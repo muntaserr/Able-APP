@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/login"
+        android:title="Login"
+        android:icon="@drawable/baseline_app_registration_24"/>
+    <item
+        android:id="@+id/searchJobs"
+        android:title="Search Jobs"
+        android:icon="@drawable/baseline_search_24"/>
+    <item
+        android:id="@+id/postJob"
+        android:title="Post Job"
+        android:icon="@drawable/baseline_add_24"/>
+</menu>
