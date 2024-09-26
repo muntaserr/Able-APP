@@ -1,8 +1,8 @@
-
 package com.example.quickcashapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -53,14 +53,24 @@ public class LoginActivity extends AppCompatActivity {
             String password = passwordEditText.getText().toString().trim();
 
             // Validate input fields
-            if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(LoginActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+            if (!isValidEmail(email)) {
+                Toast.makeText(LoginActivity.this, "Please enter a valid email address", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (password.isEmpty()) {
+                Toast.makeText(LoginActivity.this, "Please fill in the password field", Toast.LENGTH_SHORT).show();
                 return;
             }
 
             // Log in the user
             loginUser(email, password);
         });
+    }
+
+    // Helper method to validate email format
+    private boolean isValidEmail(String email) {
+        return !email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     private void loginUser(String email, String password) {
@@ -80,9 +90,9 @@ public class LoginActivity extends AppCompatActivity {
                                     // Navigate to the respective dashboard based on user role
                                     Intent intent;
                                     if ("employer".equals(role)) {
-                                        intent = new Intent(LoginActivity.this, null);
+                                        intent = new Intent(LoginActivity.this, null); // Replace with employer dashboard
                                     } else {
-                                        intent = new Intent(LoginActivity.this, null);
+                                        intent = new Intent(LoginActivity.this, null); // Replace with user dashboard
                                     }
                                     startActivity(intent);
                                     finish(); // Close the login activity
@@ -101,4 +111,3 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 }
-
