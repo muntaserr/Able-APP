@@ -19,8 +19,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class RegistrationFragment extends Fragment {
-    private FirebaseAuth mAuth;
-    private DatabaseReference mDatabase;
+    private FirebaseAuth quickCashAuth;
+    private DatabaseReference quickCashDatabase;
     private RadioGroup roleRadioGroup;
     private RadioButton selectedRoleButton;
 
@@ -31,10 +31,10 @@ public class RegistrationFragment extends Fragment {
 
 
         // Initialize Firebase Auth and Database Reference
-        mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        quickCashAuth = FirebaseAuth.getInstance();
+        quickCashDatabase = FirebaseDatabase.getInstance().getReference();
 
-        // Get references to the UI elements
+        // references to the UI elements
         EditText nameEditText = view.findViewById(R.id.name);
         EditText emailEditText = view.findViewById(R.id.email);
         EditText passwordEditText = view.findViewById(R.id.password);
@@ -48,16 +48,16 @@ public class RegistrationFragment extends Fragment {
             String password = passwordEditText.getText().toString().trim();
             String creditCard = creditCardEditText.getText().toString().trim();
 
-            // Validate input fields
+
             if (name.isEmpty() || email.isEmpty() || password.isEmpty() || creditCard.isEmpty()) {
                 Toast.makeText(getActivity(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            // Get selected role
+
             int selectedRoleId = roleRadioGroup.getCheckedRadioButtonId();
             if (selectedRoleId == -1) {
-                // No role selected
+
                 Toast.makeText(getActivity(), "Please select a role", Toast.LENGTH_SHORT).show();
                 return;
             } else {
@@ -74,13 +74,13 @@ public class RegistrationFragment extends Fragment {
     }
 
     private void registerUser(String name, String email, String password, String creditCard, String role) {
-        mAuth.createUserWithEmailAndPassword(email, password)
+        quickCashAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(requireActivity(), task -> {
                     if (task.isSuccessful()) {
                         // Registration successful
-                        FirebaseUser user = mAuth.getCurrentUser();
+                        FirebaseUser user = quickCashAuth.getCurrentUser();
                         Users newUser = new Users(name, email, password, creditCard, role);
-                        mDatabase.child("users").child(user.getUid()).setValue(newUser)
+                        quickCashDatabase.child("users").child(user.getUid()).setValue(newUser)
                                 .addOnCompleteListener(task1 -> {
                                     if (task1.isSuccessful()) {
                                         Toast.makeText(getActivity(), "Registration successful", Toast.LENGTH_SHORT).show();

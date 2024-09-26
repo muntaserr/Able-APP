@@ -7,7 +7,7 @@ public class Users {
     private String creditCard;
     private String role;
 
-    // Empty constructor needed for Firebase Realtime Database
+
     public Users() {}
 
     // Constructor
