@@ -83,7 +83,7 @@ public class RegisterActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         // Registration successful
                         FirebaseUser user = mAuth.getCurrentUser();
-                        User newUser = new User(name, email, creditCard, role);
+                        User newUser = new User(name, email, password, creditCard, role);
                         mDatabase.child("users").child(user.getUid()).setValue(newUser)
                                 .addOnCompleteListener(task1 -> {
                                     if (task1.isSuccessful()) {
