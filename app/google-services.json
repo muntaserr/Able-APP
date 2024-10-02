@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "493535482513",
-    "project_id": "quickcashapp-782c2",
-    "storage_bucket": "quickcashapp-782c2.appspot.com"
+    "project_number": "719262757666",
+    "project_id": "logoutfb-3261e",
+    "storage_bucket": "logoutfb-3261e.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:493535482513:android:d5392fb74819af1f4d2530",
+        "mobilesdk_app_id": "1:719262757666:android:f76a53c76111f29e8b6b7b",
         "android_client_info": {
-          "package_name": "com.example.quickcashapp"
+          "package_name": "Logout.firebase.test"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBmL0PrqLfUE2cFpqklrm8Oa8d_6Nhqmsg"
+          "current_key": "AIzaSyAGf-lmMkaOnMRrEuBKhCFScN1WGLF-RxI"
         }
       ],
       "services": {
