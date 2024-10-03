@@ -5,6 +5,15 @@
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
+<<<<<<< HEAD
+=======
+      <SelectionState runConfigName="SubActivity1">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="MainActivityEmployer">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+>>>>>>> b4238c9bdeb85675b994e7889e11733a61b10775
     </selectionStates>
   </component>
 </project>
