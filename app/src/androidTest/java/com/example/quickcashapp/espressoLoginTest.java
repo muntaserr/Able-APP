@@ -40,4 +40,20 @@ public class espressoLoginTest {
         onView(withText("Welcome to your dashboard")).check(matches(isDisplayed()));
     }
 
+    @Test
+    public void testLoginFailure() {
+        // Launch the login activity
+        ActivityScenario.launch(LoginActivity.class);
+
+        // Enter an invalid email or password
+        onView(withId(R.id.email)).perform(typeText("invalid@example.com"));
+        onView(withId(R.id.password)).perform(typeText("wrongpassword"));
+
+        // Close the soft keyboard and click login
+        onView(withId(R.id.login_button)).perform(click());
+
+        // Check if the login failure message is displayed
+        onView(withText("Login failed")).check(matches(isDisplayed()));
+    }
+
 }
