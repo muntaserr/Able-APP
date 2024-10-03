@@ -30,8 +30,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivityEmployee" />
-        <activity android:name=".MainActivityEmployer" />
+
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="true" /> <!-- Set to true or false based on your requirement -->
+
     </application>
 
 </manifest>
