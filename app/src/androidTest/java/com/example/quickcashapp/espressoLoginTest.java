@@ -56,4 +56,17 @@ public class espressoLoginTest {
         onView(withText("Login failed")).check(matches(isDisplayed()));
     }
 
+    @Test
+    public void testLoginEmptyFields() {
+        // Launch the login activity
+        ActivityScenario.launch(LoginActivity.class);
+
+        // Click login without entering email or password
+        onView(withId(R.id.login_button)).perform(click());
+
+        // Check if the error message for empty email and password fields is displayed
+        onView(withText("Please enter a valid email address")).check(matches(isDisplayed()));
+    }
+
+
 }
