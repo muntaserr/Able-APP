@@ -10,8 +10,6 @@ import androidx.activity.EdgeToEdge;
 import androidx.cardview.widget.CardView;
 
 public class MainActivityEmployer extends ComponentActivity {
-
-    TextView v1, v2, v3, v4, v5, v6;
     CardView c1, c2, c3, c4, c5, c6;
 
     @Override
@@ -20,14 +18,6 @@ public class MainActivityEmployer extends ComponentActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main_employer);
 
-
-        v1 = findViewById(R.id.textView1);
-        v2 = findViewById(R.id.textView2);
-        v3 = findViewById(R.id.textView3);
-        v4 = findViewById(R.id.textView4);
-        v5 = findViewById(R.id.textView5);
-        v6 = findViewById(R.id.textView6);
-
         c1 = findViewById(R.id.cardView1);
         c2 = findViewById(R.id.cardView2);
         c3 = findViewById(R.id.cardView3);
@@ -35,13 +25,6 @@ public class MainActivityEmployer extends ComponentActivity {
         c5 = findViewById(R.id.cardView5);
         c6 = findViewById(R.id.cardView6);
 
-        // Set text for TextViews
-        v1.setText("MAP");
-        v2.setText("ROLE SWITCH");
-        v3.setText("PREFERRED EMPLOYEE");
-        v4.setText("JOB POST");
-        v5.setText("PAYMENT");
-        v6.setText("MY PROFILE");
 
 
         c1.setOnClickListener(new View.OnClickListener() {
