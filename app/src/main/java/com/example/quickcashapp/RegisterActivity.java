@@ -59,7 +59,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             // Validate input fields
             if (name.isEmpty() || email.isEmpty() || password.isEmpty() || creditCard.isEmpty()) {
-                Toast.makeText(RegisterActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                setStatusMessage("Please fill in all fields",Color.YELLOW);
                 return;
             }
 
@@ -67,7 +67,7 @@ public class RegisterActivity extends AppCompatActivity {
             int selectedRoleId = roleRadioGroup.getCheckedRadioButtonId();
             if (selectedRoleId == -1) {
                 // No role selected
-                Toast.makeText(RegisterActivity.this, "Please select a role", Toast.LENGTH_SHORT).show();
+                setStatusMessage("Please select a role",Color.YELLOW);
                 return;
             } else {
                 selectedRoleButton = findViewById(selectedRoleId);
