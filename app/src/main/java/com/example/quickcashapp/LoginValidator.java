@@ -19,23 +19,12 @@ public class LoginValidator {
     }
 
     // Credit Card: Validates using Luhn algorithm
-    public static boolean isValidCreditCard(String cardNumber) {
-        if (cardNumber == null || !cardNumber.matches("\\d+")) return false;
+    public static boolean isValidCreditCard(String number) {
+        if (number == null) return false;
 
-        int nDigits = cardNumber.length();
-        int sum = 0;
-        boolean isSecond = false;
+        int length =number.length();
 
-        for (int i = nDigits - 1; i >= 0; i--) {
-            int d = cardNumber.charAt(i) - '0';
-
-            if (isSecond) d *= 2;
-            sum += d / 10;
-            sum += d % 10;
-
-            isSecond = !isSecond;
-        }
-        return (sum % 10 == 0);
+        return (length == 16);
     }
 }
 
