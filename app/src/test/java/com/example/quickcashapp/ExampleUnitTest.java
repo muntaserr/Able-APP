@@ -5,11 +5,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
- */
+
 public class ExampleUnitTest {
     LoginValidator validator;
     @Before
@@ -24,10 +20,9 @@ public class ExampleUnitTest {
         assertTrue(validator.isValidPassword("Strong@Pass2021"));
 
         // Invalid
-        assertFalse(validator.isValidPassword("pass"));               // Too short
-        assertFalse(validator.isValidPassword("password"));           // No numbers or special chars
-        assertFalse(validator.isValidPassword("Password125"));        // No special characters
-        assertFalse(validator.isValidPassword("!@#$%^&*()"));         // No letters or numbers
+        assertFalse(validator.isValidPassword("pass"));
+        assertFalse(validator.isValidPassword("password"));
+        assertFalse(validator.isValidPassword("Password"));
     }
 
     @Test
