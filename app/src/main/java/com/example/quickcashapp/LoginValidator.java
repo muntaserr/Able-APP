@@ -4,9 +4,13 @@ import java.util.regex.Pattern;
 
 public class LoginValidator {
 
+    public LoginValidator(){
+
+    };
+
     public static boolean isValidPassword(String password) {
         if (password == null) return false;
-        String passwordPattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!]).{8,}";
+        String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,}$";
         return Pattern.matches(passwordPattern, password);
     }
 

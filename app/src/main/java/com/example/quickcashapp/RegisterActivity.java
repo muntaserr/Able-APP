@@ -25,6 +25,7 @@ public class RegisterActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private RadioGroup roleRadioGroup;
     private RadioButton selectedRoleButton;
+    public LoginValidator validator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
         // Initialize Firebase Auth and Database Reference
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        validator = new LoginValidator();
 
         // Get references to the UI elements
         EditText nameEditText = findViewById(R.id.name);
@@ -54,12 +56,12 @@ public class RegisterActivity extends AppCompatActivity {
         registerButton.setOnClickListener(v -> {
             String name = nameEditText.getText().toString().trim();
             String email = emailEditText.getText().toString().trim();
-            String password = passwordEditText.getText().toString().trim();
+            String password = passwordEditText.getText().toString();
             String creditCard = creditCardEditText.getText().toString().trim();
 
             // Validate input fields
             if (name.isEmpty() || email.isEmpty() || password.isEmpty() || creditCard.isEmpty()) {
-                setStatusMessage("Please fill in all fields",Color.YELLOW);
+                setStatusMessage("Please fill in all fields",Color.RED);
                 return;
             }
 
@@ -67,7 +69,7 @@ public class RegisterActivity extends AppCompatActivity {
             int selectedRoleId = roleRadioGroup.getCheckedRadioButtonId();
             if (selectedRoleId == -1) {
                 // No role selected
-                setStatusMessage("Please select a role",Color.YELLOW);
+                setStatusMessage("Please select a role",Color.RED);
                 return;
             } else {
                 selectedRoleButton = findViewById(selectedRoleId);
@@ -76,7 +78,19 @@ public class RegisterActivity extends AppCompatActivity {
             String selectedRole = selectedRoleButton.getText().toString().toLowerCase();
 
             // Register the user with the selected role
-            registerUser(name, email, password, creditCard, selectedRole);
+            if(!validator.isValidPassword(password)){
+                setStatusMessage(password, Color.RED);
+                return;
+            }else if(!validator.isValidEmail(email)){
+                setStatusMessage("Invalid Email", Color.RED);
+                return;
+            }else if(!validator.isValidCreditCard(creditCard)){
+                setStatusMessage("Invalid Credit Card", Color.RED);
+                return;
+            }else {
+                setStatusMessage("Registering", Color.GREEN);
+                registerUser(name, email, password, creditCard, selectedRole);
+            }
         });
     }
     public void setStatusMessage(String message, int colour){
