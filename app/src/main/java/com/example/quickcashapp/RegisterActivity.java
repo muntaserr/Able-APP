@@ -1,10 +1,12 @@
 package com.example.quickcashapp;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -45,6 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
         EditText passwordEditText = findViewById(R.id.password);
         EditText creditCardEditText = findViewById(R.id.credit_card);
         roleRadioGroup = findViewById(R.id.role_radio_group);
+
         Button registerButton = findViewById(R.id.register_button);
 
 
@@ -76,7 +79,11 @@ public class RegisterActivity extends AppCompatActivity {
             registerUser(name, email, password, creditCard, selectedRole);
         });
     }
-
+    public void setStatusMessage(String message, int colour){
+        TextView statusMessage = findViewById(R.id.statusMessage);
+        statusMessage.setText(message);
+        statusMessage.setTextColor(colour);
+    }
     private void registerUser(String name, String email, String password, String creditCard, String role) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
@@ -87,14 +94,14 @@ public class RegisterActivity extends AppCompatActivity {
                         mDatabase.child("users").child(user.getUid()).setValue(newUser)
                                 .addOnCompleteListener(task1 -> {
                                     if (task1.isSuccessful()) {
-                                        Toast.makeText(RegisterActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
+                                        setStatusMessage("Registration successful",Color.GREEN);
                                     } else {
-                                        Toast.makeText(RegisterActivity.this, "Failed to save user data", Toast.LENGTH_SHORT).show();
+                                        setStatusMessage("Failed to save user data",Color.RED);
                                     }
                                 });
                     } else {
                         // Registration failed
-                        Toast.makeText(RegisterActivity.this, "Registration failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        setStatusMessage("Registration Failed",Color.RED);
                     }
                 });
     }
