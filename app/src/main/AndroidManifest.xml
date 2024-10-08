@@ -13,18 +13,33 @@
         android:theme="@style/Theme.QuickCashApp"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+
             </intent-filter>
         </activity>
 
         <activity
-            android:name=".ProfileActivity"
-            android:exported="true" /> <!-- Set to true or false based on your requirement -->
+            android:name=".MainActivity"
+            android:exported="true">
+
+        </activity>
+        <activity android:name=".MainActivityEmployer"/>
+        <activity android:name=".MainActivityEmployee"/>
+        <activity android:name=".SubActivityJobPost"/>
+        <activity android:name=".SubActivityMap"/>
+        <activity android:name=".SubActivityPayment"/>
+        <activity android:name=".SubActivityPreferredEmployee"/>
+        <activity android:name=".SubActivityProfile"/>
+        <activity android:name=".RegisterActivity"/>
+
+
+
+
 
     </application>
 

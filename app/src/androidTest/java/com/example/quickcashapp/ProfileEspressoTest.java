@@ -17,7 +17,7 @@ public class ProfileEspressoTest {
 
 
     @Test
-    public void testLogoutButton(){
+    public void testLogoutButtonChangesActivity(){
         //Click logout button
         onView(withId(R.id.logout_button)).perform(click());
 

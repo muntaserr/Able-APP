@@ -37,7 +37,7 @@ public class ProfileActivity extends AppCompatActivity {
         Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show();
 
         //Switch the activity to the login activity
-        Intent intent = new Intent(ProfileActivity.this, null); //Fill in null with logout activity
+        Intent intent = new Intent(ProfileActivity.this, null); //Fill in null with login activity
         startActivity(intent);
         finish(); //Close the profile activity
 
