@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -46,6 +47,10 @@ public class LoginActivity extends AppCompatActivity {
         EditText emailEditText = findViewById(R.id.email);
         EditText passwordEditText = findViewById(R.id.password);
         Button loginButton = findViewById(R.id.login_button);
+        TextView registerButton = findViewById(R.id.register_link);
+
+        registerButton.setOnClickListener(v -> {navigateToRegistration();});
+
 
         // Set the login button click listener
         loginButton.setOnClickListener(v -> {
@@ -66,6 +71,11 @@ public class LoginActivity extends AppCompatActivity {
             // Log in the user
             loginUser(email, password);
         });
+    }
+
+    private void navigateToRegistration() {
+        Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+        startActivity(intent);
     }
 
     // Helper method to validate email format
@@ -90,9 +100,10 @@ public class LoginActivity extends AppCompatActivity {
                                     // Navigate to the respective dashboard based on user role
                                     Intent intent;
                                     if ("employer".equals(role)) {
-                                        intent = new Intent(LoginActivity.this, null); // Replace with employer dashboard
+
+                                        intent = new Intent(LoginActivity.this, MainActivity.class);
                                     } else {
-                                        intent = new Intent(LoginActivity.this, null); // Replace with user dashboard
+                                        intent = new Intent(LoginActivity.this, MainActivity.class);
                                     }
                                     startActivity(intent);
                                     finish(); // Close the login activity
