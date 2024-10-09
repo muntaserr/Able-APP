@@ -3,7 +3,6 @@ package com.example.quickcashapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.activity.ComponentActivity;
 import androidx.activity.EdgeToEdge;
@@ -18,6 +17,7 @@ public class MainActivityEmployer extends ComponentActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main_employer);
 
+        //card view initialization
         c1 = findViewById(R.id.cardView1);
         c2 = findViewById(R.id.cardView2);
         c3 = findViewById(R.id.cardView3);
@@ -26,7 +26,7 @@ public class MainActivityEmployer extends ComponentActivity {
         c6 = findViewById(R.id.cardView6);
 
 
-
+        //if c1 is clicked, moves to according page
         c1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -35,6 +35,7 @@ public class MainActivityEmployer extends ComponentActivity {
             }
         });
 
+        //if c2 is clicked, moves to according page
         c2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -43,6 +44,7 @@ public class MainActivityEmployer extends ComponentActivity {
             }
         });
 
+        //if c3 is clicked, moves to according page
         c3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,6 +53,7 @@ public class MainActivityEmployer extends ComponentActivity {
             }
         });
 
+        //if c4 is clicked, moves to according page
         c4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,6 +62,7 @@ public class MainActivityEmployer extends ComponentActivity {
             }
         });
 
+        //if c5 is clicked, moves to according page
         c5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,6 +71,7 @@ public class MainActivityEmployer extends ComponentActivity {
             }
         });
 
+        //if c6 is clicked, moves to according page
         c6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
