@@ -1,4 +1,4 @@
-package com.example.quickcashapp;
+package com.example.quickcashapp.employeeDashboard;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,9 @@ import android.widget.Button;
 
 import androidx.activity.ComponentActivity;
 import androidx.activity.EdgeToEdge;
+
+import com.example.quickcashapp.MainActivity;
+import com.example.quickcashapp.R;
 
 public class MainActivityEmployee extends ComponentActivity {
     @Override

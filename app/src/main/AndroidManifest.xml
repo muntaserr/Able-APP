@@ -30,13 +30,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivityEmployee" />
-        <activity android:name=".MainActivityEmployer" />
-        <activity android:name=".SubActivityProfile" />
-        <activity android:name=".SubActivityPayment" />
-        <activity android:name=".SubActivityPreferredEmployee" />
-        <activity android:name=".SubActivityJobPost" />
-        <activity android:name=".SubActivityMap" />
+        <activity android:name=".employeeDashboard.MainActivityEmployee" />
+        <activity android:name=".employerDashboard.MainActivityEmployer" />
+        <activity android:name=".employerDashboard.SubActivityProfile" />
+        <activity android:name=".employerDashboard.SubActivityPayment" />
+        <activity android:name=".employerDashboard.SubActivityPreferredEmployee" />
+        <activity android:name=".employerDashboard.SubActivityJobPost" />
+        <activity android:name=".employerDashboard.SubActivityMap" />
     </application>
 
 </manifest>
