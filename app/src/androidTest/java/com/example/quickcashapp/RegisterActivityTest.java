@@ -25,9 +25,9 @@ public class RegisterActivityTest {
     @Test
     public void testSuccessfulRegistration() throws InterruptedException {
         onView(withId(R.id.name)).perform(typeText("Johntest111111"));
-        onView(withId(R.id.email)).perform(typeText("johnpleaseWork1111@gmail.com"));
-        onView(withId(R.id.password)).perform(typeText("password1234"));
-        onView(withId(R.id.credit_card)).perform(typeText("1234567890123456"));
+        onView(withId(R.id.email)).perform(typeText("Johntest111111!!!!!@gmail.com"));//must create new email for the test to work.
+        onView(withId(R.id.password)).perform(typeText("password1234S"));
+        onView(withId(R.id.credit_card)).perform(typeText("4111111111111111"));
         onView(withId(R.id.role_radio_group)).perform(click());
         onView(withId(R.id.register_button)).perform(click());
         Thread.sleep(2000);// test closes whilst program is sending a GET request
@@ -42,10 +42,10 @@ public class RegisterActivityTest {
 
     @Test
     public void testNoRoleSelected() {
-        onView(withId(R.id.name)).perform(typeText("Johntest111"));
-        onView(withId(R.id.email)).perform(typeText("johntest111@gmail.com"));
-        onView(withId(R.id.password)).perform(typeText("password1234"));
-        onView(withId(R.id.credit_card)).perform(typeText("1234567890123456"));
+        onView(withId(R.id.name)).perform(typeText("Johntest111111"));
+        onView(withId(R.id.email)).perform(typeText("Johntest111111!@gmail.com"));
+        onView(withId(R.id.password)).perform(typeText("password1234S"));
+        onView(withId(R.id.credit_card)).perform(typeText("4111111111111111"));
         onView(withId(R.id.register_button)).perform(click());
         onView(withId(R.id.statusMessage)).check(matches(withText("Please select a role")));
     }
@@ -54,8 +54,8 @@ public class RegisterActivityTest {
     public void testInvalidEmail() {
         onView(withId(R.id.name)).perform(typeText("Johntest111111"));
         onView(withId(R.id.email)).perform(typeText("invalidemail"));
-        onView(withId(R.id.password)).perform(typeText("password1234"));
-        onView(withId(R.id.credit_card)).perform(typeText("1234567890123456"));
+        onView(withId(R.id.password)).perform(typeText("password1234S"));
+        onView(withId(R.id.credit_card)).perform(typeText("4111111111111111"));
         onView(withId(R.id.role_radio_group)).perform(click());
         onView(withId(R.id.register_button)).perform(click());
         onView(withId(R.id.statusMessage)).check(matches(withText("Invalid email address")));
