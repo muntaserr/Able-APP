@@ -7,7 +7,6 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +24,7 @@ public class RegisterActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private RadioGroup roleRadioGroup;
     private RadioButton selectedRoleButton;
+    //private RegisterValidator validator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +37,10 @@ public class RegisterActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Initialize Firebase Auth and Database Reference
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        validator = new RegisterValidator();
 
-        // Get references to the UI elements
         EditText nameEditText = findViewById(R.id.name);
         EditText emailEditText = findViewById(R.id.email);
         EditText passwordEditText = findViewById(R.id.password);
@@ -50,7 +49,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         Button registerButton = findViewById(R.id.register_button);
 
-
         registerButton.setOnClickListener(v -> {
             String name = nameEditText.getText().toString().trim();
             String email = emailEditText.getText().toString().trim();
@@ -58,16 +56,29 @@ public class RegisterActivity extends AppCompatActivity {
             String creditCard = creditCardEditText.getText().toString().trim();
 
             // Validate input fields
-            if (name.isEmpty() || email.isEmpty() || password.isEmpty() || creditCard.isEmpty()) {
-                Toast.makeText(RegisterActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+            if (validator.isEmpty(name) || validator.isEmpty(email) || validator.isEmpty(password) || validator.isEmpty(creditCard)) {
+                setStatusMessage("Please fill in all fields", Color.RED);
                 return;
             }
 
-            // Get selected role
+            if (!validator.isValidEmailAddress(email)) {
+                setStatusMessage("Invalid email address", Color.RED);
+                return;
+            }
+
+            if (!validator.isValidPassword(password)) {
+                setStatusMessage("Password is too weak", Color.RED);
+                return;
+            }
+
+            if (!validator.isValidCreditCard(creditCard)) {
+                setStatusMessage("Invalid credit card number", Color.RED);
+                return;
+            }
+
             int selectedRoleId = roleRadioGroup.getCheckedRadioButtonId();
             if (selectedRoleId == -1) {
-                // No role selected
-                Toast.makeText(RegisterActivity.this, "Please select a role", Toast.LENGTH_SHORT).show();
+                setStatusMessage("Please select a role", Color.RED);
                 return;
             } else {
                 selectedRoleButton = findViewById(selectedRoleId);
@@ -75,34 +86,38 @@ public class RegisterActivity extends AppCompatActivity {
 
             String selectedRole = selectedRoleButton.getText().toString().toLowerCase();
 
-            // Register the user with the selected role
+            if (!validator.isValidRole(selectedRole)) {
+                setStatusMessage("Invalid role selected", Color.RED);
+                return;
+            }
+
             registerUser(name, email, password, creditCard, selectedRole);
         });
     }
-    public void setStatusMessage(String message, int colour){
-        TextView statusMessage = findViewById(R.id.statusMessage);
-        statusMessage.setText(message);
-        statusMessage.setTextColor(colour);
-    }
+
     private void registerUser(String name, String email, String password, String creditCard, String role) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        // Registration successful
                         FirebaseUser user = mAuth.getCurrentUser();
                         User newUser = new User(name, email, password, creditCard, role);
                         mDatabase.child("users").child(user.getUid()).setValue(newUser)
                                 .addOnCompleteListener(task1 -> {
                                     if (task1.isSuccessful()) {
-                                        setStatusMessage("Registration successful",Color.GREEN);
+                                        setStatusMessage("Registration successful", Color.GREEN);
                                     } else {
-                                        setStatusMessage("Failed to save user data",Color.RED);
+                                        setStatusMessage("Failed to save user data", Color.RED);
                                     }
                                 });
                     } else {
-                        // Registration failed
-                        setStatusMessage("Registration Failed",Color.RED);
+                        setStatusMessage("Registration Failed", Color.RED);
                     }
                 });
+    }
+
+    public void setStatusMessage(String message, int colour) {
+        TextView statusMessage = findViewById(R.id.statusMessage);
+        statusMessage.setText(message);
+        statusMessage.setTextColor(colour);
     }
 }
