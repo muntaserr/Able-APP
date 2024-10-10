@@ -12,28 +12,42 @@ public class MainActivityEmployee extends ComponentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Enable edge-to-edge mode if using EdgeToEdge utility for immersive experience
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main_employee);
 
-        // Find the buttons by their IDs from the layout
-        Button btnSearchJobs = findViewById(R.id.btnSearchJobs);
-        Button btnSetPreferences = findViewById(R.id.btnSetPreferences);
 
+        // Initialize the buttons inside onCreate
+        Button SearchJobs = findViewById(R.id.SearchJobs);
+        Button SetPreference = findViewById(R.id.SetPreference);
+        Button ChooseRole = findViewById(R.id.ChooseRole);
 
-        btnSearchJobs.setOnClickListener(new View.OnClickListener() {
+        SearchJobs.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), SearchJobsActivity.class);
-                startActivity(intent);
+            public void onClick(View view) {
+                Intent intent2 = new Intent(MainActivityEmployee.this, SearchJobsActivity.class);
+                startActivity(intent2);
             }
         });
-        btnSetPreferences.setOnClickListener(new View.OnClickListener() {
+
+        SetPreference.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), PreferencesActivity.class);
-                startActivity(intent);
+            public void onClick(View view) {
+                Intent intent2 = new Intent(MainActivityEmployee.this, SetPreferenceActivity.class);
+                startActivity(intent2);
             }
         });
+
+
+        ChooseRole.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2 = new Intent(MainActivityEmployee.this, MainActivity.class);
+                startActivity(intent2);
+            }
+        });
+
+
     }
+
+
 }
