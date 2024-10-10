@@ -32,6 +32,11 @@
         </activity>
         <activity android:name=".MainActivityEmployee" />
         <activity android:name=".MainActivityEmployer" />
+        <activity android:name=".SubActivityProfile" />
+        <activity android:name=".SubActivityPayment" />
+        <activity android:name=".SubActivityPreferredEmployee" />
+        <activity android:name=".SubActivityJobPost" />
+        <activity android:name=".SubActivityMap" />
     </application>
 
 </manifest>
