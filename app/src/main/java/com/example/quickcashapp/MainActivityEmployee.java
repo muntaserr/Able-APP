@@ -12,4 +12,5 @@ public class MainActivityEmployee extends ComponentActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main_employee);
     }
+
 }
