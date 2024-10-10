@@ -1,0 +1,70 @@
+Index: app/src/main/java/com/example/quickcashapp/MainActivityEmployer.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.quickcashapp;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.TextView;\r\n\r\nimport androidx.activity.ComponentActivity;\r\nimport androidx.activity.EdgeToEdge;\r\nimport androidx.cardview.widget.CardView;\r\n\r\npublic class MainActivityEmployer extends ComponentActivity {\r\n    CardView c1, c2, c3, c4, c5, c6;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        EdgeToEdge.enable(this);\r\n        setContentView(R.layout.activity_main_employer);\r\n\r\n        c1 = findViewById(R.id.cardView1);\r\n        c2 = findViewById(R.id.cardView2);\r\n        c3 = findViewById(R.id.cardView3);\r\n        c4 = findViewById(R.id.cardView4);\r\n        c5 = findViewById(R.id.cardView5);\r\n        c6 = findViewById(R.id.cardView6);\r\n\r\n\r\n\r\n        c1.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                Intent intent = new Intent(MainActivityEmployer.this, SubActivityMap.class);\r\n                startActivity(intent);\r\n            }\r\n        });\r\n\r\n        c2.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                Intent intent = new Intent(MainActivityEmployer.this, MainActivity.class);\r\n                startActivity(intent);\r\n            }\r\n        });\r\n\r\n        c3.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                Intent intent = new Intent(MainActivityEmployer.this, SubActivityPreferredEmployee.class);\r\n                startActivity(intent);\r\n            }\r\n        });\r\n\r\n        c4.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                Intent intent = new Intent(MainActivityEmployer.this, SubActivityJobPost.class);\r\n                startActivity(intent);\r\n            }\r\n        });\r\n\r\n        c5.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                Intent intent = new Intent(MainActivityEmployer.this, SubActivityPayment.class);\r\n                startActivity(intent);\r\n            }\r\n        });\r\n\r\n        c6.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                Intent intent = new Intent(MainActivityEmployer.this, SubActivityProfile.class);\r\n                startActivity(intent);\r\n            }\r\n        });\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/quickcashapp/MainActivityEmployer.java b/app/src/main/java/com/example/quickcashapp/MainActivityEmployer.java
+--- a/app/src/main/java/com/example/quickcashapp/MainActivityEmployer.java	(revision 824e3d976171fda8417a55e3654e0f14faf8fdc4)
++++ b/app/src/main/java/com/example/quickcashapp/MainActivityEmployer.java	(date 1728505272396)
+@@ -3,7 +3,6 @@
+ import android.content.Intent;
+ import android.os.Bundle;
+ import android.view.View;
+-import android.widget.TextView;
+ 
+ import androidx.activity.ComponentActivity;
+ import androidx.activity.EdgeToEdge;
+@@ -18,6 +17,7 @@
+         EdgeToEdge.enable(this);
+         setContentView(R.layout.activity_main_employer);
+ 
++        
+         c1 = findViewById(R.id.cardView1);
+         c2 = findViewById(R.id.cardView2);
+         c3 = findViewById(R.id.cardView3);
+Index: app/src/main/java/com/example/quickcashapp/SubActivityJobPost.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.quickcashapp;\r\n\r\nimport android.os.Bundle;\r\n\r\nimport androidx.activity.EdgeToEdge;\r\n\r\npublic class SubActivityJobPost extends MainActivityEmployer {\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        EdgeToEdge.enable(this);\r\n        setContentView(R.layout.acitivty_sub_jobpost);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/quickcashapp/SubActivityJobPost.java b/app/src/main/java/com/example/quickcashapp/SubActivityJobPost.java
+--- a/app/src/main/java/com/example/quickcashapp/SubActivityJobPost.java	(revision 824e3d976171fda8417a55e3654e0f14faf8fdc4)
++++ b/app/src/main/java/com/example/quickcashapp/SubActivityJobPost.java	(date 1728505226366)
+@@ -11,4 +11,4 @@
+         EdgeToEdge.enable(this);
+         setContentView(R.layout.acitivty_sub_jobpost);
+     }
+-}
+\ No newline at end of file
++}
+Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_2024-10-09_오후_5_20_[Changes]/shelved.patch
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-10-09_오후_5_20_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-10-09_오후_5_20_[Changes]/shelved.patch
+new file mode 100644
+--- /dev/null	(date 1728505226012)
++++ b/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-10-09_오후_5_20_[Changes]/shelved.patch	(date 1728505226012)
+@@ -0,0 +1,17 @@
++Index: app/src/main/java/com/example/quickcashapp/SubActivityJobPost.java
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
++<+>package com.example.quickcashapp;\r\n\r\nimport android.os.Bundle;\r\n\r\nimport androidx.activity.EdgeToEdge;\r\n\r\npublic class SubActivityJobPost extends MainActivityEmployer {\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        EdgeToEdge.enable(this);\r\n        setContentView(R.layout.acitivty_sub_jobpost);\r\n    }\r\n}
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/app/src/main/java/com/example/quickcashapp/SubActivityJobPost.java b/app/src/main/java/com/example/quickcashapp/SubActivityJobPost.java
++--- a/app/src/main/java/com/example/quickcashapp/SubActivityJobPost.java	(revision 00ac1d8749ba6a98167b1cc72e5fe45c6bbe0444)
+++++ b/app/src/main/java/com/example/quickcashapp/SubActivityJobPost.java	(date 1728504089025)
++@@ -11,4 +11,4 @@
++         EdgeToEdge.enable(this);
++         setContentView(R.layout.acitivty_sub_jobpost);
++     }
++-}
++\ No newline at end of file
+++}

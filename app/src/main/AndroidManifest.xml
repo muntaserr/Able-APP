@@ -32,8 +32,6 @@
         </activity>
         <activity android:name=".MainActivityEmployee" />
         <activity android:name=".MainActivityEmployer" />
-        <activity android:name=".SearchJobsActivity" />
-        <activity android:name=".PreferencesActivity" />
     </application>
 
 </manifest>
