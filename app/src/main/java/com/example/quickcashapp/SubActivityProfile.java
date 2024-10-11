@@ -1,8 +1,9 @@
 package com.example.quickcashapp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -11,6 +12,7 @@ import androidx.activity.EdgeToEdge;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
 
 public class SubActivityProfile extends MainActivityEmployer {
 
@@ -34,16 +36,25 @@ public class SubActivityProfile extends MainActivityEmployer {
     }
 
     private void logoutUser(){
-        Log.d("ProfileActivity", "Logging out...");
-        //Sign out the user from firebase
-        mAuth.signOut();
-        Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show();
 
-        //Switch the activity to the login activity
-        Intent intent = new Intent(SubActivityProfile.this, LoginActivity.class); //Fill in null with login activity
-        startActivity(intent);
-        finish(); //Close the profile activity
+        new AlertDialog.Builder(SubActivityProfile.this)
+                .setTitle("Logout")
+                .setMessage("Are you sure you want to logout?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which){
 
+                        //Sign out the user from firebase
+                        mAuth.signOut();
+                        Toast.makeText(SubActivityProfile.this, "Logged out successfully", Toast.LENGTH_SHORT).show();
 
+                        //Switch the activity to the login activity
+                        Intent intent = new Intent(SubActivityProfile.this, LoginActivity.class); //Fill in null with login activity
+                        startActivity(intent);
+                        finish(); //Close the profile activity
+
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
     }
 }
