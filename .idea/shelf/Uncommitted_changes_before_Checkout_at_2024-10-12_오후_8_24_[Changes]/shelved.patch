@@ -1,0 +1,27 @@
+Index: .idea/deploymentTargetSelector.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"deploymentTargetSelector\">\r\n    <selectionStates>\r\n      <SelectionState runConfigName=\"app\">\r\n        <option name=\"selectionMode\" value=\"DROPDOWN\" />\r\n      </SelectionState>\r\n      <SelectionState runConfigName=\"MainActivityEmployee\">\r\n        <option name=\"selectionMode\" value=\"DROPDOWN\" />\r\n      </SelectionState>\r\n      <SelectionState runConfigName=\"MainActivityEmployee (1)\">\r\n        <option name=\"selectionMode\" value=\"DROPDOWN\" />\r\n      </SelectionState>\r\n      <SelectionState runConfigName=\"mainActivityEmployeeTest()\">\r\n        <option name=\"selectionMode\" value=\"DROPDOWN\" />\r\n      </SelectionState>\r\n    </selectionStates>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/deploymentTargetSelector.xml b/.idea/deploymentTargetSelector.xml
+--- a/.idea/deploymentTargetSelector.xml	(revision ff411d5cf1f9f4276a16945e63aa4de7cdfda266)
++++ b/.idea/deploymentTargetSelector.xml	(date 1728775272660)
+@@ -5,15 +5,6 @@
+       <SelectionState runConfigName="app">
+         <option name="selectionMode" value="DROPDOWN" />
+       </SelectionState>
+-      <SelectionState runConfigName="MainActivityEmployee">
+-        <option name="selectionMode" value="DROPDOWN" />
+-      </SelectionState>
+-      <SelectionState runConfigName="MainActivityEmployee (1)">
+-        <option name="selectionMode" value="DROPDOWN" />
+-      </SelectionState>
+-      <SelectionState runConfigName="mainActivityEmployeeTest()">
+-        <option name="selectionMode" value="DROPDOWN" />
+-      </SelectionState>
+     </selectionStates>
+   </component>
+ </project>
+\ No newline at end of file

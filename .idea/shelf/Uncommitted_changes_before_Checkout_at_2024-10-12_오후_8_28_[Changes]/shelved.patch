@@ -1,0 +1,55 @@
+Index: app/src/androidTest/java/com/example/quickcashapp/employerDashboardTest/UIAutomatorTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/androidTest/java/com/example/quickcashapp/employerDashboardTest/UIAutomatorTest.java b/app/src/androidTest/java/com/example/quickcashapp/employerDashboardTest/UIAutomatorTest.java
+new file mode 100644
+--- /dev/null	(date 1728775724223)
++++ b/app/src/androidTest/java/com/example/quickcashapp/employerDashboardTest/UIAutomatorTest.java	(date 1728775724223)
+@@ -0,0 +1,4 @@
++package com.example.quickcashapp.employerDashboardTest;
++
++public class UIAutomatorTest {
++}
+Index: .idea/androidTestResultsUserPreferences.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AndroidTestResultsUserPreferences\">\r\n    <option name=\"androidTestResultsTableState\">\r\n      <map>\r\n        <entry key=\"-1914084653\">\r\n          <value>\r\n            <AndroidTestResultsTableState>\r\n              <option name=\"preferredColumnWidths\">\r\n                <map>\r\n                  <entry key=\"Duration\" value=\"90\" />\r\n                  <entry key=\"Pixel_6_Pro_API_30\" value=\"120\" />\r\n                  <entry key=\"Tests\" value=\"360\" />\r\n                </map>\r\n              </option>\r\n            </AndroidTestResultsTableState>\r\n          </value>\r\n        </entry>\r\n        <entry key=\"323647046\">\r\n          <value>\r\n            <AndroidTestResultsTableState>\r\n              <option name=\"preferredColumnWidths\">\r\n                <map>\r\n                  <entry key=\"Duration\" value=\"90\" />\r\n                  <entry key=\"Pixel_8_Pro_API_31\" value=\"120\" />\r\n                  <entry key=\"Tests\" value=\"360\" />\r\n                </map>\r\n              </option>\r\n            </AndroidTestResultsTableState>\r\n          </value>\r\n        </entry>\r\n        <entry key=\"890745521\">\r\n          <value>\r\n            <AndroidTestResultsTableState>\r\n              <option name=\"preferredColumnWidths\">\r\n                <map>\r\n                  <entry key=\"Duration\" value=\"90\" />\r\n                  <entry key=\"Pixel_6_Pro_API_30\" value=\"120\" />\r\n                  <entry key=\"Tests\" value=\"360\" />\r\n                </map>\r\n              </option>\r\n            </AndroidTestResultsTableState>\r\n          </value>\r\n        </entry>\r\n        <entry key=\"1436104304\">\r\n          <value>\r\n            <AndroidTestResultsTableState>\r\n              <option name=\"preferredColumnWidths\">\r\n                <map>\r\n                  <entry key=\"Duration\" value=\"90\" />\r\n                  <entry key=\"Pixel_6_Pro_API_30\" value=\"120\" />\r\n                  <entry key=\"Tests\" value=\"360\" />\r\n                </map>\r\n              </option>\r\n            </AndroidTestResultsTableState>\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/androidTestResultsUserPreferences.xml b/.idea/androidTestResultsUserPreferences.xml
+--- a/.idea/androidTestResultsUserPreferences.xml	(revision ff411d5cf1f9f4276a16945e63aa4de7cdfda266)
++++ b/.idea/androidTestResultsUserPreferences.xml	(date 1728775569367)
+@@ -22,6 +22,7 @@
+               <option name="preferredColumnWidths">
+                 <map>
+                   <entry key="Duration" value="90" />
++                  <entry key="Pixel_6_Pro_API_30" value="120" />
+                   <entry key="Pixel_8_Pro_API_31" value="120" />
+                   <entry key="Tests" value="360" />
+                 </map>
+Index: .idea/deploymentTargetSelector.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"deploymentTargetSelector\">\r\n    <selectionStates>\r\n      <SelectionState runConfigName=\"app\">\r\n        <option name=\"selectionMode\" value=\"DROPDOWN\" />\r\n      </SelectionState>\r\n      <SelectionState runConfigName=\"MainActivityEmployee\">\r\n        <option name=\"selectionMode\" value=\"DROPDOWN\" />\r\n      </SelectionState>\r\n      <SelectionState runConfigName=\"MainActivityEmployee (1)\">\r\n        <option name=\"selectionMode\" value=\"DROPDOWN\" />\r\n      </SelectionState>\r\n      <SelectionState runConfigName=\"mainActivityEmployeeTest()\">\r\n        <option name=\"selectionMode\" value=\"DROPDOWN\" />\r\n      </SelectionState>\r\n    </selectionStates>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/deploymentTargetSelector.xml b/.idea/deploymentTargetSelector.xml
+--- a/.idea/deploymentTargetSelector.xml	(revision ff411d5cf1f9f4276a16945e63aa4de7cdfda266)
++++ b/.idea/deploymentTargetSelector.xml	(date 1728775584307)
+@@ -5,12 +5,6 @@
+       <SelectionState runConfigName="app">
+         <option name="selectionMode" value="DROPDOWN" />
+       </SelectionState>
+-      <SelectionState runConfigName="MainActivityEmployee">
+-        <option name="selectionMode" value="DROPDOWN" />
+-      </SelectionState>
+-      <SelectionState runConfigName="MainActivityEmployee (1)">
+-        <option name="selectionMode" value="DROPDOWN" />
+-      </SelectionState>
+       <SelectionState runConfigName="mainActivityEmployeeTest()">
+         <option name="selectionMode" value="DROPDOWN" />
+       </SelectionState>
