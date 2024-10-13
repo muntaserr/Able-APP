@@ -1,0 +1,83 @@
+Index: .idea/deploymentTargetSelector.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"deploymentTargetSelector\">\r\n    <selectionStates>\r\n      <SelectionState runConfigName=\"app\">\r\n        <option name=\"selectionMode\" value=\"DROPDOWN\" />\r\n      </SelectionState>\r\n      <SelectionState runConfigName=\"EmployerProfileEspressoTest\">\r\n        <option name=\"selectionMode\" value=\"DROPDOWN\" />\r\n      </SelectionState>\r\n    </selectionStates>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/deploymentTargetSelector.xml b/.idea/deploymentTargetSelector.xml
+--- a/.idea/deploymentTargetSelector.xml	
++++ b/.idea/deploymentTargetSelector.xml	
+@@ -5,7 +5,13 @@
+       <SelectionState runConfigName="app">
+         <option name="selectionMode" value="DROPDOWN" />
+       </SelectionState>
+-      <SelectionState runConfigName="EmployerProfileEspressoTest">
++      <SelectionState runConfigName="testLoginSuccess()">
++        <option name="selectionMode" value="DROPDOWN" />
++      </SelectionState>
++      <SelectionState runConfigName="LoginActivity">
++        <option name="selectionMode" value="DROPDOWN" />
++      </SelectionState>
++      <SelectionState runConfigName="testLoginFailure()">
+         <option name="selectionMode" value="DROPDOWN" />
+       </SelectionState>
+     </selectionStates>
+Index: app/src/main/java/com/example/quickcashapp/LoginActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.quickcashapp;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.util.Patterns;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\nimport androidx.activity.EdgeToEdge;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.core.graphics.Insets;\r\nimport androidx.core.view.ViewCompat;\r\nimport androidx.core.view.WindowInsetsCompat;\r\n\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\nimport com.google.firebase.database.DataSnapshot;\r\nimport com.google.firebase.database.DatabaseError;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.database.ValueEventListener;\r\n\r\npublic class LoginActivity extends AppCompatActivity {\r\n    private FirebaseAuth mAuth;\r\n    private DatabaseReference mDatabase;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        EdgeToEdge.enable(this);\r\n        setContentView(R.layout.activity_login);\r\n\r\n        // Apply window insets for padding\r\n        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {\r\n            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());\r\n            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);\r\n            return insets;\r\n        });\r\n\r\n        // Initialize Firebase Auth and Database\r\n        mAuth = FirebaseAuth.getInstance();\r\n        mDatabase = FirebaseDatabase.getInstance().getReference();\r\n\r\n        // Get references to the UI elements\r\n        EditText emailEditText = findViewById(R.id.email);\r\n        EditText passwordEditText = findViewById(R.id.password);\r\n        Button loginButton = findViewById(R.id.login_button);\r\n        TextView registerButton = findViewById(R.id.register_link);\r\n\r\n        registerButton.setOnClickListener(v -> {navigateToRegistration();});\r\n\r\n\r\n        // Set the login button click listener\r\n        loginButton.setOnClickListener(v -> {\r\n            String email = emailEditText.getText().toString().trim();\r\n            String password = passwordEditText.getText().toString().trim();\r\n\r\n            // Validate input fields\r\n            if (!isValidEmail(email)) {\r\n                Toast.makeText(LoginActivity.this, \"Please enter a valid email address\", Toast.LENGTH_SHORT).show();\r\n                return;\r\n            }\r\n\r\n            if (password.isEmpty()) {\r\n                Toast.makeText(LoginActivity.this, \"Please fill in the password field\", Toast.LENGTH_SHORT).show();\r\n                return;\r\n            }\r\n\r\n            // Log in the user\r\n            loginUser(email, password);\r\n        });\r\n    }\r\n\r\n    private void navigateToRegistration() {\r\n        Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);\r\n        startActivity(intent);\r\n    }\r\n\r\n    // Helper method to validate email format\r\n    private boolean isValidEmail(String email) {\r\n        return !email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches();\r\n    }\r\n\r\n    private void loginUser(String email, String password) {\r\n        mAuth.signInWithEmailAndPassword(email, password)\r\n                .addOnCompleteListener(this, task -> {\r\n                    if (task.isSuccessful()) {\r\n                        // Login successful\r\n                        Toast.makeText(LoginActivity.this, \"Login successful\", Toast.LENGTH_SHORT).show();\r\n                        FirebaseUser user = mAuth.getCurrentUser();\r\n\r\n                        // Retrieve user role from database\r\n                        mDatabase.child(\"users\").child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {\r\n                            @Override\r\n                            public void onDataChange(DataSnapshot dataSnapshot) {\r\n                                if (dataSnapshot.exists()) {\r\n                                    String role = dataSnapshot.child(\"role\").getValue(String.class);\r\n                                    // Navigate to the respective dashboard based on user role\r\n                                    Intent intent;\r\n                                    if (\"employer\".equals(role)) {\r\n\r\n                                        intent = new Intent(LoginActivity.this, MainActivity.class);\r\n                                    } else {\r\n                                        intent = new Intent(LoginActivity.this, MainActivity.class);\r\n                                    }\r\n                                    startActivity(intent);\r\n                                    finish(); // Close the login activity\r\n                                }\r\n                            }\r\n\r\n                            @Override\r\n                            public void onCancelled(DatabaseError databaseError) {\r\n                                Toast.makeText(LoginActivity.this, \"Failed to retrieve user role\", Toast.LENGTH_SHORT).show();\r\n                            }\r\n                        });\r\n                    } else {\r\n                        // Login failed\r\n                        Toast.makeText(LoginActivity.this, \"Login failed: \" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();\r\n                    }\r\n                });\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/app/src/main/java/com/example/quickcashapp/LoginActivity.java b/app/src/main/java/com/example/quickcashapp/LoginActivity.java
+--- a/app/src/main/java/com/example/quickcashapp/LoginActivity.java	
++++ b/app/src/main/java/com/example/quickcashapp/LoginActivity.java	
+@@ -117,7 +117,7 @@
+                         });
+                     } else {
+                         // Login failed
+-                        Toast.makeText(LoginActivity.this, "Login failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
++                        Toast.makeText(LoginActivity.this, "Login failed " , Toast.LENGTH_SHORT).show();
+                     }
+                 });
+     }
+Index: .idea/androidTestResultsUserPreferences.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AndroidTestResultsUserPreferences\">\r\n    <option name=\"androidTestResultsTableState\">\r\n      <map>\r\n        <entry key=\"-1400229921\">\r\n          <value>\r\n            <AndroidTestResultsTableState>\r\n              <option name=\"preferredColumnWidths\">\r\n                <map>\r\n                  <entry key=\"Duration\" value=\"90\" />\r\n                  <entry key=\"Medium_Phone_API_35\" value=\"120\" />\r\n                  <entry key=\"Tests\" value=\"360\" />\r\n                </map>\r\n              </option>\r\n            </AndroidTestResultsTableState>\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n</project>
+===================================================================
+diff --git a/.idea/androidTestResultsUserPreferences.xml b/.idea/androidTestResultsUserPreferences.xml
+--- a/.idea/androidTestResultsUserPreferences.xml	
++++ b/.idea/androidTestResultsUserPreferences.xml	
+@@ -16,6 +16,32 @@
+             </AndroidTestResultsTableState>
+           </value>
+         </entry>
++        <entry key="-83393644">
++          <value>
++            <AndroidTestResultsTableState>
++              <option name="preferredColumnWidths">
++                <map>
++                  <entry key="Duration" value="90" />
++                  <entry key="Medium_Phone_API_35" value="120" />
++                  <entry key="Tests" value="360" />
++                </map>
++              </option>
++            </AndroidTestResultsTableState>
++          </value>
++        </entry>
++        <entry key="1487946811">
++          <value>
++            <AndroidTestResultsTableState>
++              <option name="preferredColumnWidths">
++                <map>
++                  <entry key="Duration" value="90" />
++                  <entry key="Medium_Phone_API_35" value="120" />
++                  <entry key="Tests" value="360" />
++                </map>
++              </option>
++            </AndroidTestResultsTableState>
++          </value>
++        </entry>
+       </map>
+     </option>
+   </component>
