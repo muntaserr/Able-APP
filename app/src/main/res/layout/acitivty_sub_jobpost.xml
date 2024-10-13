@@ -10,5 +10,6 @@
         android:layout_height="wrap_content"
         android:text="Job Post"
         tools:layout_editor_absoluteX="178dp"
-        tools:layout_editor_absoluteY="337dp" />
+        tools:layout_editor_absoluteY="337dp"
+        tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>
