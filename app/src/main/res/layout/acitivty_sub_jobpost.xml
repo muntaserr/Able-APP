@@ -11,5 +11,5 @@
         android:text="Job Post"
         tools:layout_editor_absoluteX="178dp"
         tools:layout_editor_absoluteY="337dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="HardcodedText,MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>
