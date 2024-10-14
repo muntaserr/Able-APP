@@ -1,0 +1,339 @@
+Index: app/src/androidTest/java/com/example/quickcashapp/employeeDashboard/MainActivityEmployeeTest.java
+===================================================================
+diff --git a/app/src/androidTest/java/com/example/quickcashapp/employeeDashboard/MainActivityEmployeeTest.java b/app/src/androidTest/java/com/example/quickcashapp/MainActivityEmployeeTest.java
+rename from app/src/androidTest/java/com/example/quickcashapp/employeeDashboard/MainActivityEmployeeTest.java
+rename to app/src/androidTest/java/com/example/quickcashapp/MainActivityEmployeeTest.java
+--- a/app/src/androidTest/java/com/example/quickcashapp/employeeDashboard/MainActivityEmployeeTest.java	
++++ b/app/src/androidTest/java/com/example/quickcashapp/MainActivityEmployeeTest.java	
+@@ -1,4 +1,4 @@
+-package com.example.quickcashapp.employeeDashboard;
++package com.example.quickcashapp;
+ 
+ 
+ import static androidx.test.espresso.Espresso.onView;
+@@ -16,7 +16,7 @@
+ import androidx.test.ext.junit.runners.AndroidJUnit4;
+ import androidx.test.filters.LargeTest;
+ 
+-import com.example.quickcashapp.R;
++import com.example.quickcashapp.employeeDashboard.MainActivityEmployee;
+ 
+ import org.hamcrest.core.IsInstanceOf;
+ import org.junit.Rule;
+Index: app/src/main/java/com/example/quickcashapp/employerDashboard/SubActivityJobPost.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.quickcashapp.employerDashboard;\r\n\r\nimport android.os.Bundle;\r\n\r\nimport androidx.activity.EdgeToEdge;\r\n\r\nimport com.example.quickcashapp.R;\r\n\r\npublic class SubActivityJobPost extends MainActivityEmployer {\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        EdgeToEdge.enable(this);\r\n        setContentView(R.layout.acitivty_sub_jobpost);\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/app/src/main/java/com/example/quickcashapp/employerDashboard/SubActivityJobPost.java b/app/src/main/java/com/example/quickcashapp/employerDashboard/SubActivityJobPost.java
+--- a/app/src/main/java/com/example/quickcashapp/employerDashboard/SubActivityJobPost.java	
++++ b/app/src/main/java/com/example/quickcashapp/employerDashboard/SubActivityJobPost.java	
+@@ -13,4 +13,4 @@
+         EdgeToEdge.enable(this);
+         setContentView(R.layout.acitivty_sub_jobpost);
+     }
+-}
++}
+\ No newline at end of file
+Index: app/src/main/java/com/example/quickcashapp/employerDashboard/MainActivityEmployer.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.quickcashapp.employerDashboard;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\n\r\nimport androidx.activity.ComponentActivity;\r\nimport androidx.activity.EdgeToEdge;\r\nimport androidx.cardview.widget.CardView;\r\n\r\nimport com.example.quickcashapp.MainActivity;\r\nimport com.example.quickcashapp.R;\r\n\r\npublic class MainActivityEmployer extends ComponentActivity {\r\n    CardView c1, c2, c3, c4, c5, c6;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        EdgeToEdge.enable(this);\r\n        setContentView(R.layout.activity_main_employer);\r\n\r\n        //card view initialization\r\n        c1 = findViewById(R.id.cardView1);\r\n        c2 = findViewById(R.id.cardView2);\r\n        c3 = findViewById(R.id.cardView3);\r\n        c4 = findViewById(R.id.cardView4);\r\n        c5 = findViewById(R.id.cardView5);\r\n        c6 = findViewById(R.id.cardView6);\r\n\r\n\r\n        //if c1 is clicked, moves to according page\r\n        c1.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                Intent intent = new Intent(MainActivityEmployer.this, SubActivityMap.class);\r\n                startActivity(intent);\r\n            }\r\n        });\r\n\r\n        //if c2 is clicked, moves to according page\r\n        c2.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                Intent intent = new Intent(MainActivityEmployer.this, MainActivity.class);\r\n                startActivity(intent);\r\n            }\r\n        });\r\n\r\n        //if c3 is clicked, moves to according page\r\n        c3.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                Intent intent = new Intent(MainActivityEmployer.this, SubActivityPreferredEmployee.class);\r\n                startActivity(intent);\r\n            }\r\n        });\r\n\r\n        //if c4 is clicked, moves to according page\r\n        c4.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                Intent intent = new Intent(MainActivityEmployer.this, SubActivityJobPost.class);\r\n                startActivity(intent);\r\n            }\r\n        });\r\n\r\n        //if c5 is clicked, moves to according page\r\n        c5.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                Intent intent = new Intent(MainActivityEmployer.this, SubActivityPayment.class);\r\n                startActivity(intent);\r\n            }\r\n        });\r\n\r\n        //if c6 is clicked, moves to according page\r\n        c6.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                Intent intent = new Intent(MainActivityEmployer.this, SubActivityProfile.class);\r\n                startActivity(intent);\r\n            }\r\n        });\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/app/src/main/java/com/example/quickcashapp/employerDashboard/MainActivityEmployer.java b/app/src/main/java/com/example/quickcashapp/employerDashboard/MainActivityEmployer.java
+--- a/app/src/main/java/com/example/quickcashapp/employerDashboard/MainActivityEmployer.java	
++++ b/app/src/main/java/com/example/quickcashapp/employerDashboard/MainActivityEmployer.java	
+@@ -3,6 +3,7 @@
+ import android.content.Intent;
+ import android.os.Bundle;
+ import android.view.View;
++import android.widget.TextView;
+ 
+ import androidx.activity.ComponentActivity;
+ import androidx.activity.EdgeToEdge;
+@@ -20,7 +21,6 @@
+         EdgeToEdge.enable(this);
+         setContentView(R.layout.activity_main_employer);
+ 
+-        //card view initialization
+         c1 = findViewById(R.id.cardView1);
+         c2 = findViewById(R.id.cardView2);
+         c3 = findViewById(R.id.cardView3);
+@@ -29,7 +29,7 @@
+         c6 = findViewById(R.id.cardView6);
+ 
+ 
+-        //if c1 is clicked, moves to according page
++
+         c1.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+@@ -38,7 +38,6 @@
+             }
+         });
+ 
+-        //if c2 is clicked, moves to according page
+         c2.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+@@ -47,7 +46,6 @@
+             }
+         });
+ 
+-        //if c3 is clicked, moves to according page
+         c3.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+@@ -56,7 +54,6 @@
+             }
+         });
+ 
+-        //if c4 is clicked, moves to according page
+         c4.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+@@ -65,7 +62,6 @@
+             }
+         });
+ 
+-        //if c5 is clicked, moves to according page
+         c5.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+@@ -74,7 +70,6 @@
+             }
+         });
+ 
+-        //if c6 is clicked, moves to according page
+         c6.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+Index: app/src/main/java/com/example/quickcashapp/employeeDashboard/RegisterActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.quickcashapp.employeeDashboard;\r\n\r\nimport android.graphics.Color;\r\nimport android.os.Bundle;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport android.widget.RadioButton;\r\nimport android.widget.RadioGroup;\r\nimport android.widget.TextView;\r\n\r\nimport androidx.activity.EdgeToEdge;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.core.graphics.Insets;\r\nimport androidx.core.view.ViewCompat;\r\nimport androidx.core.view.WindowInsetsCompat;\r\n\r\nimport com.example.quickcashapp.LoginValidator;\r\nimport com.example.quickcashapp.R;\r\nimport com.example.quickcashapp.User;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\n\r\npublic class RegisterActivity extends AppCompatActivity {\r\n    private FirebaseAuth mAuth;\r\n    private DatabaseReference mDatabase;\r\n    private RadioGroup roleRadioGroup;\r\n    private RadioButton selectedRoleButton;\r\n    public LoginValidator validator;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        EdgeToEdge.enable(this);\r\n        setContentView(R.layout.activity_register);\r\n        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {\r\n            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());\r\n            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);\r\n            return insets;\r\n        });\r\n\r\n        // Initialize Firebase Auth and Database Reference\r\n        mAuth = FirebaseAuth.getInstance();\r\n        mDatabase = FirebaseDatabase.getInstance().getReference();\r\n        validator = new LoginValidator();\r\n\r\n        // Get references to the UI elements\r\n        EditText nameEditText = findViewById(R.id.name);\r\n        EditText emailEditText = findViewById(R.id.email);\r\n        EditText passwordEditText = findViewById(R.id.password);\r\n        EditText creditCardEditText = findViewById(R.id.credit_card);\r\n        roleRadioGroup = findViewById(R.id.role_radio_group);\r\n\r\n        Button registerButton = findViewById(R.id.register_button);\r\n\r\n\r\n        registerButton.setOnClickListener(v -> {\r\n            String name = nameEditText.getText().toString().trim();\r\n            String email = emailEditText.getText().toString().trim();\r\n            String password = passwordEditText.getText().toString();\r\n            String creditCard = creditCardEditText.getText().toString().trim();\r\n\r\n            // Validate input fields\r\n            if (name.isEmpty() || email.isEmpty() || password.isEmpty() || creditCard.isEmpty()) {\r\n                setStatusMessage(\"Please fill in all fields\",Color.RED);\r\n                return;\r\n            }\r\n\r\n            // Get selected role\r\n            int selectedRoleId = roleRadioGroup.getCheckedRadioButtonId();\r\n            if (selectedRoleId == -1) {\r\n                // No role selected\r\n                setStatusMessage(\"Please select a role\",Color.RED);\r\n                return;\r\n            } else {\r\n                selectedRoleButton = findViewById(selectedRoleId);\r\n            }\r\n\r\n            String selectedRole = selectedRoleButton.getText().toString().toLowerCase();\r\n\r\n            // Register the user with the selected role\r\n            if(!validator.isValidPassword(password)){\r\n                setStatusMessage(password, Color.RED);\r\n                return;\r\n            }else if(!validator.isValidEmail(email)){\r\n                setStatusMessage(\"Invalid Email\", Color.RED);\r\n                return;\r\n            }else if(!validator.isValidCreditCard(creditCard)){\r\n                setStatusMessage(\"Invalid Credit Card\", Color.RED);\r\n                return;\r\n            }else {\r\n                setStatusMessage(\"Registering\", Color.GREEN);\r\n                registerUser(name, email, password, creditCard, selectedRole);\r\n            }\r\n        });\r\n    }\r\n    public void setStatusMessage(String message, int colour){\r\n        TextView statusMessage = findViewById(R.id.statusMessage);\r\n        statusMessage.setText(message);\r\n        statusMessage.setTextColor(colour);\r\n    }\r\n    private void registerUser(String name, String email, String password, String creditCard, String role) {\r\n        mAuth.createUserWithEmailAndPassword(email, password)\r\n                .addOnCompleteListener(this, task -> {\r\n                    if (task.isSuccessful()) {\r\n                        // Registration successful\r\n                        FirebaseUser user = mAuth.getCurrentUser();\r\n                        User newUser = new User(name, email, password, creditCard, role);\r\n                        mDatabase.child(\"users\").child(user.getUid()).setValue(newUser)\r\n                                .addOnCompleteListener(task1 -> {\r\n                                    if (task1.isSuccessful()) {\r\n                                        setStatusMessage(\"Registration successful\",Color.GREEN);\r\n                                    } else {\r\n                                        setStatusMessage(\"Failed to save user data\",Color.RED);\r\n                                    }\r\n                                });\r\n                    } else {\r\n                        // Registration failed\r\n                        setStatusMessage(\"Registration Failed\",Color.RED);\r\n                    }\r\n                });\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/app/src/main/java/com/example/quickcashapp/employeeDashboard/RegisterActivity.java b/app/src/main/java/com/example/quickcashapp/employeeDashboard/RegisterActivity.java
+--- a/app/src/main/java/com/example/quickcashapp/employeeDashboard/RegisterActivity.java	
++++ b/app/src/main/java/com/example/quickcashapp/employeeDashboard/RegisterActivity.java	
+@@ -8,11 +8,7 @@
+ import android.widget.RadioGroup;
+ import android.widget.TextView;
+ 
+-import androidx.activity.EdgeToEdge;
+ import androidx.appcompat.app.AppCompatActivity;
+-import androidx.core.graphics.Insets;
+-import androidx.core.view.ViewCompat;
+-import androidx.core.view.WindowInsetsCompat;
+ 
+ import com.example.quickcashapp.LoginValidator;
+ import com.example.quickcashapp.R;
+@@ -27,51 +23,54 @@
+     private DatabaseReference mDatabase;
+     private RadioGroup roleRadioGroup;
+     private RadioButton selectedRoleButton;
+-    public LoginValidator validator;
++    private LoginValidator validator;
+ 
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+-        EdgeToEdge.enable(this);
+         setContentView(R.layout.activity_register);
+-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+-            return insets;
+-        });
+ 
+-        // Initialize Firebase Auth and Database Reference
+         mAuth = FirebaseAuth.getInstance();
+         mDatabase = FirebaseDatabase.getInstance().getReference();
+         validator = new LoginValidator();
+ 
+-        // Get references to the UI elements
+         EditText nameEditText = findViewById(R.id.name);
+         EditText emailEditText = findViewById(R.id.email);
+         EditText passwordEditText = findViewById(R.id.password);
+         EditText creditCardEditText = findViewById(R.id.credit_card);
+         roleRadioGroup = findViewById(R.id.role_radio_group);
+-
+         Button registerButton = findViewById(R.id.register_button);
+ 
+-
+         registerButton.setOnClickListener(v -> {
+             String name = nameEditText.getText().toString().trim();
+             String email = emailEditText.getText().toString().trim();
+-            String password = passwordEditText.getText().toString();
++            String password = passwordEditText.getText().toString().trim();
+             String creditCard = creditCardEditText.getText().toString().trim();
+ 
+             // Validate input fields
+-            if (name.isEmpty() || email.isEmpty() || password.isEmpty() || creditCard.isEmpty()) {
+-                setStatusMessage("Please fill in all fields",Color.RED);
++            if (validator.isEmpty(name) || validator.isEmpty(email) || validator.isEmpty(password) || validator.isEmpty(creditCard)) {
++                setStatusMessage("Please fill in all fields", Color.RED);
+                 return;
+             }
+ 
+-            // Get selected role
++            if (!validator.isValidEmail(email)) {
++                setStatusMessage("Invalid email address", Color.RED);
++                return;
++            }
++
++            if (!validator.isValidPassword(password)) {
++                setStatusMessage("Password must contain at least 6 characters, including uppercase, lowercase, and a number", Color.RED);
++                return;
++            }
++
++            if (!validator.isValidCreditCard(creditCard)) {
++                setStatusMessage("Invalid credit card number", Color.RED);
++                return;
++            }
++
+             int selectedRoleId = roleRadioGroup.getCheckedRadioButtonId();
+             if (selectedRoleId == -1) {
+-                // No role selected
+-                setStatusMessage("Please select a role",Color.RED);
++                setStatusMessage("Please select a role", Color.RED);
+                 return;
+             } else {
+                 selectedRoleButton = findViewById(selectedRoleId);
+@@ -79,46 +78,41 @@
+ 
+             String selectedRole = selectedRoleButton.getText().toString().toLowerCase();
+ 
+-            // Register the user with the selected role
+-            if(!validator.isValidPassword(password)){
+-                setStatusMessage(password, Color.RED);
+-                return;
+-            }else if(!validator.isValidEmail(email)){
+-                setStatusMessage("Invalid Email", Color.RED);
+-                return;
+-            }else if(!validator.isValidCreditCard(creditCard)){
+-                setStatusMessage("Invalid Credit Card", Color.RED);
++            if (!validator.isValidRole(selectedRole)) {
++                setStatusMessage("Invalid role selected", Color.RED);
+                 return;
+-            }else {
+-                setStatusMessage("Registering", Color.GREEN);
+-                registerUser(name, email, password, creditCard, selectedRole);
+-            }
++            }
++
++            // Register the user
++            registerUser(name, email, password, creditCard, selectedRole);
+         });
+     }
+-    public void setStatusMessage(String message, int colour){
+-        TextView statusMessage = findViewById(R.id.statusMessage);
+-        statusMessage.setText(message);
+-        statusMessage.setTextColor(colour);
+-    }
++
++    // Method to register the user in Firebase
+     private void registerUser(String name, String email, String password, String creditCard, String role) {
+         mAuth.createUserWithEmailAndPassword(email, password)
+                 .addOnCompleteListener(this, task -> {
+                     if (task.isSuccessful()) {
+-                        // Registration successful
+                         FirebaseUser user = mAuth.getCurrentUser();
+                         User newUser = new User(name, email, password, creditCard, role);
+                         mDatabase.child("users").child(user.getUid()).setValue(newUser)
+                                 .addOnCompleteListener(task1 -> {
+                                     if (task1.isSuccessful()) {
+-                                        setStatusMessage("Registration successful",Color.GREEN);
++                                        setStatusMessage("Registration successful", Color.GREEN);
+                                     } else {
+-                                        setStatusMessage("Failed to save user data",Color.RED);
++                                        setStatusMessage("Failed to save user data", Color.RED);
+                                     }
+                                 });
+                     } else {
+-                        // Registration failed
+-                        setStatusMessage("Registration Failed",Color.RED);
++                        setStatusMessage("Registration failed: " + task.getException().getMessage(), Color.RED);
+                     }
+                 });
+     }
++
++    // Method to display status messages
++    public void setStatusMessage(String message, int colour) {
++        TextView statusMessage = findViewById(R.id.statusMessage);
++        statusMessage.setText(message);
++        statusMessage.setTextColor(colour);
++    }
+ }
+Index: app/src/main/java/com/example/quickcashapp/employerDashboard/SubActivityProfile.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.quickcashapp.employerDashboard;\r\n\r\nimport android.os.Bundle;\r\n\r\nimport androidx.activity.EdgeToEdge;\r\n\r\nimport com.example.quickcashapp.R;\r\n\r\npublic class SubActivityProfile extends MainActivityEmployer {\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        EdgeToEdge.enable(this);\r\n        setContentView(R.layout.activity_sub_profile);\r\n    }\r\n}
+===================================================================
+diff --git a/app/src/main/java/com/example/quickcashapp/employerDashboard/SubActivityProfile.java b/app/src/main/java/com/example/quickcashapp/employerDashboard/SubActivityProfile.java
+--- a/app/src/main/java/com/example/quickcashapp/employerDashboard/SubActivityProfile.java	
++++ b/app/src/main/java/com/example/quickcashapp/employerDashboard/SubActivityProfile.java	
+@@ -1,16 +1,62 @@
+ package com.example.quickcashapp.employerDashboard;
+ 
++import android.app.AlertDialog;
++import android.content.DialogInterface;
++import android.content.Intent;
+ import android.os.Bundle;
++import android.widget.Button;
++import android.widget.Toast;
+ 
+ import androidx.activity.EdgeToEdge;
+ 
++import com.example.quickcashapp.LoginActivity;
+ import com.example.quickcashapp.R;
++import com.google.firebase.auth.FirebaseAuth;
++import com.google.firebase.database.DatabaseReference;
++import com.google.firebase.database.FirebaseDatabase;
++
+ 
+ public class SubActivityProfile extends MainActivityEmployer {
++
++    private FirebaseAuth mAuth;
++    private DatabaseReference mDatabase;
++
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         EdgeToEdge.enable(this);
+         setContentView(R.layout.activity_sub_profile);
++
++
++        //Setup Firebase Auth and Database
++        mAuth = FirebaseAuth.getInstance();
++        mDatabase = FirebaseDatabase.getInstance().getReference();
++
++        //When logout button is clicked take to method to logout user
++        Button logoutButton = findViewById(R.id.logout_button);
++        logoutButton.setOnClickListener(v -> logoutUser());
++    }
++
++    private void logoutUser(){
++
++        new AlertDialog.Builder(SubActivityProfile.this)
++                .setTitle("Logout")
++                .setMessage("Are you sure you want to logout?")
++                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
++                    public void onClick(DialogInterface dialog, int which){
++
++                        //Sign out the user from firebase
++                        mAuth.signOut();
++                        Toast.makeText(SubActivityProfile.this, "Logged out successfully", Toast.LENGTH_SHORT).show();
++
++                        //Switch the activity to the login activity
++                        Intent intent = new Intent(SubActivityProfile.this, LoginActivity.class); //Fill in null with login activity
++                        startActivity(intent);
++                        finish(); //Close the profile activity
++
++                    }
++                })
++                .setNegativeButton("No", null)
++                .show();
+     }
+ }
+\ No newline at end of file
