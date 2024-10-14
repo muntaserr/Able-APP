@@ -8,7 +8,8 @@
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Payment"
+        android:text="@string/Payment"
         tools:layout_editor_absoluteX="178dp"
-        tools:layout_editor_absoluteY="349dp" />
+        tools:layout_editor_absoluteY="349dp"
+        tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>

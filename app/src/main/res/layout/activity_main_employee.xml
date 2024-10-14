@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="Employee"
+        android:text="@string/employee"
         android:textStyle="bold"
         android:textSize="30sp"
         />
@@ -48,7 +48,7 @@
                     android:id="@+id/SearchJobs"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Search Jobs"
+                    android:text="@string/search_jobs"
                     android:textAlignment="center"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -78,7 +78,7 @@
                     android:id="@+id/SetPreference"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Set preference"
+                    android:text="@string/set_preference"
                     android:textAlignment="center"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -109,7 +109,7 @@
                     android:id="@+id/C"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="C"
+                    android:text="@string/c"
                     android:textAlignment="center"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -140,7 +140,7 @@
                     android:id="@+id/D"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="D"
+                    android:text="@string/d"
                     android:textAlignment="center"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -171,7 +171,7 @@
                     android:id="@+id/E"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="E"
+                    android:text="@string/e"
                     android:textAlignment="center"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -202,7 +202,7 @@
                     android:id="@+id/ChooseRole"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Choose role"
+                    android:text="@string/choose_role"
                     android:textAlignment="center"
                     android:textStyle="bold" />
             </LinearLayout>
