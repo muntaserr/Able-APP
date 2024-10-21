@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">quickCashApp</string>
+    <string name="set_preference">Set Preference</string>
+    <string name="available_jobs">Available Jobs</string>
 </resources>
