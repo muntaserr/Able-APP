@@ -36,6 +36,9 @@
         <activity android:name=".SubActivityPreferredEmployee"/>
         <activity android:name=".SubActivityProfile"/>
         <activity android:name=".RegisterActivity"/>
+        <activity android:name=".SearchJobsActivity"/>
+        <activity android:name=".SetPreferenceActivity"/>
+
 
 
 
