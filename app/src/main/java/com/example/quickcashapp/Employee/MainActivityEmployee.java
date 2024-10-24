@@ -1,9 +1,11 @@
-package com.example.quickcashapp;
+package com.example.quickcashapp.Employee;
 
 import android.os.Bundle;
 
 import androidx.activity.ComponentActivity;
 import androidx.activity.EdgeToEdge;
+
+import com.example.quickcashapp.R;
 
 public class MainActivityEmployee extends ComponentActivity {
     @Override

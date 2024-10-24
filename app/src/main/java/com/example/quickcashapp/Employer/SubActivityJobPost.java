@@ -1,14 +1,16 @@
-package com.example.quickcashapp;
+package com.example.quickcashapp.Employer;
 
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
 
-public class SubActivityPayment extends MainActivityEmployer {
+import com.example.quickcashapp.R;
+
+public class SubActivityJobPost extends MainActivityEmployer {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_sub_payment);
+        setContentView(R.layout.acitivty_sub_jobpost);
     }
 }
