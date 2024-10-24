@@ -12,10 +12,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="EMPLOYER DASHBOARD"
+        android:text="@string/employer_dashboard"
         android:textColor="@color/black"
         android:textStyle="bold"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:layout_marginTop="12dp"
         />
 
@@ -57,7 +57,7 @@
                     android:id="@+id/textView1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="MAP"
+                    android:text="@string/map"
                     android:textAlignment="center"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -81,17 +81,19 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/todo" />
 
                 <TextView
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="ROLE SWITCH"
+                    android:text="@string/role_switch"
                     android:textAlignment="center"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -115,17 +117,19 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/TODO" />
 
                 <TextView
                     android:id="@+id/textView3"
                     android:layout_width="83dp"
                     android:layout_height="wrap_content"
-                    android:text="PREFERRED EMPLOYEE"
+                    android:text="@string/preferred_employee"
                     android:textAlignment="center"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -149,17 +153,19 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/Todo" />
 
                 <TextView
                     android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="JOB POST"
+                    android:text="@string/Job_post"
                     android:textAlignment="center"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -183,17 +189,19 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/ToDo" />
 
                 <TextView
                     android:id="@+id/textView5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="PAYMENT"
+                    android:text="@string/payment"
                     android:textAlignment="center"
                     android:textStyle="bold" />
 
@@ -218,17 +226,19 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/TODo" />
 
                 <TextView
                     android:id="@+id/textView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="MY PROFILE"
+                    android:text="@string/my_profile"
                     android:textAlignment="center"
                     android:textStyle="bold" />
             </LinearLayout>
