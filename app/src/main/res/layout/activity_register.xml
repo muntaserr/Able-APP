@@ -15,9 +15,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="146dp"
         android:layout_marginEnd="16dp"
-        android:autofillHints=""
-        android:hint="@string/name"
-        android:inputType=""
+        android:hint="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,8 +27,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="7dp"
         android:layout_marginEnd="16dp"
-        android:autofillHints=""
-        android:hint="@string/EMAIL"
+        android:hint="Email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name" />
@@ -42,8 +39,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="18dp"
         android:layout_marginEnd="16dp"
-        android:autofillHints=""
-        android:hint="@string/Password"
+        android:hint="Password"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,9 +52,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="19dp"
         android:layout_marginEnd="16dp"
-        android:autofillHints=""
-        android:hint="@string/credit_card"
-        android:inputType=""
+        android:hint="Credit Card"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password" />
@@ -79,14 +73,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="@+id/Employee" />
+            android:text="Employee" />
 
         <RadioButton
             android:id="@+id/radio_employer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="@+id/Employer" />
+            android:text="Employer" />
     </RadioGroup>
 
     <Button
@@ -96,7 +90,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="186dp"
-        android:text="@string/register"
+        android:text="Register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
