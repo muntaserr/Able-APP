@@ -32,7 +32,7 @@ public class MainActivityEspressoTest {
     }
 
     @Test
-    public void testRequestLocationPermissionClickOK(){
+    public void testRequestLocationPermissionClickYes(){
 
         onView(withText("Location Permission")).check(matches(isDisplayed()));
         onView(withText("This app needs location permission to better help you find relevant jobs near you"))

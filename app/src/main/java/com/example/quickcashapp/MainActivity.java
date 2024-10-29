@@ -1,7 +1,5 @@
 package com.example.quickcashapp;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,17 +10,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.quickcashapp.Employee.MainActivityEmployee;
 import com.example.quickcashapp.Employer.MainActivityEmployer;
+import com.example.quickcashapp.Maps.LocationHelper;
 
 public class MainActivity extends AppCompatActivity {
 
+    private LocationHelper locationHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        requestLocationPermissions();
-
+        locationHelper = new LocationHelper(this);
+        locationHelper.RequestLocationPermission();
 
         Button btn1 = findViewById(R.id.button); //employer
         Button btn2 = findViewById(R.id.button2); //employee
@@ -42,25 +42,5 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent2);
             }
         });
-    }
-
-    private void requestLocationPermissions(){
-
-        new AlertDialog.Builder(this)
-                .setTitle("Location Permission")
-                .setMessage("This app needs location permission to better help you find relevant jobs near you")
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id){
-                        //Request permission
-
-                    }
-                })
-                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.dismiss();
-                        // Add logic here for user implementing there own location
-                    }
-                })
-                .show();
     }
 }
