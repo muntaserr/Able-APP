@@ -1,4 +1,4 @@
-package com.example.quickcashapp;
+package com.example.quickcashapp.employerDashboard;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -9,10 +9,14 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 
+<<<<<<< HEAD:app/src/main/java/com/example/quickcashapp/employerDashboard/SubActivityProfile.java
+import com.example.quickcashapp.R;
+=======
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+>>>>>>> 3159197b20b83295fccfe8a8b50eea2ce350ef09:app/src/main/java/com/example/quickcashapp/SubActivityProfile.java
 
 public class SubActivityProfile extends MainActivityEmployer {
 

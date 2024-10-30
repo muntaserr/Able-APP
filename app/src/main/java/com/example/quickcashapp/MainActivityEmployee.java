@@ -7,6 +7,7 @@ import androidx.activity.EdgeToEdge;
 
 public class MainActivityEmployee extends ComponentActivity {
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);

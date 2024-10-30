@@ -8,7 +8,8 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="preferred employee"
+        android:text="@string/preferredEmployee"
         tools:layout_editor_absoluteX="145dp"
-        tools:layout_editor_absoluteY="344dp" />
+        tools:layout_editor_absoluteY="344dp"
+        tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>

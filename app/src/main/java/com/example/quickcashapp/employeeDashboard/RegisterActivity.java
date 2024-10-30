@@ -1,4 +1,4 @@
-package com.example.quickcashapp;
+package com.example.quickcashapp.employeeDashboard;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.quickcashapp.LoginValidator;
+import com.example.quickcashapp.R;
+import com.example.quickcashapp.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
