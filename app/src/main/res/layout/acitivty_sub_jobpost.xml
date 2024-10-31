@@ -1,14 +1,44 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
 
-    <TextView
-        android:id="@+id/textView9"
+    <EditText
+        android:id="@+id/jobTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Job Title" />
+
+    <EditText
+        android:id="@+id/jobSalary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Salary"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/jobDuration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Duration (e.g., 2 weeks)" />
+
+    <EditText
+        android:id="@+id/jobUrgency"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Urgency (Low, Medium, High)" />
+
+    <EditText
+        android:id="@+id/jobLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Location (e.g., Remote)" />
+
+    <Button
+        android:id="@+id/submitJobButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Job Post"
-        tools:layout_editor_absoluteX="178dp"
-        tools:layout_editor_absoluteY="337dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:text="Submit Job" />
+</LinearLayout>
