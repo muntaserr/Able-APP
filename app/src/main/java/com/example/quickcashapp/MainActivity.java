@@ -10,19 +10,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.quickcashapp.Employee.MainActivityEmployee;
 import com.example.quickcashapp.Employer.MainActivityEmployer;
-import com.example.quickcashapp.Maps.LocationHelper;
+
 
 public class MainActivity extends AppCompatActivity {
 
-    private LocationHelper locationHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-
-        locationHelper = new LocationHelper(this);
-        locationHelper.RequestLocationPermission();
 
         Button btn1 = findViewById(R.id.button); //employer
         Button btn2 = findViewById(R.id.button2); //employee

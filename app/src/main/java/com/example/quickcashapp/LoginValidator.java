@@ -30,7 +30,7 @@ public class LoginValidator {
         return luhnCheck(number);
     }
 
-    // Luhn algorithm for credit card validation
+
     private static boolean luhnCheck(String number) {
         int sum = 0;
         boolean alternate = false;
