@@ -11,7 +11,7 @@ import androidx.test.rule.ActivityTestRule;
 import org.junit.Rule;
 import org.junit.Test;
 
-public class MainActivityEspressoTest {
+public class MapsActivityEspressoTest {
 
 
     @Rule
