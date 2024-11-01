@@ -1,17 +1,18 @@
-package com.example.quickcashapp.Employer;
+package com.example.quickcashapp.employerDashboard;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
+import androidx.activity.ComponentActivity;
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import com.example.quickcashapp.MainActivity;
 import com.example.quickcashapp.R;
 
-public class MainActivityEmployer extends AppCompatActivity {
+public class MainActivityEmployer extends ComponentActivity {
     CardView c1, c2, c3, c4, c5, c6;
 
     @Override

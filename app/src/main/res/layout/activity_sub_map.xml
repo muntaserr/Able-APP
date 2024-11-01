@@ -5,11 +5,11 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Job Post"
-        tools:layout_editor_absoluteX="178dp"
-        tools:layout_editor_absoluteY="337dp"
-        tools:ignore="HardcodedText,MissingConstraints" />
+        android:text="@string/map"
+        tools:layout_editor_absoluteX="190dp"
+        tools:layout_editor_absoluteY="349dp"
+        tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -48,6 +48,12 @@
         android:id="@+id/logout_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
+        android:text="@string/profile"
+        tools:layout_editor_absoluteX="174dp"
+        tools:layout_editor_absoluteY="349dp"
+        tools:ignore="MissingConstraints" />
+=======
         android:layout_marginStart="22dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="19dp"
@@ -58,4 +64,5 @@
         app:layout_constraintStart_toEndOf="@+id/profile_picture"
         app:layout_constraintTop_toTopOf="parent" />
 
+>>>>>>> 3159197b20b83295fccfe8a8b50eea2ce350ef09
 </androidx.constraintlayout.widget.ConstraintLayout>

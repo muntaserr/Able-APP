@@ -1,4 +1,4 @@
-package com.example.quickcashapp.Employer;
+package com.example.quickcashapp.employerDashboard;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -9,12 +9,14 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 
-import com.example.quickcashapp.LoginActivity;
+<<<<<<< HEAD:app/src/main/java/com/example/quickcashapp/employerDashboard/SubActivityProfile.java
 import com.example.quickcashapp.R;
+=======
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+>>>>>>> 3159197b20b83295fccfe8a8b50eea2ce350ef09:app/src/main/java/com/example/quickcashapp/SubActivityProfile.java
 
 public class SubActivityProfile extends MainActivityEmployer {
 
@@ -37,15 +39,6 @@ public class SubActivityProfile extends MainActivityEmployer {
         logoutButton.setOnClickListener(v -> logoutUser());
     }
 
-    /**
-     *Logs the user out from the app by displaying a confirmation dialog
-     * If the user confirms they want to logout. It ends the firebase session by logging them out
-     * It then shows the user a logged out successfully message and takes them back to the login page.
-     *If the user cancels no action is taken
-     * Uses an AlertDialog to prompt the user for confirmation.
-     * - "Yes" button executes the sign out logic
-     * - "No" button cancels the action. and nothing is changed.
-     */
     private void logoutUser(){
 
         new AlertDialog.Builder(SubActivityProfile.this)

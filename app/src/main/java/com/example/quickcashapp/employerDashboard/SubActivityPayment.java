@@ -1,4 +1,4 @@
-package com.example.quickcashapp.Employer;
+package com.example.quickcashapp.employerDashboard;
 
 import android.os.Bundle;
 

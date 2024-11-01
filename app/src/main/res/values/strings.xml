@@ -1,4 +1,28 @@
 <resources>
     <string name="app_name">quickCashApp</string>
-    <string name="title_activity_maps">MapsActivity</string>
+    <string name="employer_dashboard">EMPLOYER DASHBOARD</string>
+    <string name="map">MAP</string>
+    <string name="role_switch">ROLE SWITCH</string>
+    <string name="preferred_employee">PREFERRED EMPLOYEE</string>
+    <string name="job_post">JOB POST</string>
+    <string name="payment">PAYMENT</string>
+    <string name="my_profile">MY PROFILE</string>
+    <string name="todo">TODO</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="credit_card">Credit Card</string>
+    <string name="employee">Employee</string>
+    <string name="employer">Employer</string>
+    <string name="register">Register</string>
+    <string name="profile">profile</string>
+    <string name="don_t_have_an_account_register_here">Don\'t have an account? Register here.</string>
+    <string name="search_jobs">Search Jobs</string>
+    <string name="set_preference">Set preference</string>
+    <string name="c">C</string>
+    <string name="d">D</string>
+    <string name="e">E</string>
+    <string name="choose_role">Choose role</string>
+    <string name="Payment">Payment</string>
+    <string name="preferredEmployee">preferred_employee</string>
 </resources>

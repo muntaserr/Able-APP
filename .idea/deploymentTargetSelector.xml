@@ -5,19 +5,19 @@
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="LoginActivity">
+<<<<<<< HEAD
+      <SelectionState runConfigName="MainActivityEmployee">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="testRequestLocationPermissionClickNo()">
+      <SelectionState runConfigName="MainActivityEmployee (1)">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="MapsActivity">
+=======
+      <SelectionState runConfigName="MainActivityEmployee (1)">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="MapsActivity (1)">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
-      <SelectionState runConfigName="SubActivityMap">
+>>>>>>> 3159197b20b83295fccfe8a8b50eea2ce350ef09
+      <SelectionState runConfigName="mainActivityEmployeeTest()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

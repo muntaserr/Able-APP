@@ -1,7 +1,6 @@
 package com.example.quickcashapp;
 
 import android.content.Intent;
-import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,11 +8,8 @@ import android.widget.Button;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.quickcashapp.Employee.MainActivityEmployee;
-import com.example.quickcashapp.Employer.MainActivityEmployer;
-import com.example.quickcashapp.Maps.LocationHelper;
-import java.util.Map;
-
+import com.example.quickcashapp.employeeDashboard.MainActivityEmployee;
+import com.example.quickcashapp.employerDashboard.MainActivityEmployer;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,9 +19,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-
-        LocationHelper locationHelper = new LocationHelper(this);
-        locationHelper.askForPermissions();
 
         Button btn1 = findViewById(R.id.button); //employer
         Button btn2 = findViewById(R.id.button2); //employee
