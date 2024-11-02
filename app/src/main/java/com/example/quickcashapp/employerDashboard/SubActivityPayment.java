@@ -28,7 +28,7 @@ import java.math.BigDecimal;
 
 public class SubActivityPayment extends AppCompatActivity {
     private static final String TAG = PaymentActivity.class.getName();
-    private ActivityResultLauncher<Intent> activityResultLauncher;
+    public ActivityResultLauncher<Intent> activityResultLauncher;
     private PayPalConfiguration payPalConfig;
 
     private EditText enterAmtET;

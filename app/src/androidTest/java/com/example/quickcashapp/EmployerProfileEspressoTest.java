@@ -16,6 +16,8 @@ import static androidx.test.espresso.intent.Intents.intended;
 import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
+import com.example.quickcashapp.employerDashboard.SubActivityProfile;
+
 
 @RunWith(AndroidJUnit4.class)
 public class EmployerProfileEspressoTest {
