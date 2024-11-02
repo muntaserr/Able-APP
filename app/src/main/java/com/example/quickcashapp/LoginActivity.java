@@ -15,6 +15,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.quickcashapp.employeeDashboard.RegisterActivity;
+import com.example.quickcashapp.employerDashboard.MainActivityEmployer;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -50,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         Button loginButton = findViewById(R.id.login_button);
         TextView registerButton = findViewById(R.id.register_link);
 
-        registerButton.setOnClickListener(v -> {navigateToRegistration();});
+        registerButton.setOnClickListener(v -> navigateToRegistration());
 
 
         // Set the login button click listener
@@ -101,8 +102,7 @@ public class LoginActivity extends AppCompatActivity {
                                     // Navigate to the respective dashboard based on user role
                                     Intent intent;
                                     if ("employer".equals(role)) {
-
-                                        intent = new Intent(LoginActivity.this, MainActivity.class);
+                                        intent = new Intent(LoginActivity.this, MainActivityEmployer.class);
                                     } else {
                                         intent = new Intent(LoginActivity.this, MainActivity.class);
                                     }

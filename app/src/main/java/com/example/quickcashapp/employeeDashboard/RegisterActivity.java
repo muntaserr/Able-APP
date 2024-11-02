@@ -25,6 +25,13 @@ public class RegisterActivity extends AppCompatActivity {
     private RadioButton selectedRoleButton;
     private LoginValidator validator;
 
+    /**
+     * Called when the activity is first created.
+     * Initializes Firebase Authentication, Database, and UI components.
+     * Sets up a click listener for the registration button to validate and register a new user.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down, this Bundle contains the most recent data.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,7 +95,15 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    // Method to register the user in Firebase
+    /**
+     * Registers a new user with Firebase Authentication and stores user details in the Firebase Realtime Database.
+     *
+     * @param name      The name of the user.
+     * @param email     The email address of the user.
+     * @param password  The password chosen by the user.
+     * @param creditCard The credit card information of the user.
+     * @param role      The role of the user, such as 'employer' or 'employee'.
+     */
     private void registerUser(String name, String email, String password, String creditCard, String role) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
@@ -109,10 +124,16 @@ public class RegisterActivity extends AppCompatActivity {
                 });
     }
 
-    // Method to display status messages
+    /**
+     * Displays a status message to the user.
+     *
+     * @param message The message to be displayed to the user.
+     * @param colour  The color of the message text, e.g., Color.RED for error or Color.GREEN for success.
+     */
     public void setStatusMessage(String message, int colour) {
         TextView statusMessage = findViewById(R.id.statusMessage);
         statusMessage.setText(message);
         statusMessage.setTextColor(colour);
     }
+
 }

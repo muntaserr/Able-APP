@@ -12,6 +12,7 @@ import androidx.cardview.widget.CardView;
 import com.example.quickcashapp.MainActivity;
 import com.example.quickcashapp.R;
 
+
 public class MainActivityEmployer extends ComponentActivity {
     CardView c1, c2, c3, c4, c5, c6;
 
