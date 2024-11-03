@@ -9,12 +9,12 @@ import android.location.LocationManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 
 import com.example.quickcashapp.R;
-import com.example.quickcashapp.employerDashboard.MainActivityEmployer;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.util.List;
 
 
-public class employerMap extends MainActivityEmployer implements OnMapReadyCallback {
+public class employerMap extends AppCompatActivity implements OnMapReadyCallback {
 
 
     private static final int REQUEST_LOCATION_PERMISSION = 0;
