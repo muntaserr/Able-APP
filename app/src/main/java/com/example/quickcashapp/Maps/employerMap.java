@@ -1,4 +1,4 @@
-package com.example.quickcashapp.employerDashboard;
+package com.example.quickcashapp.Maps;
 
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -14,6 +14,7 @@ import androidx.core.app.ActivityCompat;
 import android.Manifest;
 
 import com.example.quickcashapp.R;
+import com.example.quickcashapp.employerDashboard.MainActivityEmployer;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -26,7 +27,7 @@ import java.io.IOException;
 import java.util.List;
 
 
-public class SubActivityMap extends MainActivityEmployer implements OnMapReadyCallback {
+public class employerMap extends MainActivityEmployer implements OnMapReadyCallback {
 
 
     private static final int REQUEST_LOCATION_PERMISSION = 0;

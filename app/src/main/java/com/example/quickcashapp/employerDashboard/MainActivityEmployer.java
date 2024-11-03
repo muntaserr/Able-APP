@@ -3,13 +3,13 @@ package com.example.quickcashapp.employerDashboard;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import com.example.quickcashapp.MainActivity;
+import com.example.quickcashapp.Maps.employerMap;
 import com.example.quickcashapp.R;
 
 public class MainActivityEmployer extends AppCompatActivity {
@@ -33,7 +33,7 @@ public class MainActivityEmployer extends AppCompatActivity {
         c1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivityEmployer.this, SubActivityMap.class);
+                Intent intent = new Intent(MainActivityEmployer.this, employerMap.class);
                 startActivity(intent);
             }
         });
