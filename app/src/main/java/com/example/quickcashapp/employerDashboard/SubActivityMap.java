@@ -7,19 +7,13 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.Log;
 
-import androidx.activity.ComponentActivity;
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 
-import com.example.quickcashapp.MainActivity;
 import com.example.quickcashapp.R;
-import com.example.quickcashapp.employerDashboard.MainActivityEmployer;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -32,7 +26,7 @@ import java.io.IOException;
 import java.util.List;
 
 
-public class SubActivityMap extends MainActivity implements OnMapReadyCallback {
+public class SubActivityMap extends MainActivityEmployer implements OnMapReadyCallback {
 
 
     private static final int REQUEST_LOCATION_PERMISSION = 0;
@@ -44,11 +38,13 @@ public class SubActivityMap extends MainActivity implements OnMapReadyCallback {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
+        setContentView(R.layout.activity_employer_map);
 
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
 
 
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -68,7 +64,9 @@ public class SubActivityMap extends MainActivity implements OnMapReadyCallback {
 
 
     private void initializeLocationListener() {
+
         locationListener = new LocationListener() {
+            @Override
             public void onLocationChanged(Location location) {
                 double latitude = location.getLatitude();
                 double longitude = location.getLongitude();
@@ -84,11 +82,26 @@ public class SubActivityMap extends MainActivity implements OnMapReadyCallback {
                         marker.remove();
                     }
                     marker = mMap.addMarker(new MarkerOptions().position(latLng).title(address));
+                    mMap.setMaxZoomPreference(15);
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 20));// Adjust zoom level
 
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));  // Adjust zoom level
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
+            @Override
+            public void onStatusChanged(String s, int i, Bundle bundle) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String s) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String s) {
+
             }
         };
     }
