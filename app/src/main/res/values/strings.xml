@@ -38,4 +38,15 @@
     <string name="employer_dashboard">EMPLOYER DASHBOARD</string>
     <string name="name">Name</string>
     <string name="t">TODO</string>
+    <string name="enter_job_type">Enter job type</string>
+    <string name="enter_salary_range">Enter salary range</string>
+    <string name="save_preferences">Save Preferences</string>
+    <string name="enter_job_location" />
+    <string name="Enter_job_location" />
+    <string name="enterJobLocation">Enter job location</string>
+    <string name="Save_preferences">save_preferences</string>
+    <string name="please_enter_job_location">Please enter job location</string>
+    <string name="please_enter_expected_duration">Please enter expected duration</string>
+    <string name="please_enter_salary_range">Please enter salary range</string>
+    <string name="please_enter_job_title">Please enter job title</string>
 </resources>
