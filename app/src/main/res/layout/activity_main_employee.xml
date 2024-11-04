@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".employeeDashboard.MainActivityEmployee"
+    tools:context=".MainActivityEmployee"
     tools:ignore="ExtraText">
 
     <TextView
@@ -48,9 +48,10 @@
                     android:id="@+id/SearchJobs"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/search_jobs"
+                    android:text="Search Jobs"
                     android:textAlignment="center"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:ignore="HardcodedText" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -78,9 +79,10 @@
                     android:id="@+id/SetPreference"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/set_preference"
+                    android:text="Set Preference"
                     android:textAlignment="center"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:ignore="HardcodedText" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
