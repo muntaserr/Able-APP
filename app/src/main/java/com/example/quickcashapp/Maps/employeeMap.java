@@ -63,7 +63,13 @@ public class employeeMap extends AppCompatActivity implements OnMapReadyCallback
     }
 
 
-
+    /**
+     * Initializes the LocationListener to track location changes.
+     * When the location changes, the method gets the latitude and longitude, uses a Geocoder
+     * to obtain address information from the coordinates, and updates the map with a marker at the new location.
+     * If there was a previous marker, it will be removed.
+     * The camera is also moved to the new location with a specified zoom level.
+     */
     private void initializeLocationListener() {
 
         locationListener = new LocationListener() {
@@ -107,13 +113,22 @@ public class employeeMap extends AppCompatActivity implements OnMapReadyCallback
         };
     }
 
+    /**
+     * Removes location updates when the activity is stopped to save resources and
+     * avoid receiving unnecessary location updates while the activity is not in the foreground.
+     */
     @Override
     protected void onStop() {
         super.onStop();
         locationManager.removeUpdates(locationListener);
     }
 
-
+    /**
+     * Called when the map is ready to be used. This is where you can set up markers, listeners,
+     * or perform any other initialization needed for the Google Map.
+     *
+     * @param googleMap the GoogleMap object that is ready to be used.
+     */
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
