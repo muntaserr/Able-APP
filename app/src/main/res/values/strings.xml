@@ -38,4 +38,13 @@
     <string name="employer_dashboard">EMPLOYER DASHBOARD</string>
     <string name="name">Name</string>
     <string name="t">TODO</string>
+
+    <string-array name="job_duration_array">
+        <item>Part-time</item>
+        <item>Full-time</item>
+        <item>Temporary</item>
+        <item>Contract</item>
+        <item>Internship</item>
+        <item>Freelance</item>
+    </string-array>
 </resources>
