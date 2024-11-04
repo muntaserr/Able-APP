@@ -14,7 +14,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.quickcashapp.employeeDashboard.MainActivityEmployee;
 import com.example.quickcashapp.employeeDashboard.RegisterActivity;
+import com.example.quickcashapp.employerDashboard.MainActivityEmployer;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -50,8 +52,8 @@ public class LoginActivity extends AppCompatActivity {
         Button loginButton = findViewById(R.id.login_button);
         TextView registerButton = findViewById(R.id.register_link);
 
-        registerButton.setOnClickListener(v -> {navigateToRegistration();});
-
+        // Set register link click listener
+        registerButton.setOnClickListener(v -> navigateToRegistration());
 
         // Set the login button click listener
         loginButton.setOnClickListener(v -> {
@@ -80,6 +82,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     // Helper method to validate email format
+
+
     private boolean isValidEmail(String email) {
         return !email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
@@ -93,33 +97,50 @@ public class LoginActivity extends AppCompatActivity {
                         FirebaseUser user = mAuth.getCurrentUser();
 
                         // Retrieve user role from database
-                        mDatabase.child("users").child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                if (dataSnapshot.exists()) {
-                                    String role = dataSnapshot.child("role").getValue(String.class);
-                                    // Navigate to the respective dashboard based on user role
-                                    Intent intent;
-                                    if ("employer".equals(role)) {
-
-                                        intent = new Intent(LoginActivity.this, MainActivity.class);
-                                    } else {
-                                        intent = new Intent(LoginActivity.this, MainActivity.class);
-                                    }
-                                    startActivity(intent);
-                                    finish(); // Close the login activity
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-                                Toast.makeText(LoginActivity.this, "Failed to retrieve user role", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                        fetchUserRoleAndNavigate(user);
                     } else {
                         // Login failed
                         Toast.makeText(LoginActivity.this, "Login failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    private void fetchUserRoleAndNavigate(FirebaseUser user) {
+        if (user == null) {
+            Toast.makeText(LoginActivity.this, "User authentication failed", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        mDatabase.child("users").child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    String role = dataSnapshot.child("role").getValue(String.class);
+                    navigateBasedOnRole(role);
+                } else {
+                    Toast.makeText(LoginActivity.this, "User role not found in database", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(LoginActivity.this, "Failed to retrieve user role", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void navigateBasedOnRole(String role) {
+        Intent intent;
+        if ("employer".equals(role)) {
+            intent = new Intent(LoginActivity.this, MainActivityEmployer.class);
+        } else if ("employee".equals(role)) {
+            intent = new Intent(LoginActivity.this, MainActivityEmployee.class);
+        } else {
+            // Default case if role is undefined
+            Toast.makeText(LoginActivity.this, "User role is undefined, please contact support", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        startActivity(intent);
+        finish(); // Close the login activity
     }
 }
