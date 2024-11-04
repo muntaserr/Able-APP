@@ -8,8 +8,8 @@
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/job_post"
+        android:text="Job Post"
         tools:layout_editor_absoluteX="178dp"
         tools:layout_editor_absoluteY="337dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="HardcodedText,MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>

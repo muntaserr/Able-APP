@@ -1,4 +1,4 @@
-package com.example.quickcashapp;
+package com.example.quickcashapp.employeeDashboard;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,15 +8,20 @@ import android.widget.Button;
 import androidx.activity.ComponentActivity;
 import androidx.activity.EdgeToEdge;
 
+import com.example.quickcashapp.MainActivity;
+import com.example.quickcashapp.R;
+import com.example.quickcashapp.Maps.employerMap;
+
 public class MainActivityEmployee extends ComponentActivity {
     @Override
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main_employee);
 
+
         // Initialize the buttons inside onCreate
+        Button map = findViewById(R.id.C);
         Button SearchJobs = findViewById(R.id.SearchJobs);
         Button SetPreference = findViewById(R.id.SetPreference);
         Button ChooseRole = findViewById(R.id.ChooseRole);
@@ -46,8 +51,14 @@ public class MainActivityEmployee extends ComponentActivity {
             }
         });
 
-
+        map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2 = new Intent(MainActivityEmployee.this, employerMap.class);
+                startActivity(intent2);
+            }
+        });
     }
 
-}
 
+}

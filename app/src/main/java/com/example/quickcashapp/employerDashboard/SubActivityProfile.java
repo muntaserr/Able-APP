@@ -1,4 +1,4 @@
-package com.example.quickcashapp;
+package com.example.quickcashapp.employerDashboard;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -8,6 +8,9 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+
+import com.example.quickcashapp.LoginActivity;
+import com.example.quickcashapp.R;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;

@@ -1,8 +1,10 @@
-package com.example.quickcashapp;
+package com.example.quickcashapp.employerDashboard;
 
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
+
+import com.example.quickcashapp.R;
 
 public class SubActivityPreferredEmployee extends MainActivityEmployer {
     @Override
