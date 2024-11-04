@@ -12,6 +12,7 @@
         android:layout_marginStart="131dp"
         android:layout_marginTop="136dp"
         android:layout_marginEnd="132dp"
+        android:contentDescription="@string/ToDO"
         app:layout_constraintBottom_toTopOf="@+id/profile_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,13 +24,15 @@
         android:layout_width="413dp"
         android:layout_height="121dp"
         android:layout_marginBottom="135dp"
+        android:autofillHints=""
         android:ems="10"
         android:inputType="text"
-        android:text="Description"
+        android:text="@string/description"
         app:layout_constraintBottom_toTopOf="@+id/profile_rating"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_picture" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_picture"
+        tools:ignore="LabelFor" />
 
     <RatingBar
         android:id="@+id/profile_rating"
@@ -55,7 +58,7 @@
         android:layout_marginTop="15dp"
         android:layout_marginEnd="19dp"
         android:layout_marginBottom="140dp"
-        android:text="Logout"
+        android:text="@string/logout"
         app:layout_constraintBottom_toTopOf="@+id/profile_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/profile_picture"
