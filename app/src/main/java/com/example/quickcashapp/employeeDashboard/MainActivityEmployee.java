@@ -10,6 +10,7 @@ import androidx.activity.EdgeToEdge;
 
 import com.example.quickcashapp.MainActivity;
 import com.example.quickcashapp.R;
+import com.example.quickcashapp.Maps.employerMap;
 
 public class MainActivityEmployee extends ComponentActivity {
     @Override
@@ -20,6 +21,7 @@ public class MainActivityEmployee extends ComponentActivity {
 
 
         // Initialize the buttons inside onCreate
+        Button map = findViewById(R.id.C);
         Button SearchJobs = findViewById(R.id.SearchJobs);
         Button SetPreference = findViewById(R.id.SetPreference);
         Button ChooseRole = findViewById(R.id.ChooseRole);
@@ -49,7 +51,13 @@ public class MainActivityEmployee extends ComponentActivity {
             }
         });
 
-
+        map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2 = new Intent(MainActivityEmployee.this, employerMap.class);
+                startActivity(intent2);
+            }
+        });
     }
 
 

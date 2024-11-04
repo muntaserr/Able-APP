@@ -82,6 +82,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     // Helper method to validate email format
+
+
     private boolean isValidEmail(String email) {
         return !email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
