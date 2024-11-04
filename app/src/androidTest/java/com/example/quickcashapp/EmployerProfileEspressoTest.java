@@ -19,7 +19,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 
-import com.example.quickcashapp.Employer.SubActivityProfile;
+import com.example.quickcashapp.employerDashboard.SubActivityProfile;
 
 @RunWith(AndroidJUnit4.class)
 public class EmployerProfileEspressoTest {

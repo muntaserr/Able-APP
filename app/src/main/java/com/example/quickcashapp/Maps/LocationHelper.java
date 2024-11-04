@@ -15,11 +15,22 @@ public class LocationHelper {
     private static final int REQUEST_LOCATION_PERMISSION = 0;
     final private Context context;
 
+    /**
+     * Constructor
+     * @param context gets the Activity from the calling class to display information.
+     */
     public LocationHelper(Context context){
         this.context = context;
     }
 
 
+    /**
+     * Initializes the LocationListener to track location changes.
+     * When the location changes, the method gets the latitude and longitude, uses a Geocoder
+     * to obtain address information from the coordinates, and updates the map with a marker at the new location.
+     * If there was a previous marker, it will be removed.
+     * The camera is also moved to the new location with a specified zoom level.
+     */
     public void askForPermissions(){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Location Permission Needed");

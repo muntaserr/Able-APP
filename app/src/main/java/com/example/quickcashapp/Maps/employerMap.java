@@ -9,12 +9,12 @@ import android.location.LocationManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 
 import com.example.quickcashapp.R;
-import com.example.quickcashapp.employerDashboard.MainActivityEmployer;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.util.List;
 
 
-public class employerMap extends MainActivityEmployer implements OnMapReadyCallback {
+public class employerMap extends AppCompatActivity implements OnMapReadyCallback {
 
 
     private static final int REQUEST_LOCATION_PERMISSION = 0;
@@ -63,7 +63,13 @@ public class employerMap extends MainActivityEmployer implements OnMapReadyCallb
     }
 
 
-
+    /**
+     * Initializes the LocationListener to track location changes.
+     * When the location changes, the method gets the latitude and longitude, uses a Geocoder
+     * to obtain address information from the coordinates, and updates the map with a marker at the new location.
+     * If there was a previous marker, it will be removed.
+     * The camera is also moved to the new location with a specified zoom level.
+     */
     private void initializeLocationListener() {
 
         locationListener = new LocationListener() {
@@ -107,14 +113,23 @@ public class employerMap extends MainActivityEmployer implements OnMapReadyCallb
         };
     }
 
+    /**
+     * Removes location updates when the activity is stopped to save resources and
+     * avoid receiving unnecessary location updates while the activity is not in the foreground.
+     */
     @Override
     protected void onStop() {
         super.onStop();
         locationManager.removeUpdates(locationListener);
     }
 
-
-            @Override
+    /**
+     * Called when the map is ready to be used. This is where you can set up markers, listeners,
+     * or perform any other initialization needed for the Google Map.
+     *
+     * @param googleMap the GoogleMap object that is ready to be used.
+     */
+    @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
     }
