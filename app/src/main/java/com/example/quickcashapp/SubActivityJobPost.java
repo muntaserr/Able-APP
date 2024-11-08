@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 
+import com.example.quickcashapp.employerDashboard.MainActivityEmployer;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -48,7 +49,7 @@ public class SubActivityJobPost extends MainActivityEmployer {
         jobDurationEditText = findViewById(id.jobDuration);
         jobUrgencyEditText = findViewById(id.jobUrgency);
         jobLocationEditText = findViewById(id.jobLocation);
-        submitJobButton = findViewById(id.submitJobButton);
+        submitJobButton = findViewById(id.submitJob);
 
         // Set the button click listener to submit the job
         submitJobButton.setOnClickListener(v -> submitJob());
