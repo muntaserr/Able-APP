@@ -40,12 +40,14 @@
 
         <activity android:name=".employeeDashboard.MainActivityEmployee" />
         <activity android:name=".employerDashboard.MainActivityEmployer" />
+        <activity android:name=".employeeDashboard.SearchJobsActivity" />
         <activity android:name=".employerDashboard.SubActivityProfile" />
         <activity android:name=".employerDashboard.SubActivityPayment" />
         <activity android:name=".employeeDashboard.RegisterActivity" />
         <activity android:name=".employerDashboard.SubActivityPreferredEmployee" />
         <activity android:name=".employerDashboard.SubActivityJobPost" />
         <activity android:name=".Maps.employerMap" />
+        <activity android:name=".Maps.employeeMap" />
     </application>
 
 </manifest>
