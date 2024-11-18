@@ -8,17 +8,22 @@ public class Job {
     private String urgency;
     private String location;
 
+
+
+    private String description;
+
     // Default constructor required for Firebase
     public Job() {
     }
 
-    public Job(String jobId, String title, String salary, String duration, String urgency, String location) {
+    public Job(String jobId, String title, String salary, String duration, String urgency,String description, String location) {
         this.jobId = jobId;
         this.title = title;
         this.salary = salary;
         this.duration = duration;
         this.urgency = urgency;
         this.location = location;
+        this.description = description;
     }
 
     // Getters and Setters
@@ -69,4 +74,8 @@ public class Job {
     public void setLocation(String location) {
         this.location = location;
     }
+
+    public String getDescription() {return description;}
+
+    public void setDescription(String description) {this.description = description;}
 }

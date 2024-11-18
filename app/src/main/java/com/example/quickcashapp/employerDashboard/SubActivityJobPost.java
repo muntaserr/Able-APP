@@ -22,7 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class SubActivityJobPost extends MainActivityEmployer {
 
-    private EditText jobTitleEditText, salaryEditText, durationEditText, urgencyEditText, locationEditText;
+    private EditText jobTitleEditText, salaryEditText, durationEditText, urgencyEditText, locationEditText, descriptionEditText;
     private Button submitButton;
     private DatabaseReference jobsDatabaseReference;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1001;
@@ -40,10 +40,12 @@ public class SubActivityJobPost extends MainActivityEmployer {
         // Initialize UI elements
         jobTitleEditText = findViewById(R.id.jobTitle);
         salaryEditText = findViewById(R.id.salary);
-        durationEditText = findViewById(R.id.duration);
-        urgencyEditText = findViewById(R.id.urgency);
+        durationEditText = findViewById(R.id.jobDuration);
+        urgencyEditText = findViewById(R.id.jobUrgency);
+        descriptionEditText = findViewById(R.id.jobDescription);
         locationEditText = findViewById(R.id.location);
-        submitButton = findViewById(R.id.submitButton);
+
+        submitButton = findViewById(R.id.submitJob);
 
         // Check for location permissions
         checkLocationPermission();
@@ -86,6 +88,7 @@ public class SubActivityJobPost extends MainActivityEmployer {
         String salary = salaryEditText.getText().toString().trim();
         String duration = durationEditText.getText().toString().trim();
         String urgency = urgencyEditText.getText().toString().trim();
+        String description = descriptionEditText.getText().toString().trim();
         String location = locationEditText.getText().toString().trim();
 
         // Validate input fields; exit method if validation fails
@@ -100,7 +103,7 @@ public class SubActivityJobPost extends MainActivityEmployer {
         }
 
         // Create a new Job object with the input details
-        Job job = new Job(jobId, jobTitle, salary, duration, urgency, location);
+        Job job = new Job(jobId, jobTitle, salary, duration, urgency, description, location);
 
         // Save the Job object to Firebase
         saveJobToFirebase(jobId, job);

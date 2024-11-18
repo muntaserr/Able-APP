@@ -18,16 +18,22 @@
         android:hint="Salary" />
 
     <EditText
-        android:id="@+id/duration"
+        android:id="@+id/jobDuration"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Duration" />
 
     <EditText
-        android:id="@+id/urgency"
+        android:id="@+id/jobUrgency"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Urgency" />
+
+    <EditText
+        android:id="@+id/jobDescription"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Describe the job you would like completed" />
 
     <EditText
         android:id="@+id/location"
@@ -36,7 +42,7 @@
         android:hint="Location" />
 
     <Button
-        android:id="@+id/submitButton"
+        android:id="@+id/submitJob"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Submit Job" />
