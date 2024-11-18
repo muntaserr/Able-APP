@@ -11,6 +11,8 @@ import androidx.activity.EdgeToEdge;
 import com.example.quickcashapp.MainActivity;
 import com.example.quickcashapp.R;
 import com.example.quickcashapp.Maps.employerMap;
+import com.example.quickcashapp.SearchJobsActivity;
+
 
 public class MainActivityEmployee extends ComponentActivity {
     @Override
