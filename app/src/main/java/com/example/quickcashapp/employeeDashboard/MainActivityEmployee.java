@@ -14,6 +14,9 @@ import com.example.quickcashapp.Maps.employerMap;
 import com.example.quickcashapp.SearchJobsActivity;
 
 
+/**
+ * This class handles all the logic for switching Activity's in the Employee dashboard.
+ */
 public class MainActivityEmployee extends ComponentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
