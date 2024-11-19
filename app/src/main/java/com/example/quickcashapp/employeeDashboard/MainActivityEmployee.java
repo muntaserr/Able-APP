@@ -11,7 +11,6 @@ import androidx.activity.EdgeToEdge;
 import com.example.quickcashapp.MainActivity;
 import com.example.quickcashapp.R;
 import com.example.quickcashapp.Maps.employerMap;
-import com.example.quickcashapp.SearchJobsActivity;
 
 
 public class MainActivityEmployee extends ComponentActivity {
@@ -27,20 +26,21 @@ public class MainActivityEmployee extends ComponentActivity {
         Button SearchJobs = findViewById(R.id.SearchJobs);
         Button SetPreference = findViewById(R.id.SetPreference);
         Button ChooseRole = findViewById(R.id.ChooseRole);
+        Button viewJobs = findViewById(R.id.viewJobs);
 
         SearchJobs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent2 = new Intent(MainActivityEmployee.this, SearchJobsActivity.class);
-                startActivity(intent2);
+                Intent intent = new Intent(MainActivityEmployee.this, SearchJobsActivity.class);
+                startActivity(intent);
             }
         });
 
         SetPreference.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent2 = new Intent(MainActivityEmployee.this, SetPreferenceActivity.class);
-                startActivity(intent2);
+                Intent intent = new Intent(MainActivityEmployee.this, SetPreferenceActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -48,16 +48,24 @@ public class MainActivityEmployee extends ComponentActivity {
         ChooseRole.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent2 = new Intent(MainActivityEmployee.this, MainActivity.class);
-                startActivity(intent2);
+                Intent intent = new Intent(MainActivityEmployee.this, MainActivity.class);
+                startActivity(intent);
             }
         });
 
         map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent2 = new Intent(MainActivityEmployee.this, employerMap.class);
-                startActivity(intent2);
+                Intent intent = new Intent(MainActivityEmployee.this, employerMap.class);
+                startActivity(intent);
+            }
+        });
+
+        viewJobs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivityEmployee.this, ViewJobs.class);
+                startActivity(intent);
             }
         });
     }

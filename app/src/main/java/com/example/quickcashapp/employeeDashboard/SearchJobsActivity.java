@@ -1,4 +1,4 @@
-package com.example.quickcashapp;
+package com.example.quickcashapp.employeeDashboard;
 
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +12,10 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.quickcashapp.JobListAdapter;
+import com.example.quickcashapp.JobListing;
+import com.example.quickcashapp.R;
 
 import java.util.ArrayList;
 import java.util.List;

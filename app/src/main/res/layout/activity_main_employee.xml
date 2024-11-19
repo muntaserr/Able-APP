@@ -139,10 +139,10 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/D"
+                    android:id="@+id/viewJobs"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/d"
+                    android:text="View Jobs"
                     android:textAlignment="center"
                     android:textStyle="bold" />
             </LinearLayout>
