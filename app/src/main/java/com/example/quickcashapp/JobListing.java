@@ -1,5 +1,9 @@
 package com.example.quickcashapp;
 
+/**
+ * Job listing class for getting all the information needed in a job listing.
+ * Also jobListing object.
+ */
 public class JobListing {
     private String jobTitle;
     private int minSalary;
@@ -15,6 +19,7 @@ public class JobListing {
         this.vicinity = vicinity;
     }
 
+    //Getters for Job listings.
     public String getJobTitle() {
         return jobTitle;
     }

@@ -10,7 +10,9 @@ public class User {
     public User() {
 
     }
-
+    /**
+     * Constructor for user including all important info
+     */
     public User(String name, String email, String password, String creditCard, String role) {
         this.name = name;
         this.email = email;

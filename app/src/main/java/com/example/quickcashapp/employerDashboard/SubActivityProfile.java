@@ -38,6 +38,19 @@ public class SubActivityProfile extends MainActivityEmployer {
         logoutButton.setOnClickListener(v -> logoutUser());
     }
 
+    /**
+     * Logs out the user from the application.
+     *
+     * This method displays a confirmation dialog to the user.
+     * If the user confirms, it performs the following actions:
+     *
+     * - Signs the user out of Firebase authentication.
+     * - Displays a toast message indicating a successful logout.
+     * - Switches the activity to the login activity.
+     * - Closes the current activity (profile activity).
+     *
+     * If the user says No the user is not logged out
+     */
     private void logoutUser(){
 
         new AlertDialog.Builder(SubActivityProfile.this)
