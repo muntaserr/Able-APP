@@ -48,7 +48,8 @@
         <activity android:name=".employerDashboard.SubActivityPreferredEmployee" />
         <activity android:name=".employerDashboard.SubActivityJobPost" />
         <activity android:name=".Maps.employerMap" />
-        <activity android:name=".SearchJobsActivity" />
+        <activity android:name=".employeeDashboard.ViewJobs"/>
+        <activity android:name=".employeeDashboard.SearchJobsActivity" />
     </application>
 
 </manifest>

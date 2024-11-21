@@ -6,13 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.quickcashapp.R;
 
-public class ViewJobs  extends AppCompatActivity {
+public class ViewJobs extends AppCompatActivity {
 
-    protected void onCreate(Bundle savedInstances){
-        super.onCreate(savedInstances);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewjobs);
     }
-
-
-
 }

@@ -3,10 +3,10 @@ package com.example.quickcashapp.employeeDashboard;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 import androidx.activity.ComponentActivity;
 import androidx.activity.EdgeToEdge;
+import androidx.cardview.widget.CardView;
 
 import com.example.quickcashapp.MainActivity;
 import com.example.quickcashapp.R;
@@ -14,6 +14,8 @@ import com.example.quickcashapp.Maps.employerMap;
 
 
 public class MainActivityEmployee extends ComponentActivity {
+    CardView c1, c2, c3, c4, c5, c6, c7, c8;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,13 +24,17 @@ public class MainActivityEmployee extends ComponentActivity {
 
 
         // Initialize the buttons inside onCreate
-        Button map = findViewById(R.id.C);
-        Button SearchJobs = findViewById(R.id.SearchJobs);
-        Button SetPreference = findViewById(R.id.SetPreference);
-        Button ChooseRole = findViewById(R.id.ChooseRole);
-        Button viewJobs = findViewById(R.id.viewJobs);
+        c1 = findViewById(R.id.cardView1);
+        c2 = findViewById(R.id.cardView2);
+        c3 = findViewById(R.id.cardView3);
+        c4 = findViewById(R.id.cardView4);
+        c5 = findViewById(R.id.cardView5);
+        c6 = findViewById(R.id.cardView6);
+        c7 = findViewById(R.id.cardView7);
+        c8 = findViewById(R.id.cardView8);
 
-        SearchJobs.setOnClickListener(new View.OnClickListener() {
+
+        c1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivityEmployee.this, SearchJobsActivity.class);
@@ -36,7 +42,7 @@ public class MainActivityEmployee extends ComponentActivity {
             }
         });
 
-        SetPreference.setOnClickListener(new View.OnClickListener() {
+        c2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivityEmployee.this, SetPreferenceActivity.class);
@@ -45,7 +51,7 @@ public class MainActivityEmployee extends ComponentActivity {
         });
 
 
-        ChooseRole.setOnClickListener(new View.OnClickListener() {
+        c6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivityEmployee.this, MainActivity.class);
@@ -53,7 +59,7 @@ public class MainActivityEmployee extends ComponentActivity {
             }
         });
 
-        map.setOnClickListener(new View.OnClickListener() {
+        c3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivityEmployee.this, employerMap.class);
@@ -61,7 +67,7 @@ public class MainActivityEmployee extends ComponentActivity {
             }
         });
 
-        viewJobs.setOnClickListener(new View.OnClickListener() {
+        c4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivityEmployee.this, ViewJobs.class);
