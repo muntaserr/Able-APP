@@ -13,6 +13,9 @@ import com.example.quickcashapp.R;
 import com.example.quickcashapp.Maps.employerMap;
 
 
+/**
+ * This class handles all the logic for switching Activity's in the Employee dashboard.
+ */
 public class MainActivityEmployee extends ComponentActivity {
     CardView c1, c2, c3, c4, c5, c6, c7, c8;
 
@@ -74,6 +77,16 @@ public class MainActivityEmployee extends ComponentActivity {
                 startActivity(intent);
             }
         });
+
+        profile.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivityEmployee.this, EmployeeProfile.class);
+                startActivity(intent);
+            }
+
+        });
+
     }
 
 

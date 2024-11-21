@@ -13,6 +13,9 @@ import com.example.quickcashapp.MainActivity;
 import com.example.quickcashapp.Maps.employerMap;
 import com.example.quickcashapp.R;
 
+/**
+ * Class to navigate the dashboard for the employer
+ */
 public class MainActivityEmployer extends ComponentActivity {
     CardView c1, c2, c3, c4, c5, c6;
 
