@@ -30,7 +30,7 @@ public class MapCRUD {
 
     /**
      * Gets all info from the firebase needed to get the markers and give the information to the map.
-     * If issue with getting info from the firebase it is logged. 
+     * If issue with getting info from the firebase it is logged.
      */
     public void loadJobMarkers(){
         jobsRef.addListenerForSingleValueEvent(new ValueEventListener() {

@@ -149,8 +149,8 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
 
-        LatLng halifax = new LatLng(44.6488, -63.5752);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(halifax, 12f));
+      //  LatLng halifax = new LatLng(44.6488, -63.5752);
+      //  mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(halifax, 12f)); Uncomment this and comment the Location listener if you need to use this feature
 
         firebase.loadJobMarkers();
     }
