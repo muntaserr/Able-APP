@@ -85,7 +85,7 @@ public class SubActivityJobPost extends MainActivityEmployer {
     private void submitJob() {
         // Retrieve input values from EditText fields
         String jobTitle = jobTitleEditText.getText().toString().trim();
-        String salary = salaryEditText.getText().toString().trim();
+        Double salary = Double.parseDouble(salaryEditText.getText().toString());
         String duration = durationEditText.getText().toString().trim();
         String urgency = urgencyEditText.getText().toString().trim();
         String description = descriptionEditText.getText().toString().trim();
@@ -120,12 +120,12 @@ public class SubActivityJobPost extends MainActivityEmployer {
      * @param location The location of the job.
      * @return true if all fields are valid; false otherwise.
      */
-    private boolean validateInput(String jobTitle, String salary, String duration, String urgency, String location) {
+    private boolean validateInput(String jobTitle, Double salary, String duration, String urgency, String location) {
         if (TextUtils.isEmpty(jobTitle)) {
             jobTitleEditText.setError("Job title is required");
             return false;
         }
-        if (TextUtils.isEmpty(salary)) {
+        if (salary == null) {
             salaryEditText.setError("Salary is required");
             return false;
         }
