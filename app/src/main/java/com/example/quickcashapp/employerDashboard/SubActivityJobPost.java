@@ -11,12 +11,12 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.quickcashapp.R;
 import com.example.quickcashapp.Job; // Import the Job class
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -102,8 +102,11 @@ public class SubActivityJobPost extends MainActivityEmployer {
             return;
         }
 
+        String status = "Pending";
+        String employerID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String employeeID = null;
         // Create a new Job object with the input details
-        Job job = new Job(jobId, jobTitle, salary, duration, urgency, description, location);
+        Job job = new Job(jobId, jobTitle, salary, duration, urgency, description, location, status, employerID, employeeID);
 
         // Save the Job object to Firebase
         saveJobToFirebase(jobId, job);

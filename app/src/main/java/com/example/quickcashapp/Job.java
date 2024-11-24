@@ -7,6 +7,9 @@ public class Job {
     private String duration;
     private String urgency;
     private String location;
+    private String status;
+    private String employerID;
+    private String employeeID;
 
 
 
@@ -16,7 +19,7 @@ public class Job {
     public Job() {
     }
 
-    public Job(String jobId, String title, String salary, String duration, String urgency,String description, String location) {
+    public Job(String jobId, String title, String salary, String duration, String urgency,String description, String location, String status, String employerID, String employeeID) {
         this.jobId = jobId;
         this.title = title;
         this.salary = salary;
@@ -24,6 +27,9 @@ public class Job {
         this.urgency = urgency;
         this.location = location;
         this.description = description;
+        this.status = status;
+        this.employerID = employerID;
+        this.employeeID = employeeID;
     }
 
     // Getters and Setters
@@ -78,4 +84,28 @@ public class Job {
     public String getDescription() {return description;}
 
     public void setDescription(String description) {this.description = description;}
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getEmployerID() {
+        return employerID;
+    }
+
+    public void setEmployerID(String employerID) {
+        this.employerID = employerID;
+    }
+
+    public void setEmployeeID(String employeeID) {
+        this.employeeID = employeeID;
+    }
+
+    public String getEmployeeID() {
+        return employeeID;
+    }
 }
