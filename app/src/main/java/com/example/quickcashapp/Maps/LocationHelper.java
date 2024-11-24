@@ -55,4 +55,10 @@ public class LocationHelper {
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
+
+
+    public void postedJobs(){
+
+    }
+
 }

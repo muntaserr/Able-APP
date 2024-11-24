@@ -14,6 +14,8 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 
+import com.example.quickcashapp.Firebase.FirebaseCRUD;
+import com.example.quickcashapp.Firebase.MapCRUD;
 import com.example.quickcashapp.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -27,9 +29,10 @@ import java.io.IOException;
 import java.util.List;
 
 
-public class employeeMap extends AppCompatActivity implements OnMapReadyCallback {
 
+public class Map extends AppCompatActivity implements OnMapReadyCallback {
 
+    MapCRUD firebase;
     private static final int REQUEST_LOCATION_PERMISSION = 0;
     GoogleMap mMap;
     LocationManager locationManager;
@@ -39,13 +42,13 @@ public class employeeMap extends AppCompatActivity implements OnMapReadyCallback
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_employer_map);
+        setContentView(R.layout.map);
 
+        firebase = new MapCRUD(this);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
 
 
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -59,7 +62,7 @@ public class employeeMap extends AppCompatActivity implements OnMapReadyCallback
         initializeLocationListener();
 
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener); **/
     }
 
 
@@ -70,6 +73,7 @@ public class employeeMap extends AppCompatActivity implements OnMapReadyCallback
      * If there was a previous marker, it will be removed.
      * The camera is also moved to the new location with a specified zoom level.
      */
+
     private void initializeLocationListener() {
 
         locationListener = new LocationListener() {
@@ -124,6 +128,18 @@ public class employeeMap extends AppCompatActivity implements OnMapReadyCallback
     }
 
     /**
+     * A method to take info from the mapCRUD and actually put the markers on the map
+     *
+     * @param latitude Latitude of the new job that is being added
+     * @param longitude Longitude of the new job that is being added
+     * @param title of the new job that is being added to the map
+     */
+    public void addMarkerToMap(Double latitude, double longitude, String title){
+        LatLng jobLocation = new LatLng(latitude, longitude);
+        mMap.addMarker(new MarkerOptions().position(jobLocation).title(title));
+    }
+
+    /**
      * Called when the map is ready to be used. This is where you can set up markers, listeners,
      * or perform any other initialization needed for the Google Map.
      *
@@ -132,5 +148,10 @@ public class employeeMap extends AppCompatActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
+
+      //  LatLng halifax = new LatLng(44.6488, -63.5752);
+      //  mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(halifax, 12f)); Uncomment this and comment the Location listener if you need to use this feature
+
+        firebase.loadJobMarkers();
     }
 }

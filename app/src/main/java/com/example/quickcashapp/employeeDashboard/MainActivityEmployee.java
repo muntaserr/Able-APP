@@ -10,7 +10,7 @@ import androidx.activity.EdgeToEdge;
 
 import com.example.quickcashapp.MainActivity;
 import com.example.quickcashapp.R;
-import com.example.quickcashapp.Maps.employerMap;
+import com.example.quickcashapp.Maps.Map;
 import com.example.quickcashapp.SearchJobsActivity;
 
 
@@ -61,7 +61,7 @@ public class MainActivityEmployee extends ComponentActivity {
         map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent2 = new Intent(MainActivityEmployee.this, employerMap.class);
+                Intent intent2 = new Intent(MainActivityEmployee.this, Map.class);
                 startActivity(intent2);
             }
         });
