@@ -11,7 +11,7 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Job Title or Description -->
+        <!-- Job Title -->
         <TextView
             android:id="@+id/jobTitleTV"
             android:layout_width="wrap_content"
@@ -20,6 +20,17 @@
             android:textSize="18sp"
             android:textColor="#000000"
             android:fontFamily="sans-serif-light" />
+
+        <!-- Employee Name -->
+<!--        <TextView-->
+<!--            android:id="@+id/employeeNameTV"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Employee Name"-->
+<!--            android:textSize="16sp"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:fontFamily="sans-serif-light"-->
+<!--            android:textColor="#555555" />-->
 
         <!-- Job Salary -->
         <TextView
@@ -30,22 +41,23 @@
             android:textSize="16sp"
             android:textColor="#000000"
             android:fontFamily="sans-serif-light"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="8dp" />
 
-        <!-- Pay Button -->
-        <EditText
-            android:id="@+id/paymentAmountET"
+        <!-- Status Update Button -->
+        <Button
+            android:id="@+id/updateStatusBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Payment Amount"
-            android:inputType="numberDecimal" />
+            android:text="Mark as Completed"
+            android:layout_marginTop="16dp" />
+
+        <!-- Pay Button -->
         <Button
             android:id="@+id/payBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Pay Now" />
-
-
+            android:text="Pay Now"
+            android:layout_marginTop="8dp" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

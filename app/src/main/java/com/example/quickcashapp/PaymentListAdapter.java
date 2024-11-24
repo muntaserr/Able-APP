@@ -11,10 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class PaymentListAdapter extends RecyclerView.Adapter<PaymentListAdapter.JobViewHolder> {
-    private List<Job> jobList;
-    private OnJobSelectedListener listener;
 
-    public PaymentListAdapter(List<Job> jobList, OnJobSelectedListener listener) {
+    private List<Job> jobList;
+    private OnJobActionListener listener;
+
+    public PaymentListAdapter(List<Job> jobList, OnJobActionListener listener) {
         this.jobList = jobList;
         this.listener = listener;
     }
@@ -28,9 +29,24 @@ public class PaymentListAdapter extends RecyclerView.Adapter<PaymentListAdapter.
     @Override
     public void onBindViewHolder(JobViewHolder holder, int position) {
         Job job = jobList.get(position);
+
+        // Bind data to views
         holder.jobTitleTV.setText(job.getTitle());
-        holder.jobSalaryTV.setText("Payment: $" + job.getSalary());
-        holder.payBtn.setOnClickListener(v -> listener.onPayClicked(job));
+        holder.jobSalaryTV.setText("Salary: $" + job.getSalary());
+
+        // Disable Pay button if the job is not completed
+        holder.payBtn.setEnabled("completed".equals(job.getStatus()));
+
+        // Set up button actions
+        holder.payBtn.setOnClickListener(v -> {
+            if (holder.payBtn.isEnabled()) {
+                listener.onPayClicked(job);
+            }
+        });
+
+        holder.markCompleteBtn.setOnClickListener(v -> {
+            listener.onMarkCompleteClicked(job);
+        });
     }
 
 
@@ -39,19 +55,21 @@ public class PaymentListAdapter extends RecyclerView.Adapter<PaymentListAdapter.
         return jobList.size();
     }
 
-    public interface OnJobSelectedListener {
+    public interface OnJobActionListener {
         void onPayClicked(Job job);
+        void onMarkCompleteClicked(Job job);
     }
 
     public static class JobViewHolder extends RecyclerView.ViewHolder {
         TextView jobTitleTV, jobSalaryTV;
-        Button payBtn;
+        Button payBtn, markCompleteBtn;
 
         public JobViewHolder(View itemView) {
             super(itemView);
             jobTitleTV = itemView.findViewById(R.id.jobTitleTV);
             jobSalaryTV = itemView.findViewById(R.id.jobSalaryTV);
             payBtn = itemView.findViewById(R.id.payBtn);
+            markCompleteBtn = itemView.findViewById(R.id.updateStatusBtn);
         }
     }
 }

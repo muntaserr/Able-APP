@@ -17,12 +17,6 @@ import com.example.quickcashapp.BuildConfig;
 import com.example.quickcashapp.PaymentListAdapter;
 import com.example.quickcashapp.R;
 import com.example.quickcashapp.Job;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
 import com.paypal.android.sdk.payments.PayPalPayment;
 import com.paypal.android.sdk.payments.PayPalService;
@@ -38,7 +32,7 @@ import java.util.List;
 
 public class SubActivityPayment extends AppCompatActivity {
 
-    private static final String TAG = PaymentActivity.class.getName();
+    private static final String TAG = "SubActivityPayment";
     private ActivityResultLauncher<Intent> activityResultLauncher;
     private PayPalConfiguration payPalConfig;
 
@@ -62,27 +56,18 @@ public class SubActivityPayment extends AppCompatActivity {
         fetchJobsForUser();
     }
 
-    /**
-     * Configure PayPal settings.
-     */
     private void configurePayPal() {
         payPalConfig = new PayPalConfiguration()
                 .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX) // Use Sandbox for testing
                 .clientId(BuildConfig.PAYPAL_CLIENT_ID); // Client ID from BuildConfig
     }
 
-    /**
-     * Start PayPal service.
-     */
     private void startPayPalService() {
         Intent intent = new Intent(this, PayPalService.class);
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, payPalConfig);
         startService(intent);
     }
 
-    /**
-     * Initialize Activity Launcher for PayPal payments.
-     */
     private void initializeActivityLauncher() {
         activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                 result -> {
@@ -93,7 +78,6 @@ public class SubActivityPayment extends AppCompatActivity {
                                 String paymentDetails = confirmation.toJSONObject().toString(4);
                                 Log.i(TAG, paymentDetails);
 
-                                // Handle payment success
                                 JSONObject response = new JSONObject(paymentDetails).getJSONObject("response");
                                 String paymentId = response.getString("id");
                                 String paymentState = response.getString("state");
@@ -111,89 +95,69 @@ public class SubActivityPayment extends AppCompatActivity {
                 });
     }
 
-    /**
-     * Fetch jobs for the current user.
-     */
     private void fetchJobsForUser() {
-        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        DatabaseReference jobsRef = FirebaseDatabase.getInstance().getReference("jobs");
+        // Fetch jobs from Firebase, only "in-progress" jobs
+        String userId = com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser().getUid();
+        com.google.firebase.database.DatabaseReference jobsRef = com.google.firebase.database.FirebaseDatabase.getInstance().getReference("jobs");
 
-        jobsRef.orderByChild("employerId").equalTo(userId)
-                .addValueEventListener(new ValueEventListener() {
+        jobsRef.orderByChild("employerID").equalTo(userId)
+                .addValueEventListener(new com.google.firebase.database.ValueEventListener() {
                     @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
+                    public void onDataChange(@NonNull com.google.firebase.database.DataSnapshot dataSnapshot) {
                         jobList.clear();
-
-                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        for (com.google.firebase.database.DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Job job = snapshot.getValue(Job.class);
-                            if (job != null && "in-progress".equals(job.getStatus())) { // Show only in-progress jobs
+                            if (job != null) {
                                 jobList.add(job);
                             }
                         }
-
-                        // Set up adapter with the ability to change status and pay
-                        paymentListAdapter = new PaymentListAdapter(jobList, job -> {
-                            // Change status to "completed"
-                            updateJobStatus(job);
-                        });
-                        paymentRecyclerView.setAdapter(paymentListAdapter);
+                        setupRecyclerView();
                     }
 
                     @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        Log.e("Firebase", "Error fetching jobs", databaseError.toException());
+                    public void onCancelled(@NonNull com.google.firebase.database.DatabaseError databaseError) {
+                        Log.e(TAG, "Error fetching jobs", databaseError.toException());
                     }
                 });
     }
 
-    /**
-     * Update job status to "completed".
-     */
+    private void setupRecyclerView() {
+        paymentListAdapter = new PaymentListAdapter(jobList, new PaymentListAdapter.OnJobActionListener() {
+            @Override
+            public void onPayClicked(Job job) {
+                initiatePayment(job); // Payment action
+            }
+
+            @Override
+            public void onMarkCompleteClicked(Job job) {
+                updateJobStatus(job); // Mark as completed action
+            }
+        });
+        paymentRecyclerView.setAdapter(paymentListAdapter);
+
+    }
+
     private void updateJobStatus(Job job) {
-        DatabaseReference jobRef = FirebaseDatabase.getInstance().getReference("jobs").child(job.getJobId());
+        com.google.firebase.database.DatabaseReference jobRef = com.google.firebase.database.FirebaseDatabase.getInstance().getReference("jobs").child(job.getJobId());
         jobRef.child("status").setValue("completed")
                 .addOnSuccessListener(aVoid -> {
-                    Toast.makeText(this, "Job marked as completed!", Toast.LENGTH_SHORT).show();
-
-                    // Fetch employee name to display
-                    fetchEmployeeName(job.getEmployeeID());
-
-                    // Allow payment once status is updated
-                    initiatePayment(job);
+                    Toast.makeText(SubActivityPayment.this, "Job marked as completed!", Toast.LENGTH_SHORT).show();
+                    job.setStatus("completed");
+                    paymentListAdapter.notifyDataSetChanged();
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(this, "Failed to update job status: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SubActivityPayment.this, "Failed to update job status: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
 
-    /**
-     * Fetch employee name from Firebase.
-     */
-    private void fetchEmployeeName(String employeeId) {
-        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users").child(employeeId);
-        usersRef.child("name").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String employeeName = snapshot.getValue(String.class);
-                if (employeeName != null) {
-                    Toast.makeText(SubActivityPayment.this, "Employee: " + employeeName, Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(SubActivityPayment.this, "Employee name not found.", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(SubActivityPayment.this, "Error fetching employee name: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    /**
-     * Initiate PayPal payment for the selected job.
-     */
     private void initiatePayment(Job job) {
-        String amount = String.valueOf(job.getSalary());
+        if (!"completed".equals(job.getStatus())) {
+            Toast.makeText(this, "Please mark the job as completed before paying.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Use job's salary for payment
+        String amount = job.getSalary();
         PayPalPayment payment = new PayPalPayment(
                 new BigDecimal(amount), "CAD", job.getTitle(), PayPalPayment.PAYMENT_INTENT_SALE);
 
@@ -202,6 +166,7 @@ public class SubActivityPayment extends AppCompatActivity {
         intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payment);
         activityResultLauncher.launch(intent);
     }
+
 
     @Override
     public void onDestroy() {
