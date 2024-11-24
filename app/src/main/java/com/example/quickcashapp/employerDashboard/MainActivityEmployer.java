@@ -6,11 +6,10 @@ import android.view.View;
 
 import androidx.activity.ComponentActivity;
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import com.example.quickcashapp.MainActivity;
-import com.example.quickcashapp.Maps.employerMap;
+import com.example.quickcashapp.Maps.Map;
 import com.example.quickcashapp.R;
 
 /**
@@ -37,7 +36,7 @@ public class MainActivityEmployer extends ComponentActivity {
         c1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivityEmployer.this, employerMap.class);
+                Intent intent = new Intent(MainActivityEmployer.this, Map.class);
                 startActivity(intent);
             }
         });
