@@ -5,38 +5,52 @@ package com.example.quickcashapp;
  * Also jobListing object.
  */
 public class JobListing {
-    private String jobTitle;
-    private int minSalary;
-    private int maxSalary;
+    private String jobId;
+    private String title;
+    private Double salary; // Combine minSalary and maxSalary as a single string to match the Job class
     private String duration;
-    private int vicinity;
+    private String urgency;
+    private String location;
+    private String description;
 
-    public JobListing(String jobTitle, int minSalary, int maxSalary, String duration, int vicinity) {
-        this.jobTitle = jobTitle;
-        this.minSalary = minSalary;
-        this.maxSalary = maxSalary;
+    public JobListing(String jobId, String title, Double salary, String duration, String urgency, String location, String description) {
+        this.jobId = jobId;
+        this.title = title;
+        this.salary = salary;
         this.duration = duration;
-        this.vicinity = vicinity;
+        this.urgency = urgency;
+        this.location = location;
+        this.description = description;
     }
 
-    //Getters for Job listings.
-    public String getJobTitle() {
-        return jobTitle;
+    // Getters for JobListing
+    public String getJobId() {
+        return jobId;
     }
 
-    public int getMinSalary() {
-        return minSalary;
+    public String getTitle() {
+        return title;
     }
 
-    public int getMaxSalary() {
-        return maxSalary;
+    public Double getSalary() {
+        return salary;
     }
 
     public String getDuration() {
         return duration;
     }
 
-    public int getVicinity() {
-        return vicinity;
+    public String getUrgency() {
+        return urgency;
     }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+
 }

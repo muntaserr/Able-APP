@@ -1,5 +1,6 @@
 package com.example.quickcashapp;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,10 +43,12 @@ public class JobListAdapter extends RecyclerView.Adapter<JobListAdapter.JobViewH
     @Override
     public void onBindViewHolder(@NonNull JobViewHolder holder, int position) {
         JobListing job = jobList.get(position);
-        holder.jobTitleTextView.setText(job.getJobTitle());
-        holder.salaryTextView.setText("Salary: $" + job.getMinSalary() + " - $" + job.getMaxSalary());
+        Log.e("Lucas test", "got job listing salary is: " + job.getSalary());
+        holder.jobTitleTextView.setText(job.getTitle());
+        holder.salaryTextView.setText("Salary: " + job.getSalary().toString());
         holder.durationTextView.setText("Duration: " + job.getDuration());
-        holder.vicinityTextView.setText("Vicinity: " + job.getVicinity() + " km");
+        holder.urgencyTextView.setText("Urgency: " + job.getUrgency());
+        holder.locationTextView.setText("Location: " + job.getLocation());
     }
 
     /**
@@ -65,14 +68,16 @@ public class JobListAdapter extends RecyclerView.Adapter<JobListAdapter.JobViewH
         TextView jobTitleTextView;
         TextView salaryTextView;
         TextView durationTextView;
-        TextView vicinityTextView;
+        TextView urgencyTextView;
+        TextView locationTextView;
 
         public JobViewHolder(@NonNull View itemView) {
             super(itemView);
             jobTitleTextView = itemView.findViewById(R.id.jobTitleTextView);
             salaryTextView = itemView.findViewById(R.id.salaryTextView);
             durationTextView = itemView.findViewById(R.id.durationTextView);
-            vicinityTextView = itemView.findViewById(R.id.vicinityTextView);
+            urgencyTextView = itemView.findViewById(R.id.urgencyTextView);
+            locationTextView = itemView.findViewById(R.id.locationTextView);
         }
     }
 }

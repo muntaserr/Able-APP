@@ -3,8 +3,10 @@ package com.example.quickcashapp.employerDashboard;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -16,7 +18,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.quickcashapp.R;
-import com.example.quickcashapp.Job; // Import the Job class
+import com.example.quickcashapp.Job;
+import com.example.quickcashapp.Maps.LocationHelper; // Import the Job class
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -26,6 +29,7 @@ public class SubActivityJobPost extends MainActivityEmployer {
     private Button submitButton;
     private DatabaseReference jobsDatabaseReference;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1001;
+    private LocationHelper locationHelper;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -85,14 +89,17 @@ public class SubActivityJobPost extends MainActivityEmployer {
     private void submitJob() {
         // Retrieve input values from EditText fields
         String jobTitle = jobTitleEditText.getText().toString().trim();
-        String salary = salaryEditText.getText().toString().trim();
+        Double salary = Double.parseDouble(salaryEditText.getText().toString());
         String duration = durationEditText.getText().toString().trim();
         String urgency = urgencyEditText.getText().toString().trim();
         String description = descriptionEditText.getText().toString().trim();
-        String location = locationEditText.getText().toString().trim();
+
+        this.locationHelper = new LocationHelper(this);
+        Location location = locationHelper.getMyLocation();
+        Log.e("Lucas test", "Location is "+location.toString());
 
         // Validate input fields; exit method if validation fails
-        if (!validateInput(jobTitle, salary, duration, urgency, location)) return;
+        if (!validateInput(jobTitle, salary, duration, urgency)) return;
 
         // Generate a unique ID for the job post
         String jobId = jobsDatabaseReference.push().getKey();
@@ -103,7 +110,7 @@ public class SubActivityJobPost extends MainActivityEmployer {
         }
 
         // Create a new Job object with the input details
-        Job job = new Job(jobId, jobTitle, salary, duration, urgency, description, location);
+        Job job = new Job(jobId, jobTitle, salary, duration, urgency, description, location.toString());
 
         // Save the Job object to Firebase
         saveJobToFirebase(jobId, job);
@@ -120,12 +127,12 @@ public class SubActivityJobPost extends MainActivityEmployer {
      * @param location The location of the job.
      * @return true if all fields are valid; false otherwise.
      */
-    private boolean validateInput(String jobTitle, String salary, String duration, String urgency, String location) {
+    private boolean validateInput(String jobTitle, Double salary, String duration, String urgency) {
         if (TextUtils.isEmpty(jobTitle)) {
             jobTitleEditText.setError("Job title is required");
             return false;
         }
-        if (TextUtils.isEmpty(salary)) {
+        if (salary == null) {
             salaryEditText.setError("Salary is required");
             return false;
         }
@@ -135,10 +142,6 @@ public class SubActivityJobPost extends MainActivityEmployer {
         }
         if (TextUtils.isEmpty(urgency)) {
             urgencyEditText.setError("Urgency level is required");
-            return false;
-        }
-        if (TextUtils.isEmpty(location)) {
-            locationEditText.setError("Job location is required");
             return false;
         }
         return true;

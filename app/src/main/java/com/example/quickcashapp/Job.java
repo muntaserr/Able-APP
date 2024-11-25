@@ -3,7 +3,7 @@ package com.example.quickcashapp;
 public class Job {
     private String jobId;
     private String title;
-    private String salary;
+    private Double salary;
     private String duration;
     private String urgency;
     private String location;
@@ -16,7 +16,7 @@ public class Job {
     public Job() {
     }
 
-    public Job(String jobId, String title, String salary, String duration, String urgency,String description, String location) {
+    public Job(String jobId, String title, Double salary, String duration, String urgency,String description, String location) {
         this.jobId = jobId;
         this.title = title;
         this.salary = salary;
@@ -43,11 +43,11 @@ public class Job {
         this.title = title;
     }
 
-    public String getSalary() {
+    public Double getSalary() {
         return salary;
     }
 
-    public void setSalary(String salary) {
+    public void setSalary(Double salary) {
         this.salary = salary;
     }
 

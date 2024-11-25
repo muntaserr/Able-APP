@@ -1,6 +1,7 @@
 package com.example.quickcashapp;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -13,6 +14,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +30,7 @@ public class SearchJobsActivity extends AppCompatActivity {
     private TextView vicinityLabel, noResultsMessage;
     private Button searchButton;
     private RecyclerView resultsRecyclerView;
+    private DatabaseReference jobsDatabaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +41,7 @@ public class SearchJobsActivity extends AppCompatActivity {
         setupDurationSpinner();
         setupVicinitySeekBar();
         setupRecyclerView();
+        jobsDatabaseReference = FirebaseDatabase.getInstance().getReference("jobs");
 
         searchButton.setOnClickListener(v -> performSearch());
     }
@@ -90,8 +99,8 @@ public class SearchJobsActivity extends AppCompatActivity {
      */
     private void performSearch() {
         String jobTitle = jobTitleEditText.getText().toString();
-        String minSalary = minSalaryEditText.getText().toString();
-        String maxSalary = maxSalaryEditText.getText().toString();
+        Double minSalary = Double.parseDouble(minSalaryEditText.getText().toString());
+        Double maxSalary = Double.parseDouble(maxSalaryEditText.getText().toString());
         String duration = durationSpinner.getSelectedItem().toString();
         int vicinity = vicinitySeekBar.getProgress();
 
@@ -124,9 +133,71 @@ public class SearchJobsActivity extends AppCompatActivity {
      * @param vicinity  the radius or vicinity to search within, in kilometers
      * @return          a list of filtered job listings matching the criteria
      */
-    private List<JobListing> searchJobs(String title, String minSal, String maxSal, String duration, int vicinity) {
-        List<JobListing> filteredJobs = new ArrayList<>();
+    private List<JobListing> searchJobs(String title, Double minSal, Double maxSal, String duration, int vicinity) {
+
+        List<JobListing> matchingJobs = new ArrayList<>();
         // Add filtering logic here if needed
-        return filteredJobs;
+        // Fetch all jobs from Firebase
+        jobsDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot jobSnapshot : dataSnapshot.getChildren()) {
+                    Job job = jobSnapshot.getValue(Job.class);
+
+                    // Ensure the job object is not null and matches the criteria
+                    if (job != null && isMatching(job, title, minSal, maxSal, duration, vicinity)) {
+                        Log.e("Lucas Test", "Found a job that matches adding it now");
+                        // Convert Job to JobListing
+                        JobListing jobListing = new JobListing(
+                                job.getJobId(),
+                                job.getTitle(),
+                                job.getSalary(),
+                                job.getDuration(),
+                                job.getUrgency(),
+                                job.getLocation(),
+                                job.getDescription()
+                        );
+                        matchingJobs.add(jobListing);
+                    }
+                }
+
+                // Handle the search results (e.g., update UI or pass to another method)
+                updateUIWithResults(matchingJobs);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Handle Firebase read error
+                System.err.println("Error reading jobs from Firebase: " + databaseError.getMessage());
+            }
+        });
+
+        return matchingJobs;
     }
+    private boolean isMatching(Job job, String title, Double minSal, Double maxSal, String duration, int vicinity) {
+        // Title matching (case-insensitive partial match)
+        if (title != null && !title.isEmpty() && !job.getTitle().toLowerCase().contains(title.toLowerCase())) {
+            return false;
+        }
+
+        // Salary matching
+        try {
+            double jobSalary = job.getSalary();
+            double minSalary = (minSal != null ) ? minSal : 0;
+            double maxSalary = (maxSal != null ) ? maxSal : Double.MAX_VALUE;
+
+            if (jobSalary < minSalary || jobSalary > maxSalary) {
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            // Ignore salary filter if parsing fails
+        }
+
+
+
+        // Vicinity matching (future implementation for geolocation filtering)
+
+        return true;
+    }
+
 }
