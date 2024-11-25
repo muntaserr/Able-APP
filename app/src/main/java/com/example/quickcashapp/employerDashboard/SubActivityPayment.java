@@ -17,6 +17,7 @@ import com.example.quickcashapp.BuildConfig;
 import com.example.quickcashapp.PaymentListAdapter;
 import com.example.quickcashapp.R;
 import com.example.quickcashapp.Job;
+import com.example.quickcashapp.JobStatus;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
 import com.paypal.android.sdk.payments.PayPalPayment;
 import com.paypal.android.sdk.payments.PayPalService;
@@ -39,6 +40,7 @@ public class SubActivityPayment extends AppCompatActivity {
     private RecyclerView paymentRecyclerView;
     private PaymentListAdapter paymentListAdapter;
     private List<Job> jobList = new ArrayList<>();
+    private List<JobStatus> jobStatusList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +55,7 @@ public class SubActivityPayment extends AppCompatActivity {
         paymentRecyclerView = findViewById(R.id.paymentRecyclerView);
         paymentRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        fetchJobsForUser();
+        fetchJobsAndStatusesForUser();
     }
 
     private void configurePayPal() {
@@ -95,55 +97,76 @@ public class SubActivityPayment extends AppCompatActivity {
                 });
     }
 
-    private void fetchJobsForUser() {
-        // Fetch jobs from Firebase, only "in-progress" jobs
+    private void fetchJobsAndStatusesForUser() {
         String userId = com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser().getUid();
-        com.google.firebase.database.DatabaseReference jobsRef = com.google.firebase.database.FirebaseDatabase.getInstance().getReference("jobs");
+        com.google.firebase.database.DatabaseReference jobStatusesRef = com.google.firebase.database.FirebaseDatabase.getInstance().getReference("jobStatuses");
 
-        jobsRef.orderByChild("employerID").equalTo(userId)
-                .addValueEventListener(new com.google.firebase.database.ValueEventListener() {
+        jobStatusesRef.orderByChild("employerID").equalTo(userId)
+                .addListenerForSingleValueEvent(new com.google.firebase.database.ValueEventListener() {
                     @Override
-                    public void onDataChange(@NonNull com.google.firebase.database.DataSnapshot dataSnapshot) {
-                        jobList.clear();
-                        for (com.google.firebase.database.DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                            Job job = snapshot.getValue(Job.class);
-                            if (job != null) {
-                                jobList.add(job);
+                    public void onDataChange(@NonNull com.google.firebase.database.DataSnapshot statusSnapshot) {
+                        jobStatusList.clear();
+                        for (com.google.firebase.database.DataSnapshot snapshot : statusSnapshot.getChildren()) {
+                            JobStatus jobStatus = snapshot.getValue(JobStatus.class);
+                            if (jobStatus != null) {
+                                jobStatusList.add(jobStatus);
                             }
                         }
-                        setupRecyclerView();
+                        fetchJobDetails();
                     }
 
                     @Override
                     public void onCancelled(@NonNull com.google.firebase.database.DatabaseError databaseError) {
-                        Log.e(TAG, "Error fetching jobs", databaseError.toException());
+                        Log.e(TAG, "Error fetching job statuses", databaseError.toException());
                     }
                 });
     }
 
+    private void fetchJobDetails() {
+        com.google.firebase.database.DatabaseReference jobsRef = com.google.firebase.database.FirebaseDatabase.getInstance().getReference("jobs");
+
+        jobsRef.addListenerForSingleValueEvent(new com.google.firebase.database.ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull com.google.firebase.database.DataSnapshot jobSnapshot) {
+                jobList.clear();
+                for (JobStatus jobStatus : jobStatusList) {
+                    Job job = jobSnapshot.child(jobStatus.getJobId()).getValue(Job.class);
+                    if (job != null) {
+                        jobList.add(job);
+                    }
+                }
+                setupRecyclerView();
+            }
+
+            @Override
+            public void onCancelled(@NonNull com.google.firebase.database.DatabaseError error) {
+                Log.e(TAG, "Error fetching job details", error.toException());
+            }
+        });
+    }
+
     private void setupRecyclerView() {
-        paymentListAdapter = new PaymentListAdapter(jobList, new PaymentListAdapter.OnJobActionListener() {
+        paymentListAdapter = new PaymentListAdapter(jobList, jobStatusList, new PaymentListAdapter.OnJobActionListener() {
             @Override
             public void onPayClicked(Job job) {
-                initiatePayment(job); // Payment action
+                initiatePayment(job); // Handle payment
             }
 
             @Override
             public void onMarkCompleteClicked(Job job) {
-                updateJobStatus(job); // Mark as completed action
+                updateJobStatus(job); // Mark job as complete
             }
         });
         paymentRecyclerView.setAdapter(paymentListAdapter);
-
     }
 
+
     private void updateJobStatus(Job job) {
-        com.google.firebase.database.DatabaseReference jobRef = com.google.firebase.database.FirebaseDatabase.getInstance().getReference("jobs").child(job.getJobId());
-        jobRef.child("status").setValue("completed")
+        com.google.firebase.database.DatabaseReference jobStatusRef = com.google.firebase.database.FirebaseDatabase.getInstance().getReference("jobStatuses").child(job.getJobId());
+        jobStatusRef.child("status").setValue("completed")
                 .addOnSuccessListener(aVoid -> {
                     Toast.makeText(SubActivityPayment.this, "Job marked as completed!", Toast.LENGTH_SHORT).show();
-                    job.setStatus("completed");
-                    paymentListAdapter.notifyDataSetChanged();
+                    fetchJobsAndStatusesForUser(); // Refresh the list
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(SubActivityPayment.this, "Failed to update job status: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -151,12 +174,14 @@ public class SubActivityPayment extends AppCompatActivity {
     }
 
     private void initiatePayment(Job job) {
-        if (!"completed".equals(job.getStatus())) {
-            Toast.makeText(this, "Please mark the job as completed before paying.", Toast.LENGTH_SHORT).show();
-            return;
+        String jobId = job.getJobId();
+        for (JobStatus status : jobStatusList) {
+            if (status.getJobId().equals(jobId) && !"completed".equals(status.getStatus())) {
+                Toast.makeText(this, "Please mark the job as completed before paying.", Toast.LENGTH_SHORT).show();
+                return;
+            }
         }
 
-        // Use job's salary for payment
         String amount = job.getSalary();
         PayPalPayment payment = new PayPalPayment(
                 new BigDecimal(amount), "CAD", job.getTitle(), PayPalPayment.PAYMENT_INTENT_SALE);
@@ -166,7 +191,6 @@ public class SubActivityPayment extends AppCompatActivity {
         intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payment);
         activityResultLauncher.launch(intent);
     }
-
 
     @Override
     public void onDestroy() {

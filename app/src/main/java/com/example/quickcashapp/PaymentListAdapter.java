@@ -13,10 +13,12 @@ import java.util.List;
 public class PaymentListAdapter extends RecyclerView.Adapter<PaymentListAdapter.JobViewHolder> {
 
     private List<Job> jobList;
+    private List<JobStatus> jobStatusList;
     private OnJobActionListener listener;
 
-    public PaymentListAdapter(List<Job> jobList, OnJobActionListener listener) {
+    public PaymentListAdapter(List<Job> jobList, List<JobStatus> jobStatusList, OnJobActionListener listener) {
         this.jobList = jobList;
+        this.jobStatusList = jobStatusList;
         this.listener = listener;
     }
 
@@ -30,12 +32,19 @@ public class PaymentListAdapter extends RecyclerView.Adapter<PaymentListAdapter.
     public void onBindViewHolder(JobViewHolder holder, int position) {
         Job job = jobList.get(position);
 
+        // Find corresponding JobStatus for this Job
+        JobStatus jobStatus = findJobStatusByJobId(job.getJobId());
+
         // Bind data to views
         holder.jobTitleTV.setText(job.getTitle());
         holder.jobSalaryTV.setText("Salary: $" + job.getSalary());
 
-        // Disable Pay button if the job is not completed
-        holder.payBtn.setEnabled("completed".equals(job.getStatus()));
+        // Determine the job's status from JobStatus
+        boolean isCompleted = jobStatus != null && "completed".equals(jobStatus.getStatus());
+
+        // Enable or disable buttons based on the status
+        holder.payBtn.setEnabled(isCompleted);
+        holder.markCompleteBtn.setVisibility(isCompleted ? View.GONE : View.VISIBLE);
 
         // Set up button actions
         holder.payBtn.setOnClickListener(v -> {
@@ -49,14 +58,24 @@ public class PaymentListAdapter extends RecyclerView.Adapter<PaymentListAdapter.
         });
     }
 
-
     @Override
     public int getItemCount() {
         return jobList.size();
     }
 
+    // Helper method to find JobStatus by jobId
+    private JobStatus findJobStatusByJobId(String jobId) {
+        for (JobStatus status : jobStatusList) {
+            if (status.getJobId().equals(jobId)) {
+                return status;
+            }
+        }
+        return null;
+    }
+
     public interface OnJobActionListener {
         void onPayClicked(Job job);
+
         void onMarkCompleteClicked(Job job);
     }
 
@@ -73,4 +92,3 @@ public class PaymentListAdapter extends RecyclerView.Adapter<PaymentListAdapter.
         }
     }
 }
-

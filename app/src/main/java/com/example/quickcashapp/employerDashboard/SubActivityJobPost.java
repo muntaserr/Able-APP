@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -14,8 +15,9 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.quickcashapp.JobStatus;
 import com.example.quickcashapp.R;
-import com.example.quickcashapp.Job; // Import the Job class
+import com.example.quickcashapp.Job;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -24,7 +26,7 @@ public class SubActivityJobPost extends MainActivityEmployer {
 
     private EditText jobTitleEditText, salaryEditText, durationEditText, urgencyEditText, locationEditText, descriptionEditText;
     private Button submitButton;
-    private DatabaseReference jobsDatabaseReference;
+    private DatabaseReference jobsDatabaseReference, jobStatusesDatabaseReference;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1001;
 
     @SuppressLint("MissingInflatedId")
@@ -36,6 +38,7 @@ public class SubActivityJobPost extends MainActivityEmployer {
 
         // Initialize Firebase Database reference
         jobsDatabaseReference = FirebaseDatabase.getInstance().getReference("jobs");
+        jobStatusesDatabaseReference = FirebaseDatabase.getInstance().getReference("jobStatuses");
 
         // Initialize UI elements
         jobTitleEditText = findViewById(R.id.jobTitle);
@@ -102,11 +105,8 @@ public class SubActivityJobPost extends MainActivityEmployer {
             return;
         }
 
-        String status = "Pending";
-        String employerID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        String employeeID = null;
         // Create a new Job object with the input details
-        Job job = new Job(jobId, jobTitle, salary, duration, urgency, description, location, status, employerID, employeeID);
+        Job job = new Job(jobId, jobTitle, salary, duration, urgency, description, location);
 
         // Save the Job object to Firebase
         saveJobToFirebase(jobId, job);
@@ -157,6 +157,7 @@ public class SubActivityJobPost extends MainActivityEmployer {
         jobsDatabaseReference.child(jobId).setValue(job)
                 .addOnSuccessListener(aVoid -> {
                     // Job saved successfully, show confirmation and close the activity
+                    createJobStatus(jobId);
                     Toast.makeText(SubActivityJobPost.this, "Job submitted successfully!", Toast.LENGTH_SHORT).show();
                     finish(); // Close the form and return to the previous screen
                 })
@@ -164,6 +165,17 @@ public class SubActivityJobPost extends MainActivityEmployer {
                     // Show error message if job save fails
                     Toast.makeText(SubActivityJobPost.this, "Failed to submit job: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
+    }
+    private void createJobStatus(String jobId) {
+        String employerID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        JobStatus jobStatus = new JobStatus();
+        jobStatus.setJobId(jobId);
+        jobStatus.setStatus("in-progress");
+        jobStatus.setEmployerID(employerID);
+
+        jobStatusesDatabaseReference.child(jobId).setValue(jobStatus)
+                .addOnSuccessListener(aVoid -> Log.d("Firebase", "Job status created successfully"))
+                .addOnFailureListener(e -> Log.e("FirebaseError", "Failed to create job status: " + e.getMessage()));
     }
 
     /**
