@@ -11,7 +11,7 @@ public class JobStatus extends Job {
 
     public JobStatus(String jobId, String title, double salary, String duration, String urgency, String description, String location,
                      String status, String employerID) {
-        super(jobId, title, salary, duration, urgency, description, location); // Call the parent class constructor
+        super(jobId, title, salary, duration, urgency, description, location);
         this.status = status;
         this.employerID = employerID;
     }
