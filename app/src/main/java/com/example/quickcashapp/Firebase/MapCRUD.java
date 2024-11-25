@@ -41,7 +41,12 @@ public class MapCRUD {
                     String title = dataSnapshot.child("title").getValue(String.class);
 
                     if(location != null && title != null){
-                        String[] LatLng = location.split(",");
+
+                        String coordinates = location.substring(location.indexOf('[') + 1, location.indexOf(']'));
+                        String[] parts = coordinates.split(" ");
+                        String latLngPart = parts[1];
+                        String[] LatLng = latLngPart.split(",");
+
                         double latitude = Double.parseDouble(LatLng[0].trim());
                         double longitude = Double.parseDouble(LatLng[1].trim());
 
