@@ -37,12 +37,13 @@
             android:background="@android:color/black">
 
             <TextView
+                android:id="@+id/textView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="25dp"
                 android:text="Title1"
-                android:textSize="30dp"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                android:textSize="30dp" />
             </RelativeLayout>
 
         <RelativeLayout

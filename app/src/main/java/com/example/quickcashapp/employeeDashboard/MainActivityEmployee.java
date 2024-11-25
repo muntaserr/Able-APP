@@ -10,7 +10,8 @@ import androidx.cardview.widget.CardView;
 
 import com.example.quickcashapp.MainActivity;
 import com.example.quickcashapp.R;
-import com.example.quickcashapp.Maps.employerMap;
+import com.example.quickcashapp.Maps.Map;
+import com.example.quickcashapp.employeeDashboard.EmployeeProfile;
 
 
 /**
@@ -65,7 +66,7 @@ public class MainActivityEmployee extends ComponentActivity {
         c3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivityEmployee.this, employerMap.class);
+                Intent intent = new Intent(MainActivityEmployee.this, Map.class);
                 startActivity(intent);
             }
         });
@@ -78,7 +79,7 @@ public class MainActivityEmployee extends ComponentActivity {
             }
         });
 
-        profile.setOnClickListener(new View.OnClickListener(){
+        c5.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivityEmployee.this, EmployeeProfile.class);
