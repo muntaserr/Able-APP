@@ -11,39 +11,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text=""
+        android:fontFamily="sans-serif-light"
+        android:text="Payment Status"
         android:textColor="#000000"
         android:textSize="30sp"
-        android:fontFamily="sans-serif-light"
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/enterAmtET"
+    <!-- Add RecyclerView to display job listings -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/paymentRecyclerView"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        android:hint="$CAD"
-        android:inputType="numberDecimal"
-        android:padding="10dp"
-        android:textColor="#000000"
-        android:fontFamily="sans-serif-light"
-        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/paymentStatusTV" />
 
-    <Button
-        android:id="@+id/payNowBtn"
-        android:layout_width="213dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="16dp"
-        android:text="PayPal Payment"
-        android:fontFamily="sans-serif-light"
-        android:textStyle="normal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/enterAmtET" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

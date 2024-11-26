@@ -7,9 +7,6 @@ public class Job {
     private String duration;
     private String urgency;
     private String location;
-
-
-
     private String description;
 
     // Default constructor required for Firebase
