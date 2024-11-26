@@ -1,4 +1,4 @@
-package com.example.quickcashapp;
+package com.example.quickcashapp.employeeDashboard;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -9,11 +9,16 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.quickcashapp.Job;
+import com.example.quickcashapp.JobListAdapter;
+import com.example.quickcashapp.JobListing;
+import com.example.quickcashapp.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -44,6 +49,20 @@ public class SearchJobsActivity extends AppCompatActivity {
         jobsDatabaseReference = FirebaseDatabase.getInstance().getReference("jobs");
 
         searchButton.setOnClickListener(v -> performSearch());
+
+        resultsRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, resultsRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                // do whatever you want on position clicked
+                Toast.makeText(SearchJobsActivity.this, "clicked", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+                // do whatever you want on position long press
+                Toast.makeText(SearchJobsActivity.this, "looong clicked", Toast.LENGTH_SHORT).show();
+            }
+        }));
     }
 
     /**

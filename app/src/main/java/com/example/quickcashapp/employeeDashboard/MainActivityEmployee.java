@@ -7,11 +7,12 @@ import android.widget.Button;
 
 import androidx.activity.ComponentActivity;
 import androidx.activity.EdgeToEdge;
+import androidx.media3.common.C;
 
 import com.example.quickcashapp.MainActivity;
 import com.example.quickcashapp.R;
 import com.example.quickcashapp.Maps.Map;
-import com.example.quickcashapp.SearchJobsActivity;
+import com.example.quickcashapp.employeeDashboard.SearchJobsActivity;
 
 
 /**
