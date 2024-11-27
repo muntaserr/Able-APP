@@ -22,15 +22,15 @@
             android:fontFamily="sans-serif-light" />
 
         <!-- Employee Name -->
-<!--        <TextView-->
-<!--            android:id="@+id/employeeNameTV"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Employee Name"-->
-<!--            android:textSize="16sp"-->
-<!--            android:layout_marginTop="8dp"-->
-<!--            android:fontFamily="sans-serif-light"-->
-<!--            android:textColor="#555555" />-->
+        <TextView
+            android:id="@+id/employeeNameTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Employee Name"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif-light"
+            android:textColor="#555555" />
 
         <!-- Job Salary -->
         <TextView

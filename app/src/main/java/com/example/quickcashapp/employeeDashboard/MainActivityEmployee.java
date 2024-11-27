@@ -11,7 +11,7 @@ import androidx.activity.EdgeToEdge;
 import com.example.quickcashapp.MainActivity;
 import com.example.quickcashapp.R;
 import com.example.quickcashapp.Maps.Map;
-import com.example.quickcashapp.SearchJobsActivity;
+import com.example.quickcashapp.employeeDashboard.SearchJobsActivity;
 
 
 /**

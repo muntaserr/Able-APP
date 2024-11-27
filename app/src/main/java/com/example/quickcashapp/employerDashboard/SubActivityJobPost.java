@@ -173,7 +173,7 @@ public class SubActivityJobPost extends MainActivityEmployer {
         String employerID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         JobStatus jobStatus = new JobStatus();
         jobStatus.setJobId(jobId);
-        jobStatus.setStatus("in-progress");
+        jobStatus.setStatus("pending");
         jobStatus.setEmployerID(employerID);
 
         jobStatusesDatabaseReference.child(jobId).setValue(jobStatus)

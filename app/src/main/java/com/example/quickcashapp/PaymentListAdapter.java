@@ -6,7 +6,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -39,6 +46,29 @@ public class PaymentListAdapter extends RecyclerView.Adapter<PaymentListAdapter.
         holder.jobTitleTV.setText(job.getTitle());
         holder.jobSalaryTV.setText("Salary: $" + job.getSalary());
 
+        // Fetch and display employee's name if available
+        if (jobStatus != null && jobStatus.getEmployeeID() != null) {
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(jobStatus.getEmployeeID());
+            userRef.child("name").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    String employeeName = snapshot.getValue(String.class);
+                    if (employeeName != null) {
+                        holder.employeeNameTV.setText("Employee: " + employeeName);
+                    } else {
+                        holder.employeeNameTV.setText("Employee: Unknown");
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    holder.employeeNameTV.setText("Employee: Error");
+                }
+            });
+        } else {
+            holder.employeeNameTV.setText("Employee: Not Assigned");
+        }
+
         // Determine the job's status from JobStatus
         boolean isCompleted = jobStatus != null && "completed".equals(jobStatus.getStatus());
 
@@ -57,6 +87,7 @@ public class PaymentListAdapter extends RecyclerView.Adapter<PaymentListAdapter.
             listener.onMarkCompleteClicked(job);
         });
     }
+
 
     @Override
     public int getItemCount() {
@@ -80,15 +111,17 @@ public class PaymentListAdapter extends RecyclerView.Adapter<PaymentListAdapter.
     }
 
     public static class JobViewHolder extends RecyclerView.ViewHolder {
-        TextView jobTitleTV, jobSalaryTV;
+        TextView jobTitleTV, jobSalaryTV, employeeNameTV; // Add employeeNameTV
         Button payBtn, markCompleteBtn;
 
         public JobViewHolder(View itemView) {
             super(itemView);
             jobTitleTV = itemView.findViewById(R.id.jobTitleTV);
             jobSalaryTV = itemView.findViewById(R.id.jobSalaryTV);
+            employeeNameTV = itemView.findViewById(R.id.employeeNameTV);
             payBtn = itemView.findViewById(R.id.payBtn);
             markCompleteBtn = itemView.findViewById(R.id.updateStatusBtn);
         }
     }
+
 }
