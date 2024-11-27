@@ -36,6 +36,7 @@ public class SearchJobsActivity extends AppCompatActivity {
     private Button searchButton;
     private RecyclerView resultsRecyclerView;
     private DatabaseReference jobsDatabaseReference;
+    private boolean clicked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,15 +54,9 @@ public class SearchJobsActivity extends AppCompatActivity {
         resultsRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, resultsRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                // do whatever you want on position clicked
-                Toast.makeText(SearchJobsActivity.this, "clicked", Toast.LENGTH_SHORT).show();
+                new AddPreferenceActivity(SearchJobsActivity.this);
             }
 
-            @Override
-            public void onItemLongClick(View view, int position) {
-                // do whatever you want on position long press
-                Toast.makeText(SearchJobsActivity.this, "looong clicked", Toast.LENGTH_SHORT).show();
-            }
         }));
     }
 
