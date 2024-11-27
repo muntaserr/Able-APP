@@ -36,7 +36,7 @@ public class SearchJobsActivity extends AppCompatActivity {
     private Button searchButton;
     private RecyclerView resultsRecyclerView;
     private DatabaseReference jobsDatabaseReference;
-    private boolean clicked;
+    private String jobTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,13 +51,7 @@ public class SearchJobsActivity extends AppCompatActivity {
 
         searchButton.setOnClickListener(v -> performSearch());
 
-        resultsRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, resultsRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                new AddPreferenceActivity(SearchJobsActivity.this);
-            }
 
-        }));
     }
 
     /**
@@ -134,6 +128,18 @@ public class SearchJobsActivity extends AppCompatActivity {
             resultsRecyclerView.setVisibility(View.VISIBLE);
             noResultsMessage.setVisibility(View.GONE);
             resultsRecyclerView.setAdapter(new JobListAdapter(results));
+
+
+            resultsRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, resultsRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, int position) {
+                    JobListing clickedJob = results.get(position);
+                    jobTitle = clickedJob.getTitle();
+
+                    new AddPreferenceActivity(SearchJobsActivity.this, jobTitle);
+                }
+
+            }));
         }
     }
 
