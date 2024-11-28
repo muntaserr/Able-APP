@@ -38,26 +38,19 @@ public class PaymentListAdapter extends RecyclerView.Adapter<PaymentListAdapter.
     @Override
     public void onBindViewHolder(JobViewHolder holder, int position) {
         Job job = jobList.get(position);
-
-        // Find corresponding JobStatus for this Job
         JobStatus jobStatus = findJobStatusByJobId(job.getJobId());
 
-        // Bind data to views
         holder.jobTitleTV.setText(job.getTitle());
         holder.jobSalaryTV.setText("Salary: $" + job.getSalary());
 
-        // Fetch and display employee's name if available
+        // Fetch and display employee's name
         if (jobStatus != null && jobStatus.getEmployeeID() != null) {
             DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(jobStatus.getEmployeeID());
             userRef.child("name").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     String employeeName = snapshot.getValue(String.class);
-                    if (employeeName != null) {
-                        holder.employeeNameTV.setText("Employee: " + employeeName);
-                    } else {
-                        holder.employeeNameTV.setText("Employee: Unknown");
-                    }
+                    holder.employeeNameTV.setText(employeeName != null ? "Employee: " + employeeName : "Employee: Unknown");
                 }
 
                 @Override
@@ -69,24 +62,51 @@ public class PaymentListAdapter extends RecyclerView.Adapter<PaymentListAdapter.
             holder.employeeNameTV.setText("Employee: Not Assigned");
         }
 
-        // Determine the job's status from JobStatus
-        boolean isCompleted = jobStatus != null && "completed".equals(jobStatus.getStatus());
+        // Determine Pay button state based on status
+        if (jobStatus != null && "paid".equalsIgnoreCase(jobStatus.getStatus())) {
+            holder.payBtn.setEnabled(false);
+            holder.payBtn.setText("Paid");
+            holder.markCompleteBtn.setVisibility(View.GONE);
+        } else if (jobStatus != null && "completed".equalsIgnoreCase(jobStatus.getStatus())) {
+            holder.payBtn.setEnabled(true);
+            holder.payBtn.setText("Pay Now");
 
-        // Enable or disable buttons based on the status
-        holder.payBtn.setEnabled(isCompleted);
-        holder.markCompleteBtn.setVisibility(isCompleted ? View.GONE : View.VISIBLE);
-
-        // Set up button actions
-        holder.payBtn.setOnClickListener(v -> {
-            if (holder.payBtn.isEnabled()) {
+            // Handle Pay button click
+            holder.payBtn.setOnClickListener(v -> {
                 listener.onPayClicked(job);
-            }
-        });
 
-        holder.markCompleteBtn.setOnClickListener(v -> {
-            listener.onMarkCompleteClicked(job);
-        });
+                // Mark as paid in Firebase
+                markJobAsPaid(jobStatus);
+                holder.payBtn.setEnabled(false);
+                holder.payBtn.setText("Paid");
+                holder.markCompleteBtn.setVisibility(View.GONE);
+            });
+        } else {
+            holder.payBtn.setEnabled(false);
+            holder.payBtn.setText("Pending Completion");
+            holder.markCompleteBtn.setVisibility(View.VISIBLE);
+            holder.markCompleteBtn.setOnClickListener(v -> {
+                listener.onMarkCompleteClicked(job);
+                holder.markCompleteBtn.setVisibility(View.GONE);
+            });
+        }
     }
+
+    private void markJobAsPaid(JobStatus jobStatus) {
+        DatabaseReference jobStatusRef = FirebaseDatabase.getInstance().getReference("jobStatuses").child(jobStatus.getJobId());
+        jobStatusRef.child("status").setValue("paid")
+                .addOnSuccessListener(aVoid -> {
+                    // Optional: Toast for success
+                    // Toast.makeText(context, "Job marked as paid!", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    // Optional: Log error
+                    // Log.e("PaymentError", "Failed to mark job as paid: " + e.getMessage());
+                });
+    }
+
+
+
 
 
     @Override
@@ -111,10 +131,11 @@ public class PaymentListAdapter extends RecyclerView.Adapter<PaymentListAdapter.
     }
 
     public static class JobViewHolder extends RecyclerView.ViewHolder {
-        TextView jobTitleTV, jobSalaryTV, employeeNameTV; // Add employeeNameTV
+        TextView jobTitleTV, jobSalaryTV, employeeNameTV;
         Button payBtn, markCompleteBtn;
+        boolean isPaid = false;
 
-        public JobViewHolder(View itemView) {
+        public JobViewHolder(@NonNull View itemView) {
             super(itemView);
             jobTitleTV = itemView.findViewById(R.id.jobTitleTV);
             jobSalaryTV = itemView.findViewById(R.id.jobSalaryTV);
@@ -123,5 +144,7 @@ public class PaymentListAdapter extends RecyclerView.Adapter<PaymentListAdapter.
             markCompleteBtn = itemView.findViewById(R.id.updateStatusBtn);
         }
     }
+
+
 
 }
