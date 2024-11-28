@@ -38,6 +38,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
     LocationManager locationManager;
     LocationListener locationListener;
     Marker marker;
+    private LocationHelper locationHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,18 +52,15 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         mapFragment.getMapAsync(this);
 
 
-        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]
                             {Manifest.permission.ACCESS_FINE_LOCATION},
                     REQUEST_LOCATION_PERMISSION);
         }
+        //locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        this.locationHelper = new LocationHelper(this);
 
-        initializeLocationListener();
 
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
     }
 
 
@@ -73,49 +71,21 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
      * If there was a previous marker, it will be removed.
      * The camera is also moved to the new location with a specified zoom level.
      */
+    private void initializeMap(){
+        Location myLocation = locationHelper.getMyLocation();
+        double latitude = myLocation.getLatitude();
+        double longitude = myLocation.getLongitude();
+        LatLng latLng = new LatLng(latitude,longitude);
 
-    private void initializeLocationListener() {
+        if (marker != null) {
+            marker.remove();
+        }
+        marker = mMap.addMarker(new MarkerOptions().position(latLng).title("You"));
+        mMap.setMaxZoomPreference(15);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 20));// Adjust zoom level
 
-        locationListener = new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                double latitude = location.getLatitude();
-                double longitude = location.getLongitude();
-
-                Geocoder geocoder = new Geocoder(getApplicationContext());
-                try {
-                    List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
-                    String address = addresses.get(0).getLocality() + ": " + addresses.get(0).getCountryName();
-
-                    LatLng latLng = new LatLng(latitude, longitude);
-
-                    if (marker != null) {
-                        marker.remove();
-                    }
-                    marker = mMap.addMarker(new MarkerOptions().position(latLng).title(address));
-                    mMap.setMaxZoomPreference(15);
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 20));// Adjust zoom level
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            @Override
-            public void onStatusChanged(String s, int i, Bundle bundle) {
-
-            }
-
-            @Override
-            public void onProviderEnabled(String s) {
-
-            }
-
-            @Override
-            public void onProviderDisabled(String s) {
-
-            }
-        };
     }
+
 
     /**
      * Removes location updates when the activity is stopped to save resources and
@@ -148,7 +118,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
-
+        this.initializeMap();
       //  LatLng halifax = new LatLng(44.6488, -63.5752);
       //  mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(halifax, 12f)); Uncomment this and comment the Location listener if you need to use this feature
 

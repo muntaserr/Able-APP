@@ -56,6 +56,7 @@ public class LocationHelper {
     LocationManager locationManager;
     LocationListener locationListener;
     Location myLocation;
+    public boolean gotLocationYet = false;
 
     /**
      * Constructor
@@ -69,8 +70,8 @@ public class LocationHelper {
 
            initializeLocationListener();
 
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+            //locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+            //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
     }
 
 
@@ -84,16 +85,24 @@ public class LocationHelper {
 
     public Location getMyLocation(){
 
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+
         initializeLocationListener();
+
         if(this.myLocation == null){
+
             Log.e("Lucas Location","No location available yet returning dummy loc");
             Location halifaxLocation = new Location("Halifax");
             halifaxLocation.setLatitude(44.6488);
             halifaxLocation.setLongitude(-63.5752);
             return halifaxLocation;
-        }else{
+
+        }else {
+            this.gotLocationYet = true;
             return this.myLocation;
         }
+
 
     }
     private void initializeLocationListener() {
@@ -110,7 +119,8 @@ public class LocationHelper {
                 Log.e("Lucas test", "Location changed:" + location.toString());
                 double latitude = location.getLatitude();
                 double longitude = location.getLongitude();
-                myLocation = location;
+                LocationHelper.this.myLocation = location;
+                locationManager.removeUpdates(locationListener);
             }
             @Override
             public void onStatusChanged(String s, int i, Bundle bundle) {
