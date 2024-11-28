@@ -10,6 +10,7 @@ constraintlayout = "2.1.4"
 firebaseAuth = "21.0.1"
 firebaseDatabase = "20.0.2"
 core = "1.6.1"
+firebaseMessaging = "24.1.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -22,6 +23,7 @@ constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayo
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
 firebase-database = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabase" }
 core = { group = "androidx.test", name = "core", version.ref = "core" }
+firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging", version.ref = "firebaseMessaging" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

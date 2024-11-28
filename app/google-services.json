@@ -1,8 +1,9 @@
 {
   "project_info": {
     "project_number": "493535482513",
+    "firebase_url": "https://quickcashapp-782c2-default-rtdb.firebaseio.com",
     "project_id": "quickcashapp-782c2",
-    "storage_bucket": "quickcashapp-782c2.appspot.com"
+    "storage_bucket": "quickcashapp-782c2.firebasestorage.app"
   },
   "client": [
     {

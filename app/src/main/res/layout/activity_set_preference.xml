@@ -1,9 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:padding="16dp">
 
+    <!-- job type -->
+    <EditText
+        android:id="@+id/editTextJobType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:autofillHints="job-type"
+        android:hint="@string/jobtype"
+        android:inputType="text"
+        android:padding="12dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- work location -->
+    <EditText
+        android:id="@+id/editTextLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:autofillHints="location"
+        android:hint="@string/Locationhint"
+        android:inputType="text"
+        android:padding="12dp" />
+
+    <!-- store preference -->
+    <Button
+        android:id="@+id/btnSavePreferences"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save_preferences"
+        android:layout_gravity="center_horizontal"/>
+
+</LinearLayout>

@@ -49,4 +49,9 @@
     <string name="please_enter_expected_duration">Please enter expected duration</string>
     <string name="please_enter_salary_range">Please enter salary range</string>
     <string name="please_enter_job_title">Please enter job title</string>
+    <string name="job_type_hint">job_type_hint</string>
+    <string name="location_hint">location_hint</string>
+    <string name="locationhint" />
+    <string name="jobtype">jobtype</string>
+    <string name="Locationhint">locationhint</string>
 </resources>
