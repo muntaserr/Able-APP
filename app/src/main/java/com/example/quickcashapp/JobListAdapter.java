@@ -4,20 +4,51 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class JobListAdapter extends RecyclerView.Adapter<JobListAdapter.JobViewHolder> {
 
     private List<JobListing> jobList;
+    private OnJobActionListener listener;
 
-    public JobListAdapter(List<JobListing> jobList) {
-        this.jobList = jobList;
+    public JobListAdapter(List<JobListing> jobList, OnJobActionListener listener) {
+        this.jobList = new ArrayList<>();
+        this.listener = listener;
+
+        // Filter out jobs with status "in-progress"
+        for (JobListing job : jobList) {
+            DatabaseReference jobStatusRef = FirebaseDatabase.getInstance().getReference("jobStatuses").child(job.getJobId());
+            jobStatusRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    String status = dataSnapshot.child("status").getValue(String.class);
+                    if (!"in-progress".equalsIgnoreCase(status)) {
+                        JobListAdapter.this.jobList.add(job);
+                        notifyDataSetChanged(); // Refresh RecyclerView
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Log.e("FirebaseError", "Failed to fetch job status: " + databaseError.getMessage());
+                }
+            });
+        }
     }
+
 
     /**
      * Called when a new ViewHolder is created to represent an item.
@@ -43,13 +74,46 @@ public class JobListAdapter extends RecyclerView.Adapter<JobListAdapter.JobViewH
     @Override
     public void onBindViewHolder(@NonNull JobViewHolder holder, int position) {
         JobListing job = jobList.get(position);
-        Log.e("Lucas test", "got job listing salary is: " + job.getSalary());
+
         holder.jobTitleTextView.setText(job.getTitle());
-        holder.salaryTextView.setText("Salary: " + job.getSalary().toString());
+        holder.salaryTextView.setText("Salary: " + job.getSalary());
         holder.durationTextView.setText("Duration: " + job.getDuration());
         holder.urgencyTextView.setText("Urgency: " + job.getUrgency());
         holder.locationTextView.setText("Location: " + job.getLocation());
+
+        // Fetch the status from the JobStatus class
+        DatabaseReference jobStatusRef = FirebaseDatabase.getInstance().getReference("jobStatuses").child(job.getJobId());
+        jobStatusRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String status = dataSnapshot.child("status").getValue(String.class);
+
+                // Disable the "Accept Job" button if the job is already in-progress
+                if ("in-progress".equalsIgnoreCase(status)) {
+                    holder.acceptJobButton.setEnabled(false);
+                    holder.acceptJobButton.setText("Already Accepted");
+                } else {
+                    holder.acceptJobButton.setEnabled(true);
+                    holder.acceptJobButton.setText("Accept Job");
+
+                    // Handle button click
+                    holder.acceptJobButton.setOnClickListener(v -> {
+                        listener.onAcceptJobClicked(job);
+
+                        // Disable the button immediately to prevent duplicate clicks
+                        holder.acceptJobButton.setEnabled(false);
+                        holder.acceptJobButton.setText("Already Accepted");
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e("FirebaseError", "Failed to fetch job status: " + databaseError.getMessage());
+            }
+        });
     }
+
 
     /**
      * Returns the total number of items in the dataset.
@@ -60,16 +124,16 @@ public class JobListAdapter extends RecyclerView.Adapter<JobListAdapter.JobViewH
     public int getItemCount() {
         return jobList.size();
     }
+    public interface OnJobActionListener {
+        void onAcceptJobClicked(JobListing job);
+    }
 
     /**
      * ViewHolder class for holding and managing the views for individual job listings.
      */
     public static class JobViewHolder extends RecyclerView.ViewHolder {
-        TextView jobTitleTextView;
-        TextView salaryTextView;
-        TextView durationTextView;
-        TextView urgencyTextView;
-        TextView locationTextView;
+        TextView jobTitleTextView, salaryTextView, durationTextView, urgencyTextView, locationTextView;
+        Button acceptJobButton;
 
         public JobViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -78,6 +142,7 @@ public class JobListAdapter extends RecyclerView.Adapter<JobListAdapter.JobViewH
             durationTextView = itemView.findViewById(R.id.durationTextView);
             urgencyTextView = itemView.findViewById(R.id.urgencyTextView);
             locationTextView = itemView.findViewById(R.id.locationTextView);
+            acceptJobButton = itemView.findViewById(R.id.acceptJobButton);
         }
     }
 }
