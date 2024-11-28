@@ -5,6 +5,9 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.quickcashapp.Maps.Map;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,6 +42,7 @@ public class MapCRUD {
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     String location = dataSnapshot.child("location").getValue(String.class);
                     String title = dataSnapshot.child("title").getValue(String.class);
+                    String description = dataSnapshot.child("description").getValue(String.class);
 
                     if(location != null && title != null){
 
@@ -49,6 +53,13 @@ public class MapCRUD {
 
                         double latitude = Double.parseDouble(LatLng[0].trim());
                         double longitude = Double.parseDouble(LatLng[1].trim());
+                        LatLng latLng = new LatLng(latitude,longitude);
+                        Marker newMarker = map.getMap().addMarker(
+                                new MarkerOptions()
+                                        .position(latLng)
+                                        .title(title)
+                                        .snippet(description)
+                        );
 
                         map.addMarkerToMap(latitude, longitude, title);
                     }

@@ -1,8 +1,6 @@
 package com.example.quickcashapp.Maps;
 
 import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -14,7 +12,6 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 
-import com.example.quickcashapp.Firebase.FirebaseCRUD;
 import com.example.quickcashapp.Firebase.MapCRUD;
 import com.example.quickcashapp.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -24,10 +21,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import java.io.IOException;
-import java.util.List;
-
 
 
 public class Map extends AppCompatActivity implements OnMapReadyCallback {
@@ -109,6 +102,9 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         mMap.addMarker(new MarkerOptions().position(jobLocation).title(title));
     }
 
+    public GoogleMap getMap(){
+        return this.mMap;
+    }
     /**
      * Called when the map is ready to be used. This is where you can set up markers, listeners,
      * or perform any other initialization needed for the Google Map.
