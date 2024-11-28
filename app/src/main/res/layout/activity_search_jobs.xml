@@ -52,11 +52,14 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         android:text="No results found. Adjust search criteria." />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/resultsRecyclerView"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone" />
+        android:layout_height="500dp">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/resultsRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:visibility="gone" />
+    </ScrollView>
 
 </LinearLayout>

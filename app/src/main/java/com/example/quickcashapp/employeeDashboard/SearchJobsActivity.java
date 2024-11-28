@@ -1,6 +1,7 @@
 package com.example.quickcashapp.employeeDashboard;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -19,6 +20,7 @@ import com.example.quickcashapp.Job;
 import com.example.quickcashapp.JobListAdapter;
 import com.example.quickcashapp.JobListing;
 import com.example.quickcashapp.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,7 +38,6 @@ public class SearchJobsActivity extends AppCompatActivity {
     private Button searchButton;
     private RecyclerView resultsRecyclerView;
     private DatabaseReference jobsDatabaseReference;
-    private String jobTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +51,6 @@ public class SearchJobsActivity extends AppCompatActivity {
         jobsDatabaseReference = FirebaseDatabase.getInstance().getReference("jobs");
 
         searchButton.setOnClickListener(v -> performSearch());
-
-
     }
 
     /**
@@ -97,7 +96,12 @@ public class SearchJobsActivity extends AppCompatActivity {
      */
     private void setupRecyclerView() {
         resultsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        resultsRecyclerView.setAdapter(new JobListAdapter(new ArrayList<>()));  // Placeholder empty list
+        resultsRecyclerView.setAdapter(new JobListAdapter(new ArrayList<>(), new JobListAdapter.OnJobActionListener() {
+            @Override
+            public void onAcceptJobClicked(JobListing job) {
+                acceptJob(job);
+            }
+        }));
     }
 
     /**
@@ -107,8 +111,19 @@ public class SearchJobsActivity extends AppCompatActivity {
      */
     private void performSearch() {
         String jobTitle = jobTitleEditText.getText().toString();
-        Double minSalary = Double.parseDouble(minSalaryEditText.getText().toString());
-        Double maxSalary = Double.parseDouble(maxSalaryEditText.getText().toString());
+        Double minSalary,maxSalary;
+        //Add default salary search options if left blank
+        if(TextUtils.isEmpty(minSalaryEditText.getText().toString()) ) {
+            minSalary = 0.0;
+        }else {
+            minSalary = Double.parseDouble(minSalaryEditText.getText().toString());
+        }
+        if(TextUtils.isEmpty(maxSalaryEditText.getText().toString()) ) {
+            maxSalary =Double.MAX_VALUE;
+        }else{
+            maxSalary = Double.parseDouble(maxSalaryEditText.getText().toString());
+        }
+
         String duration = durationSpinner.getSelectedItem().toString();
         int vicinity = vicinitySeekBar.getProgress();
 
@@ -127,21 +142,41 @@ public class SearchJobsActivity extends AppCompatActivity {
         } else {
             resultsRecyclerView.setVisibility(View.VISIBLE);
             noResultsMessage.setVisibility(View.GONE);
-            resultsRecyclerView.setAdapter(new JobListAdapter(results));
-
-
-            resultsRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, resultsRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+            resultsRecyclerView.setAdapter(new JobListAdapter(results, new JobListAdapter.OnJobActionListener() {
                 @Override
-                public void onItemClick(View view, int position) {
-                    JobListing clickedJob = results.get(position);
-                    jobTitle = clickedJob.getTitle();
-
-                    new AddPreferenceActivity(SearchJobsActivity.this, jobTitle);
+                public void onAcceptJobClicked(JobListing job) {
+                    acceptJob(job); // Handle job acceptance here
                 }
-
             }));
         }
     }
+
+
+    private void acceptJob(JobListing job) {
+        String employeeID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        // Reference to the job in the database
+        DatabaseReference jobRef = FirebaseDatabase.getInstance().getReference("jobStatuses").child(job.getJobId());
+
+        // Update employeeID and status fields in a single operation
+        jobRef.child("employeeID").setValue(employeeID)
+                .addOnSuccessListener(aVoid -> {
+                    // Once employeeID is successfully updated, update the job status
+                    jobRef.child("status").setValue("in-progress")
+                            .addOnSuccessListener(innerVoid -> {
+                                Toast.makeText(this, "Job accepted successfully and status updated to in-progress!", Toast.LENGTH_SHORT).show();
+                            })
+                            .addOnFailureListener(innerError -> {
+                                Toast.makeText(this, "Failed to update job status: " + innerError.getMessage(), Toast.LENGTH_SHORT).show();
+                            });
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Failed to accept job: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+    }
+
+
+
 
     /**
      * Searches and filters job listings based on the given criteria.
