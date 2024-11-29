@@ -100,10 +100,15 @@ public class LocationHelper {
 
         }else {
             this.gotLocationYet = true;
+            locationManager.removeUpdates(locationListener);
+
             return this.myLocation;
         }
 
 
+    }
+    public void stop(){
+        locationManager.removeUpdates(this.locationListener);
     }
     private void initializeLocationListener() {
         ActivityManager am = (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
@@ -134,6 +139,7 @@ public class LocationHelper {
 
             @Override
             public void onProviderDisabled(String s) {
+                locationManager.removeUpdates(locationListener);
 
             }
         },null);

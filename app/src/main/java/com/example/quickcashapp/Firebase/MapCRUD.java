@@ -43,7 +43,7 @@ public class MapCRUD {
                     String location = dataSnapshot.child("location").getValue(String.class);
                     String title = dataSnapshot.child("title").getValue(String.class);
                     String description = dataSnapshot.child("description").getValue(String.class);
-
+                    String jobID = dataSnapshot.child("jobID").getValue(String.class);
                     if(location != null && title != null){
 
                         String coordinates = location.substring(location.indexOf('[') + 1, location.indexOf(']'));
@@ -60,6 +60,8 @@ public class MapCRUD {
                                         .title(title)
                                         .snippet(description)
                         );
+                        newMarker.setTag(jobID);
+                        newMarker.showInfoWindow();
 
                         map.addMarkerToMap(latitude, longitude, title);
                     }

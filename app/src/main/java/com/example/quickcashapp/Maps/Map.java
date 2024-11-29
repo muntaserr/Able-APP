@@ -1,5 +1,8 @@
 package com.example.quickcashapp.Maps;
 
+import static android.app.PendingIntent.getActivity;
+
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -11,9 +14,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.util.Log;
 
 import com.example.quickcashapp.Firebase.MapCRUD;
 import com.example.quickcashapp.R;
+import com.example.quickcashapp.employeeDashboard.MainActivityEmployee;
+import com.example.quickcashapp.employeeDashboard.SearchJobsActivity;
+import com.example.quickcashapp.individualJob;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -23,7 +30,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 
-public class Map extends AppCompatActivity implements OnMapReadyCallback {
+public class Map extends AppCompatActivity implements GoogleMap.OnInfoWindowClickListener, OnMapReadyCallback {
 
     MapCRUD firebase;
     private static final int REQUEST_LOCATION_PERMISSION = 0;
@@ -69,7 +76,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         double latitude = myLocation.getLatitude();
         double longitude = myLocation.getLongitude();
         LatLng latLng = new LatLng(latitude,longitude);
-
+        locationHelper.stop();
         if (marker != null) {
             marker.remove();
         }
@@ -86,8 +93,10 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
      */
     @Override
     protected void onStop() {
+        //locationManager.removeUpdates(locationListener);
+        locationHelper.stop();
         super.onStop();
-        locationManager.removeUpdates(locationListener);
+
     }
 
     /**
@@ -115,9 +124,20 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
         this.initializeMap();
-      //  LatLng halifax = new LatLng(44.6488, -63.5752);
-      //  mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(halifax, 12f)); Uncomment this and comment the Location listener if you need to use this feature
-
         firebase.loadJobMarkers();
+        googleMap.setOnInfoWindowClickListener(this);
+    }
+
+    @Override
+    public void onInfoWindowClick(Marker marker){
+        Log.e("Lucas test", "Info window clicked");
+        Intent intent = new Intent(this.getApplicationContext(), individualJob.class);
+        String jobID =(String) marker.getTag();
+        if(jobID == null){
+            jobID = "-OCnOSL0O2Nn2aK20VN6";
+        }
+        intent.putExtra("jobID", jobID);
+        locationHelper.stop();
+        startActivity(intent);
     }
 }

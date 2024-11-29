@@ -1,0 +1,57 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/jobTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="Job Title" />
+
+    <TextView
+        android:id="@+id/salaryTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Salary" />
+
+    <TextView
+        android:id="@+id/durationTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Duration" />
+
+    <TextView
+        android:id="@+id/vicinityTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Vicinity" />
+
+    <TextView
+        android:id="@+id/locationTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Location" />
+
+    <TextView
+        android:id="@+id/urgencyTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Urgency" />
+
+    <TextView
+        android:id="@+id/descriptionTextView"
+        android:layout_width="match_parent"
+        android:layout_height="400dp" />
+    <Button
+        android:id="@+id/acceptJobButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Accept Job"
+        android:layout_marginTop="8dp" />
+
+</LinearLayout>
