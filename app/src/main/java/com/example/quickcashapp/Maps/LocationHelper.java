@@ -70,9 +70,7 @@ public class LocationHelper {
 
            initializeLocationListener();
 
-            //locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-            //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-    }
+            }
 
 
     /**
@@ -85,12 +83,7 @@ public class LocationHelper {
 
     public Location getMyLocation(){
 
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-
-        initializeLocationListener();
-
-        if(this.myLocation == null){
+        if(myLocation == null){
 
             Log.e("Lucas Location","No location available yet returning dummy loc");
             Location halifaxLocation = new Location("Halifax");
@@ -100,15 +93,15 @@ public class LocationHelper {
 
         }else {
             this.gotLocationYet = true;
-            locationManager.removeUpdates(locationListener);
+            this.stop();
 
-            return this.myLocation;
+            return myLocation;
         }
 
 
     }
     public void stop(){
-        locationManager.removeUpdates(this.locationListener);
+        locationManager.removeUpdates(locationListener);
     }
     private void initializeLocationListener() {
         ActivityManager am = (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
@@ -118,14 +111,14 @@ public class LocationHelper {
                         REQUEST_LOCATION_PERMISSION);
 
         }
-        locationManager.requestSingleUpdate(locationManager.GPS_PROVIDER, locationListener = new LocationListener() {
+       locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
                 Log.e("Lucas test", "Location changed:" + location.toString());
                 double latitude = location.getLatitude();
                 double longitude = location.getLongitude();
-                LocationHelper.this.myLocation = location;
-                locationManager.removeUpdates(locationListener);
+                myLocation = location;
+
             }
             @Override
             public void onStatusChanged(String s, int i, Bundle bundle) {
@@ -139,10 +132,11 @@ public class LocationHelper {
 
             @Override
             public void onProviderDisabled(String s) {
-                locationManager.removeUpdates(locationListener);
+
 
             }
-        },null);
+        };
+        locationManager.requestLocationUpdates(locationManager.GPS_PROVIDER,5000, 10, locationListener);
     }
     public void postedJobs(){
 

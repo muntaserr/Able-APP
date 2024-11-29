@@ -52,7 +52,7 @@ public class SubActivityJobPost extends MainActivityEmployer {
         durationEditText = findViewById(R.id.jobDuration);
         urgencyEditText = findViewById(R.id.jobUrgency);
         descriptionEditText = findViewById(R.id.jobDescription);
-        locationEditText = findViewById(R.id.location);
+
 
         submitButton = findViewById(R.id.submitJob);
 

@@ -130,7 +130,7 @@ public class Map extends AppCompatActivity implements GoogleMap.OnInfoWindowClic
 
     @Override
     public void onInfoWindowClick(Marker marker){
-        Log.e("Lucas test", "Info window clicked");
+        Log.e("Lucas test", "Marker is: "+marker.getTag().toString());
         Intent intent = new Intent(this.getApplicationContext(), individualJob.class);
         String jobID =(String) marker.getTag();
         if(jobID == null){
