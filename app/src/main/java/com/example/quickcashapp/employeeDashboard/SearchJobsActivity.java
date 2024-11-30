@@ -1,6 +1,7 @@
 package com.example.quickcashapp.employeeDashboard;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -110,8 +111,19 @@ public class SearchJobsActivity extends AppCompatActivity {
      */
     private void performSearch() {
         String jobTitle = jobTitleEditText.getText().toString();
-        Double minSalary = Double.parseDouble(minSalaryEditText.getText().toString());
-        Double maxSalary = Double.parseDouble(maxSalaryEditText.getText().toString());
+        Double minSalary,maxSalary;
+        //Add default salary search options if left blank
+        if(TextUtils.isEmpty(minSalaryEditText.getText().toString()) ) {
+            minSalary = 0.0;
+        }else {
+            minSalary = Double.parseDouble(minSalaryEditText.getText().toString());
+        }
+        if(TextUtils.isEmpty(maxSalaryEditText.getText().toString()) ) {
+            maxSalary =Double.MAX_VALUE;
+        }else{
+            maxSalary = Double.parseDouble(maxSalaryEditText.getText().toString());
+        }
+
         String duration = durationSpinner.getSelectedItem().toString();
         int vicinity = vicinitySeekBar.getProgress();
 

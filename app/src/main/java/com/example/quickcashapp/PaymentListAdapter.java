@@ -1,5 +1,6 @@
 package com.example.quickcashapp;
 
+import android.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import java.util.List;
 
 public class PaymentListAdapter extends RecyclerView.Adapter<PaymentListAdapter.JobViewHolder> {
 
+    private EmployerRating employerRating;
     private List<Job> jobList;
     private List<JobStatus> jobStatusList;
     private OnJobActionListener listener;
@@ -75,6 +77,18 @@ public class PaymentListAdapter extends RecyclerView.Adapter<PaymentListAdapter.
             holder.payBtn.setOnClickListener(v -> {
                 listener.onPayClicked(job);
 
+<<<<<<< HEAD
+        holder.markCompleteBtn.setOnClickListener(v -> {
+            listener.onMarkCompleteClicked(job);
+            if (jobStatus != null && jobStatus.getEmployeeID() != null) {
+                employerRating.showRatingDialog(
+                        holder.itemView.getContext(),
+                        job.getJobId(),
+                        jobStatus.getEmployeeID()
+                );
+            }
+        });
+=======
                 // Mark as paid in Firebase
                 markJobAsPaid(jobStatus);
                 holder.payBtn.setEnabled(false);
@@ -90,6 +104,7 @@ public class PaymentListAdapter extends RecyclerView.Adapter<PaymentListAdapter.
                 holder.markCompleteBtn.setVisibility(View.GONE);
             });
         }
+>>>>>>> 3f67b73e82011265a6e459a16df9cbceb1b52926
     }
 
     private void markJobAsPaid(JobStatus jobStatus) {
