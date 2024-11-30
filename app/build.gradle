@@ -58,6 +58,7 @@ dependencies {
     implementation libs.firebase.database
     implementation libs.places
     implementation libs.play.services.maps
+    implementation libs.firebase.messaging
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
@@ -84,4 +85,7 @@ dependencies {
     implementation "androidx.cardview:cardview:1.0.0"
 
     implementation 'com.paypal.sdk:paypal-android-sdk:2.16.0'
+    implementation 'com.google.firebase:firebase-database:19.7.0'
+
+
 }
