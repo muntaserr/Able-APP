@@ -1,21 +1,26 @@
 package com.example.quickcashapp.employeeDashboard;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.Toast;
+import android.util.Log;
+import android.widget.RatingBar;
 
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 
-import com.example.quickcashapp.LoginActivity;
 import com.example.quickcashapp.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Objects;
 
 public class EmployeeProfile extends MainActivityEmployee {
 
+    private RatingBar ratingBar;
     FirebaseAuth mAuth;
 
     @Override
@@ -24,51 +29,46 @@ public class EmployeeProfile extends MainActivityEmployee {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_sub_profile);
 
-        //Setup Firebase Auth and Database
+
+        ratingBar = findViewById(R.id.profile_rating);
+
         mAuth = FirebaseAuth.getInstance();
 
+        String employeeID = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
 
-        //When logout button is clicked take to method to logout user
-        Button logoutButton = findViewById(R.id.logout_button);
-        logoutButton.setOnClickListener(v -> logoutUser());
-
+        setRating(employeeID);
     }
 
-    /**
-     * Logs out the user from the application.
-     *
-     * This method displays a confirmation dialog to the user.
-     * If the user confirms, it performs the following actions:
-     *
-     * - Signs the user out of Firebase authentication.
-     * - Displays a toast message indicating a successful logout.
-     * - Switches the activity to the login activity.
-     * - Closes the current activity (profile activity).
-     *
-     * If the user says No the user is not logged out
-     */
+    private void setRating(String employeeID){
+        DatabaseReference ratingRef = FirebaseDatabase.getInstance().getReference("ratings").child(employeeID);
 
-    private void logoutUser(){
-
-        new AlertDialog.Builder(EmployeeProfile.this)
-                .setTitle("Logout")
-                .setMessage("Are you sure you want to logout?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which){
-
-                        //Sign out the user from firebase
-                        mAuth.signOut();
-                        Toast.makeText(EmployeeProfile.this, "Logged out successfully", Toast.LENGTH_SHORT).show();
-
-                        //Switch the activity to the login activity
-                        Intent intent = new Intent(EmployeeProfile.this, LoginActivity.class); //Fill in null with login activity
-                        startActivity(intent);
-                        finish(); //Close the profile activity
-
+        ratingRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                double totalRatingChange = 0;
+                int count = 0;
+                Log.e("Julians Bio", "Julian is wants to ligma and lokey is always imagining dragons");
+                for (DataSnapshot ratingSnapshot : snapshot.getChildren()) {
+                    Integer rating = ratingSnapshot.getValue(Integer.class);
+                    if (rating != null) {
+                        totalRatingChange += rating;
+                        count++;
                     }
-                })
-                .setNegativeButton("No", null)
-                .show();
+                }
+                if(count > 0){
+                    double avgRating = totalRatingChange/count;
+                    ratingBar.setRating((float)avgRating);
+                } else {
+                    ratingBar.setRating(0);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("FirebaseError", "Failed to get the ratings from firebase", error.toException());
+            }
+        });
     }
 }
+
 
