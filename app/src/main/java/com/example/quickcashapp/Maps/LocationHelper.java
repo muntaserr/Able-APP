@@ -65,6 +65,13 @@ public class LocationHelper {
     public LocationHelper(Context context){
             this.context = context;
 
+            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                    ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions((Activity) context,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                        REQUEST_LOCATION_PERMISSION);
+                return; // Ensure execution stops until permissions are granted
+            }
             locationManager = (LocationManager) context.getSystemService(LocationManager.class);
 
 
@@ -92,6 +99,7 @@ public class LocationHelper {
             return halifaxLocation;
 
         }else {
+            Log.e("Lucas Location", "Got a real lokey");
             this.gotLocationYet = true;
             this.stop();
 
@@ -104,12 +112,12 @@ public class LocationHelper {
         locationManager.removeUpdates(locationListener);
     }
     private void initializeLocationListener() {
+        Log.e("Lucas test","Initializing location listener");
         ActivityManager am = (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this.context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this.context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-            ActivityCompat.requestPermissions((Activity) this.context, new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
-                        REQUEST_LOCATION_PERMISSION);
-
+        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) &&
+                !locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+            Log.e("LocationHelper", "No location provider available.");
+            // Optionally, prompt the user to enable location services
         }
        locationListener = new LocationListener() {
             @Override
@@ -117,7 +125,7 @@ public class LocationHelper {
                 Log.e("Lucas test", "Location changed:" + location.toString());
                 double latitude = location.getLatitude();
                 double longitude = location.getLongitude();
-                myLocation = location;
+                LocationHelper.this.myLocation = location;
 
             }
             @Override
@@ -136,7 +144,8 @@ public class LocationHelper {
 
             }
         };
-        locationManager.requestLocationUpdates(locationManager.GPS_PROVIDER,5000, 10, locationListener);
+        locationManager.requestLocationUpdates(locationManager.GPS_PROVIDER,500, 10, locationListener);
+        locationManager.requestLocationUpdates(locationManager.NETWORK_PROVIDER,500, 10, locationListener);
     }
     public void postedJobs(){
 
