@@ -36,10 +36,9 @@
         </activity>
 
 
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCWQzOiffu7lW_pyTno7MitAE3YfJXj07U"></meta-data>
+            android:value="AIzaSyCWQzOiffu7lW_pyTno7MitAE3YfJXj07U" />
 
 
         <activity android:name=".employeeDashboard.MainActivityEmployee" />
@@ -53,9 +52,10 @@
         <activity android:name=".employerDashboard.SubActivityPreferredEmployee" />
         <activity android:name=".employerDashboard.SubActivityJobPost" />
         <activity android:name=".Maps.Map" />
-        <activity android:name=".SearchJobsActivity" />
+        <activity android:name=".individualJob" />
         <activity android:name=".employeeDashboard.EmployeeProfile" />
-        <activity android:name=".employeeDashboard.SetPreferenceActivity" />
+        <activity android:name=".employeeDashboard.MatchJobs"/>
+
     </application>
 
 </manifest>
