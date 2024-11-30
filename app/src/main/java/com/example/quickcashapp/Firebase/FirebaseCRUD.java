@@ -15,7 +15,5 @@ public class FirebaseCRUD {
     DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
 
     public void getUserID(){
-
-        for(DataSnapshot userSnapshot : s)
     }
 }

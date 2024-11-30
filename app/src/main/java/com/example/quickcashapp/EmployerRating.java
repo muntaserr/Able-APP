@@ -1,51 +1,61 @@
 package com.example.quickcashapp;
 
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.example.quickcashapp.employerDashboard.SubActivityPayment;
 
-public class EmployerRating  {
+public class EmployerRating extends AppCompatActivity {
 
-    public void showRatingDialog(Context context, String jobId, String employeeID){
+    private String jobId;
+    private String employeeID;
 
-        View dialogView = LayoutInflater.from(context).inflate(R.layout.rating_popup, null);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.rating_popup);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setView(dialogView);
-        AlertDialog dialog = builder.create();
+        jobId = getIntent().getStringExtra("jobId");
+        employeeID = getIntent().getStringExtra("employeeID");
 
-        //get the rating bar and submit button
-        RatingBar ratingBar = dialogView.findViewById(R.id.rating_bar);
-        Button Submit = dialogView.findViewById(R.id.submit_rating_button);
+        if (jobId == null || employeeID == null) {
+            Toast.makeText(this, "Missing required data", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
 
-        //On submit in the alert dialog get the rating inputted by the employer
-        Submit.setOnClickListener(v -> {
+        RatingBar ratingBar = findViewById(R.id.rating_bar);
+        Button submitButton = findViewById(R.id.submit_rating_button);
+
+        submitButton.setOnClickListener(v -> {
             float rating = ratingBar.getRating();
-
             saveRatingToFirebase(jobId, employeeID, rating);
 
-            Toast.makeText(context, "Rating submitted!", Toast.LENGTH_SHORT).show();
-            dialog.dismiss();
+            Toast.makeText(this, "Rating submitted!", Toast.LENGTH_SHORT).show();
+
+            // Redirect back to PaymentActivity
+            Intent restartIntent = new Intent(this, SubActivityPayment.class);
+            restartIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(restartIntent);
+
+            // Finish the EmployerRating activity
+            finish();
         });
-        dialog.show();
+
     }
 
-    /**
-     * Saves the rating from the employer to the firebase
-     * @param jobId ID of the job
-     * @param employeeId ID of the employee who completed the job
-     * @param rating the rating the employer gave to the employee
-     */
-    private void saveRatingToFirebase(String jobId, String employeeId, float rating) {
+    private void saveRatingToFirebase(String jobId, String employeeID, float rating) {
         DatabaseReference ratingRef = FirebaseDatabase.getInstance().getReference("ratings");
-        ratingRef.child(employeeId).child(jobId).setValue(rating);
+        ratingRef.child(employeeID).child(jobId).setValue(rating)
+                .addOnSuccessListener(aVoid -> Log.d("EmployerRating", "Rating saved successfully"))
+                .addOnFailureListener(e -> Log.e("EmployerRating", "Failed to save rating: " + e.getMessage()));
     }
 }

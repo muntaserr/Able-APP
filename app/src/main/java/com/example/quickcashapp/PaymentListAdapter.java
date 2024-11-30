@@ -1,11 +1,14 @@
 package com.example.quickcashapp;
 
-import android.app.AlertDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,12 +23,13 @@ import java.util.List;
 
 public class PaymentListAdapter extends RecyclerView.Adapter<PaymentListAdapter.JobViewHolder> {
 
-    private EmployerRating employerRating;
     private List<Job> jobList;
     private List<JobStatus> jobStatusList;
     private OnJobActionListener listener;
+    private Context context;
 
-    public PaymentListAdapter(List<Job> jobList, List<JobStatus> jobStatusList, OnJobActionListener listener) {
+    public PaymentListAdapter(Context context, List<Job> jobList, List<JobStatus> jobStatusList, OnJobActionListener listener) {
+        this.context = context;
         this.jobList = jobList;
         this.jobStatusList = jobStatusList;
         this.listener = listener;
@@ -64,64 +68,72 @@ public class PaymentListAdapter extends RecyclerView.Adapter<PaymentListAdapter.
             holder.employeeNameTV.setText("Employee: Not Assigned");
         }
 
-        // Determine Pay button state based on status
-        if (jobStatus != null && "paid".equalsIgnoreCase(jobStatus.getStatus())) {
-            holder.payBtn.setEnabled(false);
-            holder.payBtn.setText("Paid");
-            holder.markCompleteBtn.setVisibility(View.GONE);
-        } else if (jobStatus != null && "completed".equalsIgnoreCase(jobStatus.getStatus())) {
-            holder.payBtn.setEnabled(true);
-            holder.payBtn.setText("Pay Now");
-
-            // Handle Pay button click
-            holder.payBtn.setOnClickListener(v -> {
-                listener.onPayClicked(job);
-
-<<<<<<< HEAD
-        holder.markCompleteBtn.setOnClickListener(v -> {
-            listener.onMarkCompleteClicked(job);
-            if (jobStatus != null && jobStatus.getEmployeeID() != null) {
-                employerRating.showRatingDialog(
-                        holder.itemView.getContext(),
-                        job.getJobId(),
-                        jobStatus.getEmployeeID()
-                );
-            }
-        });
-=======
-                // Mark as paid in Firebase
-                markJobAsPaid(jobStatus);
-                holder.payBtn.setEnabled(false);
-                holder.payBtn.setText("Paid");
-                holder.markCompleteBtn.setVisibility(View.GONE);
-            });
-        } else {
-            holder.payBtn.setEnabled(false);
-            holder.payBtn.setText("Pending Completion");
+        // "Mark as Completed" Button Logic
+        if (jobStatus != null && !"completed".equalsIgnoreCase(jobStatus.getStatus()) && !"paid".equalsIgnoreCase(jobStatus.getStatus())) {
             holder.markCompleteBtn.setVisibility(View.VISIBLE);
             holder.markCompleteBtn.setOnClickListener(v -> {
                 listener.onMarkCompleteClicked(job);
+
+                // Update status to "completed" in Firebase
+                markJobAsCompleted(jobStatus);
+
+                // Open EmployerRating Activity
+                if (jobStatus.getEmployeeID() != null) {
+                    Intent ratingIntent = new Intent(context, EmployerRating.class);
+                    ratingIntent.putExtra("jobId", job.getJobId());
+                    ratingIntent.putExtra("employeeID", jobStatus.getEmployeeID());
+                    context.startActivity(ratingIntent);
+                }
+
+                // Hide the button after marking as complete
                 holder.markCompleteBtn.setVisibility(View.GONE);
             });
+        } else {
+            holder.markCompleteBtn.setVisibility(View.GONE);
         }
->>>>>>> 3f67b73e82011265a6e459a16df9cbceb1b52926
+
+        // Pay Button Logic
+        if (jobStatus != null) {
+            if ("paid".equalsIgnoreCase(jobStatus.getStatus())) {
+                holder.payBtn.setEnabled(false);
+                holder.payBtn.setText("Paid");
+            } else if ("completed".equalsIgnoreCase(jobStatus.getStatus())) {
+                holder.payBtn.setEnabled(true);
+                holder.payBtn.setText("Pay Now");
+
+                holder.payBtn.setOnClickListener(v -> {
+                    listener.onPayClicked(job);
+
+                    // Update status to "paid" in Firebase
+                    markJobAsPaid(jobStatus);
+
+                    // Update button state locally
+                    holder.payBtn.setEnabled(false);
+                    holder.payBtn.setText("Paid");
+                });
+            } else {
+                holder.payBtn.setEnabled(false);
+                holder.payBtn.setText("Pending Completion");
+            }
+        } else {
+            holder.payBtn.setEnabled(false);
+            holder.payBtn.setText("Pending Completion");
+        }
+    }
+
+    private void markJobAsCompleted(JobStatus jobStatus) {
+        DatabaseReference jobStatusRef = FirebaseDatabase.getInstance().getReference("jobStatuses").child(jobStatus.getJobId());
+        jobStatusRef.child("status").setValue("completed")
+                .addOnSuccessListener(aVoid -> Log.d("PaymentListAdapter", "Job marked as completed successfully"))
+                .addOnFailureListener(e -> Log.e("PaymentListAdapter", "Failed to mark job as completed: " + e.getMessage()));
     }
 
     private void markJobAsPaid(JobStatus jobStatus) {
         DatabaseReference jobStatusRef = FirebaseDatabase.getInstance().getReference("jobStatuses").child(jobStatus.getJobId());
         jobStatusRef.child("status").setValue("paid")
-                .addOnSuccessListener(aVoid -> {
-                    // Toast.makeText(context, "Job marked as paid", Toast.LENGTH_SHORT).show();
-                })
-                .addOnFailureListener(e -> {
-
-                    // Log.e("PaymentError", "Failed to mark job as paid: " + e.getMessage());
-                });
+                .addOnSuccessListener(aVoid -> Log.d("PaymentListAdapter", "Job marked as paid successfully"))
+                .addOnFailureListener(e -> Log.e("PaymentListAdapter", "Failed to mark job as paid: " + e.getMessage()));
     }
-
-
-
-
 
     @Override
     public int getItemCount() {
@@ -147,7 +159,6 @@ public class PaymentListAdapter extends RecyclerView.Adapter<PaymentListAdapter.
     public static class JobViewHolder extends RecyclerView.ViewHolder {
         TextView jobTitleTV, jobSalaryTV, employeeNameTV;
         Button payBtn, markCompleteBtn;
-        boolean isPaid = false;
 
         public JobViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -158,7 +169,4 @@ public class PaymentListAdapter extends RecyclerView.Adapter<PaymentListAdapter.
             markCompleteBtn = itemView.findViewById(R.id.updateStatusBtn);
         }
     }
-
-
-
 }

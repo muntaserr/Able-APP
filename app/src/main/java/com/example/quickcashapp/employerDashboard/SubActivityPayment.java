@@ -151,15 +151,14 @@ public class SubActivityPayment extends AppCompatActivity {
     }
 
     private void setupRecyclerView() {
-        paymentListAdapter = new PaymentListAdapter(jobList, jobStatusList, new PaymentListAdapter.OnJobActionListener() {
+        paymentListAdapter = new PaymentListAdapter(this, jobList, jobStatusList, new PaymentListAdapter.OnJobActionListener() {
             @Override
             public void onPayClicked(Job job) {
-                initiatePayment(job); // Handle payment
+                initiatePayment(job);
             }
 
             @Override
             public void onMarkCompleteClicked(Job job) {
-                updateJobStatus(job); // Mark job as complete
             }
         });
         paymentRecyclerView.setAdapter(paymentListAdapter);

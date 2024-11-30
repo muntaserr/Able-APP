@@ -55,6 +55,9 @@
         <activity android:name=".employerDashboard.SubActivityPayment" />
         <activity android:name=".employerDashboard.SubActivityPreferredEmployee" />
         <activity android:name=".employerDashboard.SubActivityJobPost" />
+
+        <activity android:name="com.example.quickcashapp.EmployerRating" />
+
         <activity android:name=".Maps.Map" />
     </application>
 
