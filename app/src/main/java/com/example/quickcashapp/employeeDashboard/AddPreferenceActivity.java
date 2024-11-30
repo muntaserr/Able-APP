@@ -26,6 +26,7 @@ public class AddPreferenceActivity extends AppCompatActivity {
     private FirebaseUser user;
     private String jobTitle;
     private String userId;
+    private boolean isValid;
 
 
     public AddPreferenceActivity(Context context, String jobTitle){
@@ -34,11 +35,9 @@ public class AddPreferenceActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         user = mAuth.getCurrentUser();
-
-        showMessage();
     }
 
-    protected void showMessage() {
+    public void showMessage() {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
         builder.setMessage("then click 'Yes'");
@@ -77,6 +76,9 @@ public class AddPreferenceActivity extends AppCompatActivity {
         });
     }
 
+    public boolean checkValidStoring(){
+        return isValid;
+    }
 
     protected void getCount(DatabaseReference ref, CountCallback callback) {
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -102,7 +104,7 @@ public class AddPreferenceActivity extends AppCompatActivity {
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                boolean isValid = true;
+                isValid = true;
 
                 // checking for dulplicated information
                 for (DataSnapshot childSnapshot : snapshot.getChildren()) {

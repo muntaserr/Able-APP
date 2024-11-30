@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.quickcashapp.employeeDashboard.AddPreferenceActivity;
+import com.example.quickcashapp.employeeDashboard.SearchJobsActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -81,6 +83,23 @@ public class JobListAdapter extends RecyclerView.Adapter<JobListAdapter.JobViewH
         holder.urgencyTextView.setText("Urgency: " + job.getUrgency());
         holder.locationTextView.setText("Location: " + job.getLocation());
 
+        //add the informations to the database
+        holder.add2PreferenceButton.setOnClickListener(v -> {
+            AddPreferenceActivity addPreferenceActivity = new AddPreferenceActivity(holder.itemView.getContext(), job.getTitle());
+            boolean isValid = addPreferenceActivity.checkValidStoring();
+            if(!isValid){
+                holder.add2PreferenceButton.setEnabled(false);
+                holder.add2PreferenceButton.setText("Already added to the Preference");
+            }else{
+                holder.add2PreferenceButton.setEnabled(true);
+                holder.add2PreferenceButton.setText("Add to Preference");
+            }
+
+            addPreferenceActivity.showMessage();
+
+        });
+
+
         // Fetch the status from the JobStatus class
         DatabaseReference jobStatusRef = FirebaseDatabase.getInstance().getReference("jobStatuses").child(job.getJobId());
         jobStatusRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -134,6 +153,7 @@ public class JobListAdapter extends RecyclerView.Adapter<JobListAdapter.JobViewH
     public static class JobViewHolder extends RecyclerView.ViewHolder {
         TextView jobTitleTextView, salaryTextView, durationTextView, urgencyTextView, locationTextView;
         Button acceptJobButton;
+        Button add2PreferenceButton;
 
         public JobViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -143,6 +163,7 @@ public class JobListAdapter extends RecyclerView.Adapter<JobListAdapter.JobViewH
             urgencyTextView = itemView.findViewById(R.id.urgencyTextView);
             locationTextView = itemView.findViewById(R.id.locationTextView);
             acceptJobButton = itemView.findViewById(R.id.acceptJobButton);
+            add2PreferenceButton = itemView.findViewById(R.id.add2PreferenceButton);
         }
     }
 }

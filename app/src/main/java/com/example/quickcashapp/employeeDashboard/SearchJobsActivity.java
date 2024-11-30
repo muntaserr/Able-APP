@@ -36,8 +36,11 @@ public class SearchJobsActivity extends AppCompatActivity {
     private SeekBar vicinitySeekBar;
     private TextView vicinityLabel, noResultsMessage;
     private Button searchButton;
+    private Button add2PreferenceButton;
     private RecyclerView resultsRecyclerView;
     private DatabaseReference jobsDatabaseReference;
+    private boolean clicked;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +69,7 @@ public class SearchJobsActivity extends AppCompatActivity {
         searchButton = findViewById(R.id.searchButton);
         resultsRecyclerView = findViewById(R.id.resultsRecyclerView);
         noResultsMessage = findViewById(R.id.noResultsMessage);
+        add2PreferenceButton = findViewById(R.id.add2PreferenceButton);
     }
 
     /**
@@ -102,6 +106,7 @@ public class SearchJobsActivity extends AppCompatActivity {
                 acceptJob(job);
             }
         }));
+
     }
 
     /**
@@ -142,12 +147,16 @@ public class SearchJobsActivity extends AppCompatActivity {
         } else {
             resultsRecyclerView.setVisibility(View.VISIBLE);
             noResultsMessage.setVisibility(View.GONE);
+
             resultsRecyclerView.setAdapter(new JobListAdapter(results, new JobListAdapter.OnJobActionListener() {
+
                 @Override
                 public void onAcceptJobClicked(JobListing job) {
                     acceptJob(job); // Handle job acceptance here
                 }
             }));
+
+
         }
     }
 
