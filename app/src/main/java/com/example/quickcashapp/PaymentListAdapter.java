@@ -1,5 +1,6 @@
 package com.example.quickcashapp;
 
+import android.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import java.util.List;
 
 public class PaymentListAdapter extends RecyclerView.Adapter<PaymentListAdapter.JobViewHolder> {
 
+    private EmployerRating employerRating;
     private List<Job> jobList;
     private List<JobStatus> jobStatusList;
     private OnJobActionListener listener;
@@ -85,6 +87,13 @@ public class PaymentListAdapter extends RecyclerView.Adapter<PaymentListAdapter.
 
         holder.markCompleteBtn.setOnClickListener(v -> {
             listener.onMarkCompleteClicked(job);
+            if (jobStatus != null && jobStatus.getEmployeeID() != null) {
+                employerRating.showRatingDialog(
+                        holder.itemView.getContext(),
+                        job.getJobId(),
+                        jobStatus.getEmployeeID()
+                );
+            }
         });
     }
 

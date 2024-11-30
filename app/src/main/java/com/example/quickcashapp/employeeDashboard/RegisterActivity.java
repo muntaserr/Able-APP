@@ -25,6 +25,7 @@ public class RegisterActivity extends AppCompatActivity {
     private RadioButton selectedRoleButton;
     private LoginValidator validator;
 
+
     /**
      * Called when the activity is first created.
      * Initializes Firebase Authentication, Database, and UI components.
@@ -105,11 +106,12 @@ public class RegisterActivity extends AppCompatActivity {
      * @param role      The role of the user, such as 'employer' or 'employee'.
      */
     private void registerUser(String name, String email, String password, String creditCard, String role) {
+        float rating = 0;
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
-                        User newUser = new User(name, email, password, creditCard, role);
+                        User newUser = new User(name, email, password, creditCard, role, rating);
                         mDatabase.child("users").child(user.getUid()).setValue(newUser)
                                 .addOnCompleteListener(task1 -> {
                                     if (task1.isSuccessful()) {
