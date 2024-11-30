@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+
     <application
 
         android:allowBackup="true"
@@ -45,12 +47,16 @@
         <activity android:name=".employeeDashboard.RegisterActivity" />
         <activity android:name=".employeeDashboard.SearchJobsActivity" />
         <activity android:name=".employeeDashboard.SetPreferenceActivity" />
+        <activity android:name=".employeeDashboard.EmployeeProfile" />
 
         <activity android:name=".employerDashboard.MainActivityEmployer" />
         <activity android:name=".employerDashboard.SubActivityProfile" />
         <activity android:name=".employerDashboard.SubActivityPayment" />
         <activity android:name=".employerDashboard.SubActivityPreferredEmployee" />
         <activity android:name=".employerDashboard.SubActivityJobPost" />
+
+        <activity android:name="com.example.quickcashapp.EmployerRating" />
+
         <activity android:name=".Maps.Map" />
         <activity android:name=".individualJob" />
         <activity android:name=".employeeDashboard.EmployeeProfile" />

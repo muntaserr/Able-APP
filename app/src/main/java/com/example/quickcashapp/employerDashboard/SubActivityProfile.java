@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -13,14 +14,12 @@ import com.example.quickcashapp.LoginActivity;
 import com.example.quickcashapp.R;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 
 public class SubActivityProfile extends MainActivityEmployer {
 
+
     private FirebaseAuth mAuth;
-    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +30,14 @@ public class SubActivityProfile extends MainActivityEmployer {
 
         //Setup Firebase Auth and Database
         mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+
 
         //When logout button is clicked take to method to logout user
         Button logoutButton = findViewById(R.id.logout_button);
         logoutButton.setOnClickListener(v -> logoutUser());
+
     }
+
 
     /**
      * Logs out the user from the application.
