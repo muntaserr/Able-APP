@@ -5,6 +5,7 @@ import static androidx.core.content.ContextCompat.getSystemService;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
@@ -55,22 +56,21 @@ public class LocationHelper {
     LocationManager locationManager;
     LocationListener locationListener;
     Location myLocation;
+    public boolean gotLocationYet = false;
 
     /**
      * Constructor
      * @param context gets the Activity from the calling class to display information.
      */
     public LocationHelper(Context context){
-        this.context = context;
+            this.context = context;
 
-        locationManager = (LocationManager) context.getSystemService(LocationManager.class);
+            locationManager = (LocationManager) context.getSystemService(LocationManager.class);
 
 
-        initializeLocationListener();
+           initializeLocationListener();
 
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-    }
+            }
 
 
     /**
@@ -80,50 +80,41 @@ public class LocationHelper {
      * If there was a previous marker, it will be removed.
      * The camera is also moved to the new location with a specified zoom level.
      */
-    public void askForPermissions(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Location Permission Needed");
-        builder.setMessage("this app need location permission to work correctly");
-        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener(){
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions((Activity) context, new String[]
-                                    {Manifest.permission.ACCESS_FINE_LOCATION},
-                            REQUEST_LOCATION_PERMISSION);
-                }
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
-    }
 
     public Location getMyLocation(){
-        askForPermissions();
-        initializeLocationListener();
-        if(this.myLocation == null){
+
+        if(myLocation == null){
+
             Log.e("Lucas Location","No location available yet returning dummy loc");
             Location halifaxLocation = new Location("Halifax");
             halifaxLocation.setLatitude(44.6488);
             halifaxLocation.setLongitude(-63.5752);
             return halifaxLocation;
-        }else{
-            return this.myLocation;
+
+        }else {
+            this.gotLocationYet = true;
+            this.stop();
+
+            return myLocation;
         }
 
+
+    }
+    public void stop(){
+        locationManager.removeUpdates(locationListener);
     }
     private void initializeLocationListener() {
+        ActivityManager am = (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this.context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this.context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
-        locationListener = new LocationListener() {
+            ActivityCompat.requestPermissions((Activity) this.context, new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
+                        REQUEST_LOCATION_PERMISSION);
+
+        }
+       locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
+                Log.e("Lucas test", "Location changed:" + location.toString());
                 double latitude = location.getLatitude();
                 double longitude = location.getLongitude();
                 myLocation = location;
@@ -142,8 +133,10 @@ public class LocationHelper {
             @Override
             public void onProviderDisabled(String s) {
 
+
             }
         };
+        locationManager.requestLocationUpdates(locationManager.GPS_PROVIDER,5000, 10, locationListener);
     }
     public void postedJobs(){
 

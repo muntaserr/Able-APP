@@ -32,6 +32,7 @@ public class SubActivityJobPost extends MainActivityEmployer {
     private DatabaseReference jobsDatabaseReference, jobStatusesDatabaseReference;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1001;
     private LocationHelper locationHelper;
+    private Location myLocation;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -51,12 +52,13 @@ public class SubActivityJobPost extends MainActivityEmployer {
         durationEditText = findViewById(R.id.jobDuration);
         urgencyEditText = findViewById(R.id.jobUrgency);
         descriptionEditText = findViewById(R.id.jobDescription);
-        locationEditText = findViewById(R.id.location);
+
 
         submitButton = findViewById(R.id.submitJob);
 
         // Check for location permissions
         checkLocationPermission();
+        this.locationHelper = new LocationHelper(this);
 
         // Set up the submit button click listener
         submitButton.setOnClickListener(view -> submitJob());
@@ -70,9 +72,6 @@ public class SubActivityJobPost extends MainActivityEmployer {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // Request location permission if not granted
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_REQUEST_CODE);
-        } else {
-            // Permission already granted, fetch location
-            fetchUserLocation();
         }
     }
 
@@ -81,9 +80,10 @@ public class SubActivityJobPost extends MainActivityEmployer {
      * If location permission is granted, it will retrieve the last known location.
      * If location detection fails, prompts the user to enter it manually.
      */
-    private void fetchUserLocation() {
+    private Location fetchUserLocation() {
         // Placeholder for location fetching logic
-        locationEditText.setHint("Enter job location manually if location detection fails");
+        this.myLocation = locationHelper.getMyLocation();
+        return this.myLocation;
     }
 
     /**
@@ -98,8 +98,7 @@ public class SubActivityJobPost extends MainActivityEmployer {
         String urgency = urgencyEditText.getText().toString().trim();
         String description = descriptionEditText.getText().toString().trim();
 
-        this.locationHelper = new LocationHelper(this);
-        Location location = locationHelper.getMyLocation();
+        Location location=this.fetchUserLocation();
         Log.e("Lucas test", "Location is "+location.toString());
 
         // Validate input fields; exit method if validation fails

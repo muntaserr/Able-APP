@@ -35,11 +35,6 @@
         android:layout_height="50dp"
         android:hint="Describe the job you would like completed" />
 
-    <EditText
-        android:id="@+id/location"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Location" />
 
     <Button
         android:id="@+id/submitJob"
