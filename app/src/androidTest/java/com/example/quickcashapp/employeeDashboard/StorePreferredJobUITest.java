@@ -71,9 +71,9 @@ public class StorePreferredJobUITest {
         UiObject searchButton = device.findObject(new UiSelector().text("Search"));
         searchButton.click();
 
-        UiObject jobTitle = device.findObject(new UiSelector().text("New Test"));
-        assertTrue(jobTitle.exists());
-        jobTitle.click();
+        UiObject add2PreferenceButton = device.findObject(new UiSelector().text("Add to Preference"));
+        assertTrue(add2PreferenceButton.exists());
+        add2PreferenceButton.click();
 
         UiObject messageBox = device.findObject(new UiSelector().text("Add to Preference?"));
         assertTrue(messageBox.exists());
