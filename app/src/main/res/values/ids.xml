@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="editTextJobType" type="id" />
+    <item name="editTextLocation" type="id" />
+</resources>
