@@ -14,6 +14,8 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 
+import com.example.quickcashapp.employeeDashboard.SearchJobsActivity;
+
 @RunWith(AndroidJUnit4.class)
 public class SearchJobsEspressoTest {
 

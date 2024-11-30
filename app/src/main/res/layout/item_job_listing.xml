@@ -44,10 +44,16 @@
         android:text="Urgency" />
 
     <Button
+        android:id="@+id/add2PreferenceButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add to Preference" />
+
+    <Button
         android:id="@+id/acceptJobButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Accept Job"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="8dp"
+        android:text="Accept Job" />
 
 </LinearLayout>
