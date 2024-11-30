@@ -191,6 +191,9 @@ public class SubActivityPayment extends AppCompatActivity {
     private void markJobAsPaid() {
         // Update the local adapter to reflect the "Paid" state
         paymentListAdapter.notifyDataSetChanged();
+        Intent intent = new Intent(this, SubActivityPayment.class);
+        finish();
+        startActivity(intent);
     }
 
 
