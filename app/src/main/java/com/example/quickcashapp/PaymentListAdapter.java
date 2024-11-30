@@ -96,11 +96,10 @@ public class PaymentListAdapter extends RecyclerView.Adapter<PaymentListAdapter.
         DatabaseReference jobStatusRef = FirebaseDatabase.getInstance().getReference("jobStatuses").child(jobStatus.getJobId());
         jobStatusRef.child("status").setValue("paid")
                 .addOnSuccessListener(aVoid -> {
-                    // Optional: Toast for success
-                    // Toast.makeText(context, "Job marked as paid!", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(context, "Job marked as paid", Toast.LENGTH_SHORT).show();
                 })
                 .addOnFailureListener(e -> {
-                    // Optional: Log error
+
                     // Log.e("PaymentError", "Failed to mark job as paid: " + e.getMessage());
                 });
     }
