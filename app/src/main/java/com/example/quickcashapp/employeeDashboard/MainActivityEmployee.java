@@ -1,5 +1,6 @@
 package com.example.quickcashapp.employeeDashboard;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.widget.Button;
 
 import androidx.activity.ComponentActivity;
 import androidx.activity.EdgeToEdge;
+
 
 import com.example.quickcashapp.MainActivity;
 import com.example.quickcashapp.R;
@@ -31,6 +33,7 @@ public class MainActivityEmployee extends ComponentActivity {
         Button SearchJobs = findViewById(R.id.SearchJobs);
         Button SetPreference = findViewById(R.id.SetPreference);
         Button ChooseRole = findViewById(R.id.ChooseRole);
+        Button matchJobs = findViewById(R.id.MatchJobs);
 
 
         SearchJobs.setOnClickListener(new View.OnClickListener() {
@@ -74,6 +77,10 @@ public class MainActivityEmployee extends ComponentActivity {
             }
 
         });
+
+
+
+
 
     }
 

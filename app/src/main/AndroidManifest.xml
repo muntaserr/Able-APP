@@ -38,10 +38,9 @@
         </activity>
 
 
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCWQzOiffu7lW_pyTno7MitAE3YfJXj07U"></meta-data>
+            android:value="AIzaSyCWQzOiffu7lW_pyTno7MitAE3YfJXj07U" />
 
 
         <activity android:name=".employeeDashboard.MainActivityEmployee" />
@@ -59,6 +58,10 @@
         <activity android:name="com.example.quickcashapp.EmployerRating" />
 
         <activity android:name=".Maps.Map" />
+        <activity android:name=".individualJob" />
+        <activity android:name=".employeeDashboard.EmployeeProfile" />
+        <activity android:name=".employeeDashboard.MatchJobs"/>
+
     </application>
 
 </manifest>

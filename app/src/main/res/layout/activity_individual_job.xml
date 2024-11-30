@@ -1,0 +1,94 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/white">
+
+    <!-- Job Title -->
+    <TextView
+        android:id="@+id/jobTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:text="Job Title" />
+
+    <!-- Salary -->
+    <TextView
+        android:id="@+id/salaryTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:text="Salary" />
+
+    <!-- Duration -->
+    <TextView
+        android:id="@+id/durationTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:text="Duration" />
+
+    <!-- Vicinity -->
+    <TextView
+        android:id="@+id/vicinityTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:text="Vicinity" />
+
+    <!-- Location -->
+    <TextView
+        android:id="@+id/locationTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:text="Location" />
+
+    <!-- Urgency -->
+    <TextView
+        android:id="@+id/urgencyTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:text="Urgency" />
+
+    <!-- Description -->
+    <TextView
+        android:id="@+id/descriptionTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:padding="12dp"
+        android:background="@drawable/description_background"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        android:text="Description goes here..." />
+
+    <!-- Accept Job Button -->
+    <Button
+        android:id="@+id/acceptJobButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:padding="12dp"
+        android:text="Accept Job"
+        android:backgroundTint="@color/primary"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
+</LinearLayout>
