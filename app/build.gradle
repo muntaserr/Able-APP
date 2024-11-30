@@ -58,8 +58,6 @@ dependencies {
     implementation libs.firebase.database
     implementation libs.places
     implementation libs.play.services.maps
-    implementation libs.media3.common
-    implementation libs.uiautomator
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core

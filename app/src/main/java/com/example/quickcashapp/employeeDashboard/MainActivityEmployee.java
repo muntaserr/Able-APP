@@ -8,7 +8,7 @@ import android.widget.Button;
 
 import androidx.activity.ComponentActivity;
 import androidx.activity.EdgeToEdge;
-import androidx.media3.common.C;
+
 
 import com.example.quickcashapp.MainActivity;
 import com.example.quickcashapp.R;
@@ -79,14 +79,7 @@ public class MainActivityEmployee extends ComponentActivity {
         });
 
 
-        matchJobs.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivityEmployee.this, MatchJobs.class);
-                startActivity(intent);
-            }
 
-        });
 
 
     }
