@@ -63,6 +63,7 @@ public class MapCRUD {
                         //map.addMarkerToMap(latitude, longitude, title);
                     }
                 }
+                //return null;
             }
 
             @Override

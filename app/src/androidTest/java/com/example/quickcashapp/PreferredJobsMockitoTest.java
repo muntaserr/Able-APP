@@ -1,12 +1,8 @@
 package com.example.quickcashapp;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import androidx.test.uiautomator.UiObject;
-
 import com.example.quickcashapp.employeeDashboard.SearchJobsActivity;
-import com.example.quickcashapp.employeeDashboard.SetPreferenceActivity;
 
 import org.junit.BeforeClass;
 import org.junit.Test;

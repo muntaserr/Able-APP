@@ -32,6 +32,7 @@ public class FirebaseCRUD {
                     Job job = jobSnapshot.getValue(Job.class);
                     jobList.add(job);
                 }
+                //return null;
             }
 
             @Override

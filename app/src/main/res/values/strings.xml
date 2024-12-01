@@ -42,6 +42,10 @@
     <string name="textview7">textView7</string>
     <string name="send_notification" />
     <string name="send_Notification">send_notification</string>
+    <string name="store_favorites">Store_Favorites</string>
+    <string name="view_post_jobs">View_Post_Jobs</string>
+    <string name="match_jobs">Match Jobs</string>
+    <string name="Map">Map</string>
 
     <string-array name="job_duration_array">
         <item>Part-time</item>

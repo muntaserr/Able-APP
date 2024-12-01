@@ -113,6 +113,7 @@ public class SubActivityPayment extends AppCompatActivity {
                             }
                         }
                         fetchJobDetails();
+                        //return null;
                     }
 
                     @Override
@@ -136,6 +137,7 @@ public class SubActivityPayment extends AppCompatActivity {
                     }
                 }
                 setupRecyclerView();
+                //return null;
             }
 
             @Override

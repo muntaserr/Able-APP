@@ -255,4 +255,7 @@ public class SearchJobsActivity extends AppCompatActivity {
         return true;
     }
 
+    public boolean AddtoPreference() {
+        return true;
+    }
 }

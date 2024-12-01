@@ -136,6 +136,7 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(LoginActivity.this, "User role not found in database", Toast.LENGTH_SHORT).show();
                 }
+                //return null;
             }
 
             @Override

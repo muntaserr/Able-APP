@@ -58,6 +58,7 @@ public class PaymentListAdapter extends RecyclerView.Adapter<PaymentListAdapter.
                     } else {
                         holder.employeeNameTV.setText("Employee: Unknown");
                     }
+                    //return null;
                 }
 
                 @Override

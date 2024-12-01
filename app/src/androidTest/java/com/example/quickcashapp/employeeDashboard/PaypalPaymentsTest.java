@@ -28,9 +28,9 @@ public class PaypalPaymentsTest {
 
     @Before
     public void setUp() {
-        payPalConfig = new PayPalConfiguration()
-                .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
-                .clientId(BuildConfig.PAYPAL_CLIENT_ID);
+        payPalConfig = new PayPalConfiguration();
+        payPalConfig.environment(PayPalConfiguration.ENVIRONMENT_SANDBOX);
+        payPalConfig.clientId(BuildConfig.PAYPAL_CLIENT_ID);
 
         Intent intent = new Intent(activityRule.getActivity(), PayPalService.class);
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, payPalConfig);
@@ -42,7 +42,7 @@ public class PaypalPaymentsTest {
         activityRule.getActivity().stopService(new Intent(activityRule.getActivity(), PayPalService.class));
     }
 
-    @Test
+   @Test
     public void testPaymentProcess() {
         ActivityScenario<SubActivityPayment> scenario = ActivityScenario.launch(SubActivityPayment.class);
 

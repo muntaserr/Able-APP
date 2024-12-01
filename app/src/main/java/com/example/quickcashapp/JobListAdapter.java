@@ -39,6 +39,7 @@ public class JobListAdapter extends RecyclerView.Adapter<JobListAdapter.JobViewH
                         JobListAdapter.this.jobList.add(job);
                         notifyDataSetChanged(); // Refresh RecyclerView
                     }
+                    //return null;
                 }
 
                 @Override
@@ -105,6 +106,7 @@ public class JobListAdapter extends RecyclerView.Adapter<JobListAdapter.JobViewH
                         holder.acceptJobButton.setText("Already Accepted");
                     });
                 }
+                //return null;
             }
 
             @Override

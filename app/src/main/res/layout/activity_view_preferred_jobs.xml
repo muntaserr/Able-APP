@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".employeeDashboard.ViewPreferredJobsActivity">
+
+    <Button
+        android:id="@+id/buttonLoadJobs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Load Job Titles" />
+
+    <ListView
+        android:id="@+id/listViewJobs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

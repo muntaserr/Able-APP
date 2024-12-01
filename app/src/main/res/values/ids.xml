@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="MatchJobsatchJobs" type="id" />
+    <item name="textViewHeader" type="id" />
+    <item name="payNowBtn" type="id" />
+    <item name="enterAmtET" type="id" />
 </resources>

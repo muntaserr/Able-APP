@@ -63,6 +63,7 @@ public class MatchJobs extends AppCompatActivity {
                         break; // Send notification for the first match, then stop checking
                     }
                 }
+                //return null;
             }
 
             @Override

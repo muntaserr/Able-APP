@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
+
     <application
 
         android:allowBackup="true"
@@ -55,6 +56,9 @@
         <activity android:name=".individualJob" />
         <activity android:name=".employeeDashboard.EmployeeProfile" />
         <activity android:name=".employeeDashboard.MatchJobs"/>
+        <activity android:name=".employeeDashboard.StoreFavoritesEmployer"/>
+        <activity android:name=".employeeDashboard.EmployerList"/>
+        <activity android:name=".employeeDashboard.ViewPreferredJobsActivity"/>
 
     </application>
 

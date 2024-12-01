@@ -111,7 +111,7 @@
                     android:id="@+id/C"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Map"
+                    android:text="@string/Map"
                     android:textAlignment="center"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -142,7 +142,7 @@
                     android:id="@+id/MatchJobs"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Match Jobs"
+                    android:text="@string/match_jobs"
                     android:textAlignment="center"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -231,10 +231,10 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/G"
+                    android:id="@+id/StoreFavorites"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="G"
+                    android:text="@string/store_favorites"
                     android:textAlignment="center"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -261,10 +261,10 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/H"
+                    android:id="@+id/ViewPreferredJobsActivity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="H"
+                    android:text="@string/view_post_jobs"
                     android:textAlignment="center"
                     android:textStyle="bold" />
             </LinearLayout>

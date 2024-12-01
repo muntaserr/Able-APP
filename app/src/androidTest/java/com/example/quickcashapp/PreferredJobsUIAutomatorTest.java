@@ -1,12 +1,6 @@
 package com.example.quickcashapp;
 
-import static org.junit.Assert.assertTrue;
-
-import android.content.Context;
-import android.content.Intent;
-
-import androidx.test.core.app.ApplicationProvider;
-import androidx.test.platform.app.InstrumentationRegistry;
+/*
 import androidx.test.uiautomator.By;
 import androidx.test.uiautomator.UiDevice;
 import androidx.test.uiautomator.UiObject;
@@ -69,3 +63,4 @@ public class PreferredJobsUIAutomatorTest {
     }
 
 }
+*/

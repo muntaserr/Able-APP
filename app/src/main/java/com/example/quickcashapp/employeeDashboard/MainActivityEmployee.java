@@ -33,6 +33,8 @@ public class MainActivityEmployee extends ComponentActivity {
         Button SetPreference = findViewById(R.id.SetPreference);
         Button ChooseRole = findViewById(R.id.ChooseRole);
         Button matchJobs = findViewById(R.id.MatchJobs);
+        Button storeFavorites = findViewById(R.id.StoreFavorites);
+        Button viewPostJobs = findViewById(R.id.ViewPreferredJobsActivity);
 
 
         SearchJobs.setOnClickListener(new View.OnClickListener() {
@@ -87,6 +89,21 @@ public class MainActivityEmployee extends ComponentActivity {
 
         });
 
+        storeFavorites.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2 = new Intent(MainActivityEmployee.this, StoreFavoritesEmployer.class);
+                startActivity(intent2);
+            }
+        });
+
+        viewPostJobs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2 = new Intent(MainActivityEmployee.this, ViewPreferredJobsActivity.class);
+                startActivity(intent2);
+            }
+        });
 
     }
 
