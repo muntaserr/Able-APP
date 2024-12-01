@@ -5,6 +5,9 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.quickcashapp.Maps.Map;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,7 +42,9 @@ public class MapCRUD {
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     String location = dataSnapshot.child("location").getValue(String.class);
                     String title = dataSnapshot.child("title").getValue(String.class);
-
+                    String description = dataSnapshot.child("description").getValue(String.class);
+                    String jobID = dataSnapshot.child("jobId").getValue(String.class);
+                    Log.e("Lucas MApCrud","Job id for marker is "+jobID);
                     if(location != null && title != null){
 
                         String coordinates = location.substring(location.indexOf('[') + 1, location.indexOf(']'));
@@ -49,8 +54,13 @@ public class MapCRUD {
 
                         double latitude = Double.parseDouble(LatLng[0].trim());
                         double longitude = Double.parseDouble(LatLng[1].trim());
+                        LatLng latLng = new LatLng(latitude,longitude);
+                        MarkerOptions options=  new MarkerOptions().position(latLng).title(title).snippet(description);
+                        Marker newMarker = map.getMap().addMarker(options);
+                        newMarker.setTag(jobID);
+                        newMarker.showInfoWindow();
 
-                        map.addMarkerToMap(latitude, longitude, title);
+                        //map.addMarkerToMap(latitude, longitude, title);
                     }
                 }
             }
