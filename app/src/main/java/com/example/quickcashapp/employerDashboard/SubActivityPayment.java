@@ -81,10 +81,14 @@ public class SubActivityPayment extends AppCompatActivity {
                                 Log.i(TAG, paymentDetails);
 
                                 JSONObject response = new JSONObject(paymentDetails).getJSONObject("response");
-                                String paymentId = response.getString("id");
                                 String paymentState = response.getString("state");
 
-                                Toast.makeText(this, "Payment Successful: " + paymentState, Toast.LENGTH_LONG).show();
+                                if ("approved".equalsIgnoreCase(paymentState)) {
+                                    Toast.makeText(this, "Payment Successful!", Toast.LENGTH_SHORT).show();
+
+                                    // Mark the job as paid locally and refresh UI
+                                    markJobAsPaid();
+                                }
                             } catch (JSONException e) {
                                 Log.e(TAG, "Payment Confirmation Parsing Failed", e);
                             }
@@ -96,6 +100,7 @@ public class SubActivityPayment extends AppCompatActivity {
                     }
                 });
     }
+
 
     private void fetchJobsAndStatusesForUser() {
         String userId = com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -146,15 +151,14 @@ public class SubActivityPayment extends AppCompatActivity {
     }
 
     private void setupRecyclerView() {
-        paymentListAdapter = new PaymentListAdapter(jobList, jobStatusList, new PaymentListAdapter.OnJobActionListener() {
+        paymentListAdapter = new PaymentListAdapter(this, jobList, jobStatusList, new PaymentListAdapter.OnJobActionListener() {
             @Override
             public void onPayClicked(Job job) {
-                initiatePayment(job); // Handle payment
+                initiatePayment(job);
             }
 
             @Override
             public void onMarkCompleteClicked(Job job) {
-                updateJobStatus(job); // Mark job as complete
             }
         });
         paymentRecyclerView.setAdapter(paymentListAdapter);
@@ -174,14 +178,6 @@ public class SubActivityPayment extends AppCompatActivity {
     }
 
     private void initiatePayment(Job job) {
-        String jobId = job.getJobId();
-        for (JobStatus status : jobStatusList) {
-            if (status.getJobId().equals(jobId) && !"completed".equals(status.getStatus())) {
-                Toast.makeText(this, "Please mark the job as completed before paying.", Toast.LENGTH_SHORT).show();
-                return;
-            }
-        }
-
         double amount = job.getSalary();
         PayPalPayment payment = new PayPalPayment(
                 new BigDecimal(amount), "CAD", job.getTitle(), PayPalPayment.PAYMENT_INTENT_SALE);
@@ -191,6 +187,16 @@ public class SubActivityPayment extends AppCompatActivity {
         intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payment);
         activityResultLauncher.launch(intent);
     }
+
+    private void markJobAsPaid() {
+        // Update the local adapter to reflect the "Paid" state
+        paymentListAdapter.notifyDataSetChanged();
+        Intent intent = new Intent(this, SubActivityPayment.class);
+        finish();
+        startActivity(intent);
+    }
+
+
 
     @Override
     public void onDestroy() {
