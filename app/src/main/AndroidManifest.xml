@@ -53,9 +53,10 @@
         <activity android:name=".employerDashboard.SubActivityPreferredEmployee" />
         <activity android:name=".employerDashboard.SubActivityJobPost" />
         <activity android:name=".Maps.Map" />
-        <activity android:name=".SearchJobsActivity" />
+        <activity android:name=".SearchJobsActivity"/>
         <activity android:name=".employeeDashboard.EmployeeProfile" />
         <activity android:name=".employeeDashboard.SetPreferenceActivity" />
+        <activity android:name=".employeeDashboard.PreferredJob"/>
     </application>
 
 </manifest>

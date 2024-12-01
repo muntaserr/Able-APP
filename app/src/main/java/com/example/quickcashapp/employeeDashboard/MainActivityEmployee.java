@@ -32,6 +32,7 @@ public class MainActivityEmployee extends ComponentActivity {
         Button SearchJobs = findViewById(R.id.SearchJobs);
         Button SetPreference = findViewById(R.id.SetPreference);
         Button ChooseRole = findViewById(R.id.ChooseRole);
+        Button viewpreferredjobs = findViewById(R.id.preferredjobs);
 
 
         SearchJobs.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +72,14 @@ public class MainActivityEmployee extends ComponentActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivityEmployee.this, EmployeeProfile.class);
+                startActivity(intent);
+            }
+        });
+
+        viewpreferredjobs.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivityEmployee.this, PreferredJob.class);
                 startActivity(intent);
             }
 

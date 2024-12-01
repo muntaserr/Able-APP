@@ -39,7 +39,6 @@ public class SearchJobsActivity extends AppCompatActivity {
     private Button add2PreferenceButton;
     private RecyclerView resultsRecyclerView;
     private DatabaseReference jobsDatabaseReference;
-    private boolean clicked;
 
 
     @Override

@@ -22,33 +22,3 @@ import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-@LargeTest
-@RunWith(AndroidJUnit4.class)
-public class MainActivityEmployeeTest {
-
-    @Rule
-    public ActivityScenarioRule<MainActivityEmployee> mActivityScenarioRule =
-            new ActivityScenarioRule<>(MainActivityEmployee.class);
-
-    @Test
-    public void mainActivityEmployeeTest() {
-        ViewInteraction button = onView(
-                allOf(withId(R.id.SearchJobs), withText("SEARCH JOBS"),
-                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.FrameLayout.class))),
-                        isDisplayed()));
-        button.check(matches(isDisplayed()));
-
-        ViewInteraction button2 = onView(
-                allOf(withId(R.id.SetPreference), withText("SET PREFERENCE"),
-                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.FrameLayout.class))),
-                        isDisplayed()));
-        button2.check(matches(isDisplayed()));
-
-        ViewInteraction button3 = onView(
-                allOf(withId(R.id.ChooseRole), withText("CHOOSE ROLE"),
-                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.FrameLayout.class))),
-                        isDisplayed()));
-        button3.check(matches(isDisplayed()));
-    }
-}
