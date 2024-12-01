@@ -2,12 +2,14 @@ package com.example.quickcashapp.employeeDashboard;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.RatingBar;
 
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 
+import com.example.quickcashapp.Firebase.FirebaseCRUD;
 import com.example.quickcashapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -20,6 +22,7 @@ import java.util.Objects;
 
 public class EmployeeProfile extends MainActivityEmployee {
 
+    private FirebaseCRUD firebaseCRUD;
     private RatingBar ratingBar;
     FirebaseAuth mAuth;
 
@@ -33,10 +36,14 @@ public class EmployeeProfile extends MainActivityEmployee {
         ratingBar = findViewById(R.id.profile_rating);
 
         mAuth = FirebaseAuth.getInstance();
+        firebaseCRUD = new FirebaseCRUD();
 
         String employeeID = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
 
         setRating(employeeID);
+
+        Button logoutButton = findViewById(R.id.logout_button);
+        logoutButton.setOnClickListener(v -> firebaseCRUD.logoutUser(this, mAuth));
     }
 
     private void setRating(String employeeID){
