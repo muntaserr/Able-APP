@@ -7,7 +7,7 @@
 
     <ImageView
         android:id="@+id/profile_picture"
-        android:layout_width="148dp"
+        android:layout_width="match_parent"
         android:layout_height="146dp"
         android:layout_marginStart="131dp"
         android:layout_marginTop="136dp"
@@ -21,7 +21,7 @@
 
     <EditText
         android:id="@+id/profile_description"
-        android:layout_width="413dp"
+        android:layout_width="match_parent"
         android:layout_height="121dp"
         android:layout_marginBottom="135dp"
         android:autofillHints=""
