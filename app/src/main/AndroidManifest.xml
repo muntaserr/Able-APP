@@ -6,7 +6,10 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+
     <application
+
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -17,12 +20,14 @@
         android:theme="@style/Theme.QuickCashApp"
         tools:targetApi="31">
         <activity
+
             android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+
             </intent-filter>
         </activity>
 
@@ -35,17 +40,28 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCWQzOiffu7lW_pyTno7MitAE3YfJXj07U"></meta-data>
+            android:value="AIzaSyCWQzOiffu7lW_pyTno7MitAE3YfJXj07U" />
 
 
         <activity android:name=".employeeDashboard.MainActivityEmployee" />
+        <activity android:name=".employeeDashboard.RegisterActivity" />
+        <activity android:name=".employeeDashboard.SearchJobsActivity" />
+        <activity android:name=".employeeDashboard.SetPreferenceActivity" />
+        <activity android:name=".employeeDashboard.EmployeeProfile" />
+
         <activity android:name=".employerDashboard.MainActivityEmployer" />
         <activity android:name=".employerDashboard.SubActivityProfile" />
         <activity android:name=".employerDashboard.SubActivityPayment" />
-        <activity android:name=".employeeDashboard.RegisterActivity" />
         <activity android:name=".employerDashboard.SubActivityPreferredEmployee" />
         <activity android:name=".employerDashboard.SubActivityJobPost" />
-        <activity android:name=".Maps.employerMap" />
+
+        <activity android:name="com.example.quickcashapp.EmployerRating" />
+
+        <activity android:name=".Maps.Map" />
+        <activity android:name=".individualJob" />
+        <activity android:name=".employeeDashboard.EmployeeProfile" />
+        <activity android:name=".employeeDashboard.MatchJobs"/>
+
     </application>
 
 </manifest>

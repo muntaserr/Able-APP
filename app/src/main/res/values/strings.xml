@@ -38,4 +38,17 @@
     <string name="employer_dashboard">EMPLOYER DASHBOARD</string>
     <string name="name">Name</string>
     <string name="t">TODO</string>
+    <string name="textview8">textView8</string>
+    <string name="textview7">textView7</string>
+    <string name="send_notification" />
+    <string name="send_Notification">send_notification</string>
+
+    <string-array name="job_duration_array">
+        <item>Part-time</item>
+        <item>Full-time</item>
+        <item>Temporary</item>
+        <item>Contract</item>
+        <item>Internship</item>
+        <item>Freelance</item>
+    </string-array>
 </resources>

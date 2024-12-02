@@ -56,6 +56,7 @@ dependencies {
     implementation libs.constraintlayout
     implementation libs.firebase.auth
     implementation libs.firebase.database
+    implementation libs.places
     implementation libs.play.services.maps
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
@@ -74,10 +75,6 @@ dependencies {
     androidTestImplementation("org.mockito:mockito-inline:4.11.0")
     implementation 'com.google.android.gms:play-services-location:21.0.1'
 
-    implementation 'com.google.android.gms:play-services-maps:18.2.0'
-    implementation 'com.google.android.gms:play-services-location:21.1.0'
-    implementation 'com.google.maps.android:android-maps-utils:0.4'
-
     implementation 'com.google.android.gms:play-services-maps:19.0.0'
     implementation 'com.google.android.gms:play-services-location:21.3.0'
     implementation 'com.google.maps.android:android-maps-utils:0.4'
@@ -87,4 +84,7 @@ dependencies {
     implementation "androidx.cardview:cardview:1.0.0"
 
     implementation 'com.paypal.sdk:paypal-android-sdk:2.16.0'
+    implementation 'com.google.firebase:firebase-database:19.7.0'
+
+
 }

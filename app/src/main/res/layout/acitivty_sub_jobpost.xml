@@ -1,15 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
 
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/jobTitle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Job Post"
-        tools:layout_editor_absoluteX="178dp"
-        tools:layout_editor_absoluteY="337dp"
-        tools:ignore="HardcodedText,MissingConstraints" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:hint="Job Title" />
+
+    <EditText
+        android:id="@+id/salary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Salary" />
+
+    <EditText
+        android:id="@+id/jobDuration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Duration" />
+
+    <EditText
+        android:id="@+id/jobUrgency"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Urgency" />
+
+    <EditText
+        android:id="@+id/jobDescription"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Describe the job you would like completed" />
+
+
+    <Button
+        android:id="@+id/submitJob"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit Job" />
+</LinearLayout>

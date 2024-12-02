@@ -21,9 +21,6 @@ public class MainActivity extends ComponentActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        LocationHelper locationHelper = new LocationHelper(this);
-        locationHelper.askForPermissions();
-
         Button btn1 = findViewById(R.id.button); //employer
         Button btn2 = findViewById(R.id.button2); //employee
 

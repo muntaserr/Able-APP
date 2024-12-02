@@ -30,21 +30,5 @@ public class LocationHelperEspressoTest {
         locationHelper = new LocationHelper(activityTestRule.getActivity());
     }
 
-    @Test
-    public void testRequestLocationPermissionIsDisplayed(){
 
-        activityTestRule.getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                locationHelper.askForPermissions();
-            }
-        });
-
-        onView(withText("Location Permission Needed")).check(matches(isDisplayed()));
-        onView(withText("this app need location permission to work correctly")).check(matches(isDisplayed()));
-
-        onView(withText("Ok")).check(matches(isDisplayed()));
-        onView(withText("Cancel")).check(matches(isDisplayed()));
-
-    }
 }

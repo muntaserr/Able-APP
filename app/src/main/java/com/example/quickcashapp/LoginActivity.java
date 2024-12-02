@@ -76,18 +76,30 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Switch the intent to the Registration on user click
+     */
     private void navigateToRegistration() {
         Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
         startActivity(intent);
     }
 
-    // Helper method to validate email format
 
-
+    /**
+     * Check is the email is valid
+     *
+     * @param email The email string that the user provided.
+     * @return Returns true of false depending on if the email is a valid email
+     */
     private boolean isValidEmail(String email) {
         return !email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
+    /**
+     *
+     * @param email
+     * @param password
+     */
     private void loginUser(String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
@@ -105,6 +117,10 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Get the users role.
+     * @param user Firebase variable to get the users role.
+     */
     private void fetchUserRoleAndNavigate(FirebaseUser user) {
         if (user == null) {
             Toast.makeText(LoginActivity.this, "User authentication failed", Toast.LENGTH_SHORT).show();
@@ -129,6 +145,10 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Take the user to the correct Dashboard depending on there role
+     * @param role a string value indicating if the user is an employer or an employee.
+     */
     private void navigateBasedOnRole(String role) {
         Intent intent;
         if ("employer".equals(role)) {
